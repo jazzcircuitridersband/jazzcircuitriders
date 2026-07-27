@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============================================================
+     REPLACE: check the city, and the description wording.
+     This title is what Google shows. Genre + city = bookings.
+     ============================================================ -->
+<title>Jazz Circuit Riders — Funky Jazz Band for Hire</title>
+<meta name="description" content="Jazz Circuit Riders play funky jazz for clubs, weddings and private events. Listen, see upcoming dates, and book the band.">
+
+<meta property="og:title" content="Jazz Circuit Riders">
+<meta property="og:description" content="Funky jazz for rooms that want to dance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jazzcircuitriders.com/">
+<meta property="og:image" content="https://jazzcircuitriders.com/assets/img/hero-live-2026.webp">
+<meta name="theme-color" content="#0E1A2B">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%20%20%3Crect%20width%3D%2732%27%20height%3D%2732%27%20fill%3D%27%230E1A2B%27/%3E%20%20%3Cline%20x1%3D%2716%27%20y1%3D%270%27%20x2%3D%2716%27%20y2%3D%2732%27%20stroke%3D%27%23C9922E%27%20stroke-width%3D%271.5%27/%3E%20%20%3Ccircle%20cx%3D%2716%27%20cy%3D%2716%27%20r%3D%276%27%20fill%3D%27%23E8B75C%27/%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   JAZZ CIRCUIT RIDERS
+   Palette : deep navy base, brass trace, cream type, amber warmth
+   Concept : the page is a circuit. One brass line runs the whole
+             length of it; every section is a stop on the route.
+   ============================================================ */
+
+:root{
+  --ink:        #0E1A2B;
+  --ink-2:      #132234;
+  --ink-3:      #1C3049;
+  --brass:      #C9922E;
+  --brass-lit:  #E8B75C;
+  --amber:      #F0C070;
+  --cream:      #F2E9D8;
+  --steel:      #8DA0B6;
+
+  --display: 'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --mono: ui-monospace,'SF Mono',SFMono-Regular,'Cascadia Mono',Menlo,Consolas,monospace;
+  --sans: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+
+  --rail-x: 24px;   /* where the brass line sits */
+  --gut: 56px;      /* content starts here */
+  --maxw: 980px;
+}
+
+@media (min-width: 760px){
+  :root{ --rail-x: 46px; --gut: 108px; }
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--cream);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ---------- film grain: the "analog" half of the brief ---------- */
+.grain{
+  position:fixed; inset:0; z-index:9; pointer-events:none;
+  opacity:.16; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:50;
+  background:var(--brass); color:var(--ink);
+  padding:10px 16px; font-family:var(--mono); font-size:13px;
+}
+.skip:focus{ left:8px; top:8px; }
+
+/* ============================================================
+   THE RAIL — one continuous brass trace down the whole page
+   ============================================================ */
+.rail{
+  position:relative;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 24px 0 var(--gut);
+}
+.rail::before{
+  content:"";
+  position:absolute;
+  left:var(--rail-x); top:0; bottom:0;
+  width:1px;
+  background:linear-gradient(
+    to bottom,
+    transparent 0,
+    rgba(201,146,46,.55) 90px,
+    rgba(201,146,46,.55) calc(100% - 90px),
+    transparent 100%);
+}
+
+.node{
+  position:absolute;
+  /* sections are inset by --gut, so pull back to land on the rail line */
+  left:calc(var(--rail-x) - var(--gut));
+  top:14px;
+  z-index:2;
+  width:11px; height:11px;
+  border:1px solid var(--brass);
+  border-radius:50%;
+  background:var(--ink);
+  transform:translateX(-50%) scale(.9);
+  transition:background .5s ease, box-shadow .5s ease, transform .5s ease;
+}
+.node.lit{
+  background:var(--brass-lit);
+  box-shadow:0 0 0 4px rgba(201,146,46,.16), 0 0 14px rgba(232,183,92,.6);
+  transform:translateX(-50%) scale(1);
+}
+.node-end{ border-radius:0; transform:translateX(-50%) rotate(45deg) scale(.9); }
+.node-end.lit{ transform:translateX(-50%) rotate(45deg) scale(1); }
+
+@media (prefers-reduced-motion: reduce){
+  .node{ transition:none; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+  padding:120px 0 90px;
+}
+
+.hero-body{ position:relative; z-index:1; }
+
+.hero-art{
+  position:absolute;
+  inset:-10% -50vw -10% 10%;
+  z-index:0;
+  /* fallback gradient shows through cleanly if the photo is missing */
+  background-color:var(--ink-2);
+  background-image:
+    linear-gradient(105deg, var(--ink) 8%, rgba(14,26,43,.86) 46%, rgba(14,26,43,.55) 100%),
+    radial-gradient(60% 70% at 78% 30%, rgba(240,192,112,.20), transparent 70%),
+    url("assets/img/hero-live-2026.webp");
+  background-size:cover, cover, cover;
+  background-position:center, center, center right;
+  background-repeat:no-repeat;
+}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin:0 0 26px;
+}
+
+.wordmark{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(3.4rem, 13.5vw, 8.4rem);
+  line-height:.84;
+  letter-spacing:-.035em;
+  margin:0;
+  color:var(--cream);
+}
+.wordmark span{ display:block; }
+.wordmark span:nth-child(2){ color:var(--brass-lit); padding-left:.06em; }
+.wordmark span:nth-child(3){ padding-left:.12em; }
+
+.lede{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.15rem, 3.4vw, 1.6rem);
+  color:var(--cream);
+  opacity:.9;
+  max-width:22ch;
+  margin:30px 0 40px;
+}
+
+.hero-actions{ display:flex; flex-wrap:wrap; gap:14px; }
+
+.btn{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:15px 26px;
+  background:var(--brass);
+  color:var(--ink);
+  border:1px solid var(--brass);
+  transition:background .25s ease, color .25s ease;
+}
+.btn:hover{ background:var(--brass-lit); border-color:var(--brass-lit); }
+
+.btn-ghost{
+  background:transparent;
+  color:var(--brass-lit);
+}
+.btn-ghost:hover{ background:rgba(201,146,46,.14); color:var(--cream); }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{
+  position:relative;
+  padding:76px 0;
+  border-top:1px solid rgba(141,160,182,.14);
+}
+
+.section-head{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(1.9rem, 5.5vw, 2.9rem);
+  letter-spacing:-.02em;
+  line-height:1.1;
+  margin:0;
+  color:var(--cream);
+}
+.section-num{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.16em;
+  color:var(--brass);
+  vertical-align:middle;
+  margin-right:16px;
+  transform:translateY(-.35em);
+}
+.section-sub{
+  color:var(--steel);
+  font-size:15.5px;
+  margin:12px 0 0;
+}
+
+/* ---------- Listen ---------- */
+.tracks{ list-style:none; margin:38px 0 0; padding:0; }
+
+.track{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  grid-template-areas:
+    "btn meta time"
+    "btn bar  bar";
+  align-items:center;
+  gap:6px 18px;
+  padding:18px 0;
+  border-bottom:1px solid rgba(141,160,182,.14);
+}
+.track:first-child{ border-top:1px solid rgba(141,160,182,.14); }
+
+.track-btn{
+  grid-area:btn;
+  width:46px; height:46px;
+  border:1px solid var(--brass);
+  border-radius:50%;
+  background:transparent;
+  cursor:pointer;
+  display:grid; place-items:center;
+  transition:background .2s ease;
+  padding:0;
+}
+.track-btn:hover{ background:rgba(201,146,46,.16); }
+
+.ico-play{
+  width:0; height:0;
+  border-left:11px solid var(--brass-lit);
+  border-top:7px solid transparent;
+  border-bottom:7px solid transparent;
+  margin-left:3px;
+}
+.track.playing .ico-play{
+  width:11px; height:13px;
+  border:0;
+  margin-left:0;
+  background:linear-gradient(to right,
+    var(--brass-lit) 0 4px, transparent 4px 7px, var(--brass-lit) 7px 11px);
+}
+
+.track-meta{ grid-area:meta; min-width:0; }
+.track-title{
+  font-family:var(--display);
+  font-size:1.22rem;
+  margin:0;
+  color:var(--cream);
+}
+.track-sub{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--steel);
+  margin:4px 0 0;
+}
+
+.track-time{
+  grid-area:time;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--steel);
+  margin:0;
+}
+
+.track-bar{
+  grid-area:bar;
+  height:2px;
+  background:rgba(141,160,182,.22);
+  cursor:pointer;
+  position:relative;
+}
+.track-fill{
+  position:absolute; left:0; top:0; bottom:0;
+  width:0;
+  background:var(--brass-lit);
+}
+
+/* ---------- The Circuit (shows) ---------- */
+.shows{ list-style:none; margin:38px 0 0; padding:0; }
+
+.show{
+  display:grid;
+  grid-template-columns:96px 1fr auto;
+  gap:20px;
+  align-items:baseline;
+  padding:20px 0;
+  border-bottom:1px solid rgba(141,160,182,.14);
+}
+.show:first-child{ border-top:1px solid rgba(141,160,182,.14); }
+
+.show-date{
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--brass);
+}
+.show-venue{
+  font-family:var(--display);
+  font-size:1.2rem;
+  color:var(--cream);
+}
+.show-city{
+  display:block;
+  font-family:var(--sans);
+  font-size:14px;
+  color:var(--steel);
+  margin-top:3px;
+}
+.show-right{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--steel);
+  white-space:nowrap;
+}
+.show-right a{ color:var(--brass-lit); text-decoration:none; border-bottom:1px solid rgba(201,146,46,.5); }
+.show-right a:hover{ color:var(--cream); }
+
+.shows-status{
+  color:var(--steel);
+  font-family:var(--mono);
+  font-size:13px;
+  padding:22px 0;
+  border-top:1px solid rgba(141,160,182,.14);
+}
+
+@media (max-width: 599px){
+  .show{ grid-template-columns:1fr; gap:6px; }
+  .show-right{ margin-top:6px; }
+}
+
+/* ---------- The Riders ---------- */
+.riders-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:40px;
+  margin-top:38px;
+}
+@media (min-width: 760px){
+  .riders-grid{ grid-template-columns:1.5fr 1fr; gap:56px; }
+}
+
+.riders-copy p{ margin:0 0 18px; max-width:56ch; }
+
+.member{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:16px;
+  margin:0;
+  padding:12px 0;
+  border-bottom:1px solid rgba(141,160,182,.14);
+}
+.member-name{ font-family:var(--display); font-size:1.15rem; color:var(--cream); }
+.member-inst{
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--steel);
+}
+
+.played{ margin-top:46px; }
+.played-label{
+  font-family:var(--mono); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--brass); margin:0 0 10px;
+}
+.played-list{
+  font-family:var(--display);
+  font-size:clamp(1.05rem, 3vw, 1.35rem);
+  line-height:1.5;
+  color:var(--cream);
+  margin:0;
+}
+
+/* ---------- Booking ---------- */
+.section-book{ padding-bottom:96px; }
+
+.book-lines{ margin-top:36px; display:flex; flex-direction:column; gap:14px; align-items:flex-start; }
+
+.book-line{
+  font-family:var(--display);
+  font-size:clamp(1.35rem, 5.2vw, 2.2rem);
+  color:var(--brass-lit);
+  text-decoration:none;
+  letter-spacing:-.015em;
+  border-bottom:1px solid rgba(201,146,46,.35);
+  padding-bottom:3px;
+  word-break:break-word;
+  transition:color .2s ease, border-color .2s ease;
+}
+.book-line:hover{ color:var(--cream); border-color:var(--cream); }
+
+.book-note{
+  font-family:var(--mono); font-size:12px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--steel); margin:34px 0 0;
+}
+
+/* ---------- Foot ---------- */
+.foot{
+  position:relative;
+  padding:44px 0 72px;
+  border-top:1px solid rgba(141,160,182,.14);
+}
+.foot p{ margin:0; font-size:14px; color:var(--steel); }
+.foot-dim{ margin-top:8px !important; opacity:.6; font-family:var(--mono); font-size:11px; letter-spacing:.1em; }
+
+/* ---------- focus visibility (quality floor) ---------- */
+a:focus-visible, button:focus-visible{
+  outline:2px solid var(--brass-lit);
+  outline-offset:3px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#booking">Skip to booking</a>
+
+<div class="rail">
+
+  <!-- ========================= HERO ========================= -->
+  <header class="hero">
+    <span class="node" data-node></span>
+    <div class="hero-art" aria-hidden="true"></div>
+    <div class="hero-body">
+      <p class="eyebrow">Est. on the road &middot; Four riders</p>
+      <h1 class="wordmark">
+        <span>Jazz</span>
+        <span>Circuit</span>
+        <span>Riders</span>
+      </h1>
+      <!-- REPLACE: your one-liner. Under 12 words. -->
+      <p class="lede">Funky jazz for rooms that want to dance.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#booking">Book the band</a>
+        <a class="btn btn-ghost" href="#listen">Hear us first</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================= LISTEN ========================= -->
+  <section class="section" id="listen">
+    <span class="node" data-node></span>
+    <h2 class="section-head"><span class="section-num">01</span> Listen</h2>
+
+    <ol class="tracks">
+      <!-- REPLACE: track titles + filenames. Best track first. -->
+      <li class="track" data-src="assets/audio/01-track-name.mp3">
+        <button class="track-btn" type="button" aria-label="Play track one">
+          <span class="ico-play" aria-hidden="true"></span>
+        </button>
+        <div class="track-meta">
+          <p class="track-title">Track One Title</p>
+          <p class="track-sub">Live at a room we like &middot; 2026</p>
+        </div>
+        <div class="track-bar"><span class="track-fill"></span></div>
+        <p class="track-time">0:00</p>
+      </li>
+
+      <li class="track" data-src="assets/audio/02-track-name.mp3">
+        <button class="track-btn" type="button" aria-label="Play track two">
+          <span class="ico-play" aria-hidden="true"></span>
+        </button>
+        <div class="track-meta">
+          <p class="track-title">Track Two Title</p>
+          <p class="track-sub">Studio &middot; 2026</p>
+        </div>
+        <div class="track-bar"><span class="track-fill"></span></div>
+        <p class="track-time">0:00</p>
+      </li>
+
+      <li class="track" data-src="assets/audio/03-track-name.mp3">
+        <button class="track-btn" type="button" aria-label="Play track three">
+          <span class="ico-play" aria-hidden="true"></span>
+        </button>
+        <div class="track-meta">
+          <p class="track-title">Track Three Title</p>
+          <p class="track-sub">Studio &middot; 2026</p>
+        </div>
+        <div class="track-bar"><span class="track-fill"></span></div>
+        <p class="track-time">0:00</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ========================= THE CIRCUIT (shows) ========================= -->
+  <section class="section" id="circuit">
+    <span class="node" data-node></span>
+    <h2 class="section-head"><span class="section-num">02</span> The Circuit</h2>
+    <p class="section-sub">Where we're riding next.</p>
+
+    <ol class="shows" id="shows-list">
+      <li class="shows-status">Loading dates&hellip;</li>
+    </ol>
+  </section>
+
+  <!-- ========================= THE RIDERS ========================= -->
+  <section class="section" id="riders">
+    <span class="node" data-node></span>
+    <h2 class="section-head"><span class="section-num">03</span> The Riders</h2>
+
+    <div class="riders-grid">
+      <div class="riders-copy">
+        <!-- REPLACE: 60-80 words. Who, what, where, how long. No origin myths. -->
+        <p>Four players who met on the local circuit and never quite got off it.
+        Jazz Circuit Riders play funk-forward jazz built for movement — horn lines
+        with grease on them, a rhythm section that leaves room, and a set that
+        works as well at a wedding reception as it does at last call.</p>
+        <p>We bring our own PA, we start on time, and we've never played the
+        same set twice.</p>
+      </div>
+
+      <div class="riders-list">
+        <!-- REPLACE: correct instruments -->
+        <p class="member"><span class="member-name">Russ</span><span class="member-inst">instrument</span></p>
+        <p class="member"><span class="member-name">Jed</span><span class="member-inst">instrument</span></p>
+        <p class="member"><span class="member-name">Wes</span><span class="member-inst">instrument</span></p>
+        <p class="member"><span class="member-name">Brian</span><span class="member-inst">instrument</span></p>
+      </div>
+    </div>
+
+    <div class="played">
+      <p class="played-label">Rooms we've played</p>
+      <!-- REPLACE: 3-6 real venue names. This is the most persuasive
+           thing on the entire page. Real names beat any adjective. -->
+      <p class="played-list">Venue Name &middot; Venue Name &middot; Venue Name &middot; Venue Name &middot; Venue Name</p>
+    </div>
+  </section>
+
+  <!-- ========================= BOOKING ========================= -->
+  <section class="section section-book" id="booking">
+    <span class="node" data-node></span>
+    <h2 class="section-head"><span class="section-num">04</span> Booking</h2>
+    <p class="section-sub">Tell us the room, the date, and how long you need us.</p>
+
+    <div class="book-lines">
+      <!-- REPLACE: phone number -->
+      <a class="book-line" href="mailto:booking@jazzcircuitriders.com">booking@jazzcircuitriders.com</a>
+      <a class="book-line" href="tel:+15555550123">(555) 555-0123</a>
+    </div>
+
+    <p class="book-note">Clubs, weddings, private events, festivals. We travel.</p>
+  </section>
+
+  <footer class="foot">
+    <span class="node node-end" data-node></span>
+    <p class="foot-dim">&copy; <span id="year">2026</span> Jazz Circuit Riders</p>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   JAZZ CIRCUIT RIDERS — main.js
+   Three jobs: light the circuit, play the music, list the shows.
+   No dependencies, no build step.
+   ============================================================ */
+
+(function () {
+  'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- year in the footer ---------- */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ============================================================
+     1. THE CIRCUIT LIGHTS UP AS YOU SCROLL
+     ============================================================ */
+  var nodes = document.querySelectorAll('[data-node]');
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    nodes.forEach(function (n) { n.classList.add('lit'); });
+  } else {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('lit');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -18% 0px', threshold: 0.1 });
+
+    nodes.forEach(function (n) { obs.observe(n); });
+  }
+
+  /* ============================================================
+     2. AUDIO PLAYERS
+     One track at a time. Loads only when someone presses play,
+     so the page stays fast for people who never listen.
+     ============================================================ */
+  var tracks = Array.prototype.slice.call(document.querySelectorAll('.track'));
+  var current = null;
+
+  function fmt(seconds) {
+    if (!isFinite(seconds) || seconds < 0) seconds = 0;
+    var m = Math.floor(seconds / 60);
+    var s = Math.floor(seconds % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  tracks.forEach(function (track) {
+    var btn = track.querySelector('.track-btn');
+    var bar = track.querySelector('.track-bar');
+    var fill = track.querySelector('.track-fill');
+    var time = track.querySelector('.track-time');
+    var src = track.getAttribute('data-src');
+    var audio = null;
+
+    function build() {
+      if (audio) return audio;
+      audio = new Audio(src);
+      audio.preload = 'metadata';
+
+      audio.addEventListener('loadedmetadata', function () {
+        time.textContent = fmt(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', function () {
+        if (!audio.duration) return;
+        fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+        time.textContent = fmt(audio.duration - audio.currentTime);
+      });
+
+      audio.addEventListener('ended', function () {
+        track.classList.remove('playing');
+        fill.style.width = '0%';
+        audio.currentTime = 0;
+        current = null;
+      });
+
+      audio.addEventListener('error', function () {
+        track.classList.remove('playing');
+        time.textContent = '—';
+        var sub = track.querySelector('.track-sub');
+        if (sub) sub.textContent = 'Audio file not found yet';
+      });
+
+      return audio;
+    }
+
+    btn.addEventListener('click', function () {
+      var a = build();
+
+      if (current && current !== a) {
+        current.pause();
+        tracks.forEach(function (t) { t.classList.remove('playing'); });
+      }
+
+      if (a.paused) {
+        a.play().then(function () {
+          track.classList.add('playing');
+          btn.setAttribute('aria-label', 'Pause');
+          current = a;
+        }).catch(function () {
+          track.classList.remove('playing');
+        });
+      } else {
+        a.pause();
+        track.classList.remove('playing');
+        btn.setAttribute('aria-label', 'Play');
+        current = null;
+      }
+    });
+
+    bar.addEventListener('click', function (e) {
+      if (!audio || !audio.duration) return;
+      var rect = bar.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    });
+  });
+
+  /* ============================================================
+     3. SHOWS — read from shows.json, hide anything in the past
+     ============================================================ */
+  var FALLBACK_SHOWS = [
+  {
+    "date": "2026-09-14",
+    "venue": "The Blue Room",
+    "city": "Springfield, IL",
+    "time": "9:00 PM",
+    "ticketUrl": ""
+  },
+  {
+    "date": "2026-10-03",
+    "venue": "Harvest Street Festival",
+    "city": "Decatur, IL",
+    "time": "6:30 PM",
+    "ticketUrl": ""
+  },
+  {
+    "date": "2026-11-21",
+    "venue": "The Copper Door",
+    "city": "Peoria, IL",
+    "time": "10:00 PM",
+    "ticketUrl": ""
+  }
+];
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var list = document.getElementById('shows-list');
+  if (!list) return;
+
+  // Parse YYYY-MM-DD as a LOCAL date. Using new Date(str) treats it as
+  // UTC and shifts the date backwards a day in the Americas.
+  function parseLocal(str) {
+    var p = String(str).split('-');
+    return new Date(+p[0], (+p[1]) - 1, +p[2]);
+  }
+
+  function esc(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function render(shows) {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    var upcoming = shows
+      .filter(function (s) { return parseLocal(s.date) >= today; })
+      .sort(function (a, b) { return parseLocal(a.date) - parseLocal(b.date); });
+
+    if (!upcoming.length) {
+      list.innerHTML =
+        '<li class="shows-status">No dates on the books right now. ' +
+        '<a href="#booking" style="color:var(--brass-lit)">Put us on yours.</a></li>';
+      return;
+    }
+
+    list.innerHTML = upcoming.map(function (s) {
+      var d = parseLocal(s.date);
+      var date = MONTHS[d.getMonth()] + ' ' + d.getDate();
+
+      var right = s.ticketUrl
+        ? '<a href="' + esc(s.ticketUrl) + '" rel="noopener">Tickets</a>'
+        : esc(s.time || '');
+
+      return '<li class="show">' +
+        '<span class="show-date">' + date + '</span>' +
+        '<span class="show-venue">' + esc(s.venue) +
+          '<span class="show-city">' + esc(s.city) + '</span>' +
+        '</span>' +
+        '<span class="show-right">' + right + '</span>' +
+      '</li>';
+    }).join('');
+  }
+
+  // A missing shows.json is obvious and harmless — you'll notice the dates
+  // are wrong. A MALFORMED shows.json is the dangerous one: the site quietly
+  // serves backup dates and looks perfectly fine. Only that case gets an alarm.
+  fetch('shows.json', { cache: 'no-cache' })
+    .then(function (r) {
+      if (!r.ok) throw new Error('MISSING');
+      return r.json().catch(function () { throw new Error('MALFORMED'); });
+    })
+    .then(render)
+    .catch(function (err) {
+      render(FALLBACK_SHOWS);
+
+      if (err && err.message === 'MALFORMED') {
+        console.error(
+          'shows.json was found but could not be read — usually a missing or ' +
+          'extra comma. The site is showing BACKUP dates until this is fixed.'
+        );
+      } else {
+        console.info(
+          'shows.json not loaded — showing sample dates. Normal in preview. ' +
+          'On the live site, make sure shows.json sits next to index.html.'
+        );
+      }
+    });
+
+})();
+
+</script>
+</body>
+</html>

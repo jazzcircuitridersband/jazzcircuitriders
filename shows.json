@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2026-09-14",
+    "venue": "The Blue Room",
+    "city": "Springfield, IL",
+    "time": "9:00 PM",
+    "ticketUrl": ""
+  },
+  {
+    "date": "2026-10-03",
+    "venue": "Harvest Street Festival",
+    "city": "Decatur, IL",
+    "time": "6:30 PM",
+    "ticketUrl": ""
+  },
+  {
+    "date": "2026-11-21",
+    "venue": "The Copper Door",
+    "city": "Peoria, IL",
+    "time": "10:00 PM",
+    "ticketUrl": ""
+  }
+]
