@@ -18,6 +18,34 @@
 <meta property="og:image" content="https://jazzcircuitriders.com/assets/img/hero-live-2026.webp">
 <meta name="theme-color" content="#0E1A2B">
 
+<!-- Structured data: tells Google this is a band, not just a page.
+     Feeds rich results for "jazz band near me" style searches.
+     REPLACE the url with jazzcircuitriders.com once the domain points here. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Jazz Circuit Riders",
+  "url": "https://jazzcircuitridersband.github.io/jazzcircuitriders/",
+  "genre": ["Jazz", "Funk", "Soul Jazz"],
+  "description": "Funky jazz for rooms that want to dance. Available as a trio or quartet for clubs, weddings and private events.",
+  "email": "booking@jazzcircuitriders.com",
+  "member": [
+    { "@type": "Person", "name": "Jed" },
+    { "@type": "Person", "name": "Wes" },
+    { "@type": "Person", "name": "Brian" },
+    { "@type": "Person", "name": "Ross" }
+  ],
+  "track": [
+    { "@type": "MusicRecording", "name": "Emily" },
+    { "@type": "MusicRecording", "name": "Watch What Happens" },
+    { "@type": "MusicRecording", "name": "Nature Boy" },
+    { "@type": "MusicRecording", "name": "Killer Joe" },
+    { "@type": "MusicRecording", "name": "Billie\u2019s Bounce" }
+  ]
+}
+</script>
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2032%2032%27%3E%20%20%3Crect%20width%3D%2732%27%20height%3D%2732%27%20fill%3D%27%230E1A2B%27/%3E%20%20%3Cline%20x1%3D%2716%27%20y1%3D%270%27%20x2%3D%2716%27%20y2%3D%2732%27%20stroke%3D%27%23C9922E%27%20stroke-width%3D%271.5%27/%3E%20%20%3Ccircle%20cx%3D%2716%27%20cy%3D%2716%27%20r%3D%276%27%20fill%3D%27%23E8B75C%27/%3E%3C/svg%3E">
 <style>
 /* ============================================================
@@ -312,17 +340,47 @@ body{
   margin:0;
 }
 
+/* Native range input, restyled. Keyboard arrows, Home/End, screen
+   readers and touch all work for free because the browser provides them. */
 .track-bar{
   grid-area:bar;
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+  height:18px;          /* generous hit area; the visible track is 2px */
+  background:transparent;
+  cursor:pointer;
+  margin:0;
+  padding:0;
+}
+.track-bar::-webkit-slider-runnable-track{
+  height:2px;
+  background:linear-gradient(to right,
+    var(--brass-lit) 0 var(--pct,0%), rgba(141,160,182,.22) var(--pct,0%) 100%);
+}
+.track-bar::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:11px; height:11px;
+  margin-top:-4.5px;
+  border-radius:50%;
+  background:var(--brass-lit);
+}
+.track-bar::-moz-range-track{
   height:2px;
   background:rgba(141,160,182,.22);
-  cursor:pointer;
-  position:relative;
 }
-.track-fill{
-  position:absolute; left:0; top:0; bottom:0;
-  width:0;
+.track-bar::-moz-range-progress{
+  height:2px;
   background:var(--brass-lit);
+}
+.track-bar::-moz-range-thumb{
+  width:11px; height:11px;
+  border:0; border-radius:50%;
+  background:var(--brass-lit);
+}
+.track-bar:focus-visible{
+  outline:2px solid var(--brass-lit);
+  outline-offset:4px;
 }
 
 /* ---------- The Circuit (shows) ---------- */
@@ -469,7 +527,7 @@ a:focus-visible, button:focus-visible{
 
   <!-- ========================= HERO ========================= -->
   <header class="hero">
-    <span class="node" data-node></span>
+    <span class="node" data-node aria-hidden="true"></span>
     <div class="hero-art" aria-hidden="true"></div>
     <div class="hero-body">
       <p class="eyebrow">Est. on the road &middot; Four riders</p>
@@ -488,55 +546,78 @@ a:focus-visible, button:focus-visible{
   </header>
 
   <!-- ========================= LISTEN ========================= -->
-  <section class="section" id="listen">
-    <span class="node" data-node></span>
-    <h2 class="section-head"><span class="section-num">01</span> Listen</h2>
+  <section class="section" id="listen" aria-labelledby="listen-h">
+    <span class="node" data-node aria-hidden="true"></span>
+    <h2 class="section-head" id="listen-h"><span class="section-num">01</span> Listen</h2>
+    <p class="section-sub">Standards, recorded as a trio &mdash; Jed, Wes and Brian.</p>
 
     <ol class="tracks">
-      <!-- REPLACE: track titles + filenames. Best track first. -->
       <li class="track" data-src="assets/audio/emily.mp3">
         <button class="track-btn" type="button" aria-label="Play Emily">
           <span class="ico-play" aria-hidden="true"></span>
         </button>
         <div class="track-meta">
           <p class="track-title">Emily</p>
-          <!-- REPLACE: live or studio, and the year -->
-          <p class="track-sub">Studio &middot; 2026</p>
+          <p class="track-sub">Johnny Mandel</p>
         </div>
-        <div class="track-bar"><span class="track-fill"></span></div>
+        <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Emily">
         <p class="track-time">0:00</p>
       </li>
 
-      <li class="track" data-src="assets/audio/02-track-name.mp3">
-        <button class="track-btn" type="button" aria-label="Play track two">
+      <li class="track" data-src="assets/audio/watch-what-happens.mp3">
+        <button class="track-btn" type="button" aria-label="Play Watch What Happens">
           <span class="ico-play" aria-hidden="true"></span>
         </button>
         <div class="track-meta">
-          <p class="track-title">Track Two Title</p>
-          <p class="track-sub">Studio &middot; 2026</p>
+          <p class="track-title">Watch What Happens</p>
+          <p class="track-sub">Michel Legrand</p>
         </div>
-        <div class="track-bar"><span class="track-fill"></span></div>
+        <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Watch What Happens">
         <p class="track-time">0:00</p>
       </li>
 
-      <li class="track" data-src="assets/audio/03-track-name.mp3">
-        <button class="track-btn" type="button" aria-label="Play track three">
+      <li class="track" data-src="assets/audio/nature-boy.mp3">
+        <button class="track-btn" type="button" aria-label="Play Nature Boy">
           <span class="ico-play" aria-hidden="true"></span>
         </button>
         <div class="track-meta">
-          <p class="track-title">Track Three Title</p>
-          <p class="track-sub">Studio &middot; 2026</p>
+          <p class="track-title">Nature Boy</p>
+          <p class="track-sub">eden ahbez</p>
         </div>
-        <div class="track-bar"><span class="track-fill"></span></div>
+        <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Nature Boy">
+        <p class="track-time">0:00</p>
+      </li>
+
+      <li class="track" data-src="assets/audio/killer-joe.mp3">
+        <button class="track-btn" type="button" aria-label="Play Killer Joe">
+          <span class="ico-play" aria-hidden="true"></span>
+        </button>
+        <div class="track-meta">
+          <p class="track-title">Killer Joe</p>
+          <p class="track-sub">Benny Golson</p>
+        </div>
+        <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Killer Joe">
+        <p class="track-time">0:00</p>
+      </li>
+
+      <li class="track" data-src="assets/audio/billies-bounce.mp3">
+        <button class="track-btn" type="button" aria-label="Play Billie's Bounce">
+          <span class="ico-play" aria-hidden="true"></span>
+        </button>
+        <div class="track-meta">
+          <p class="track-title">Billie&rsquo;s Bounce</p>
+          <p class="track-sub">Charlie Parker</p>
+        </div>
+        <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Billie's Bounce">
         <p class="track-time">0:00</p>
       </li>
     </ol>
   </section>
 
   <!-- ========================= THE CIRCUIT (shows) ========================= -->
-  <section class="section" id="circuit">
-    <span class="node" data-node></span>
-    <h2 class="section-head"><span class="section-num">02</span> The Circuit</h2>
+  <section class="section" id="circuit" aria-labelledby="circuit-h">
+    <span class="node" data-node aria-hidden="true"></span>
+    <h2 class="section-head" id="circuit-h"><span class="section-num">02</span> The Circuit</h2>
     <p class="section-sub">Where we're riding next.</p>
 
     <ol class="shows" id="shows-list">
@@ -545,9 +626,9 @@ a:focus-visible, button:focus-visible{
   </section>
 
   <!-- ========================= THE RIDERS ========================= -->
-  <section class="section" id="riders">
-    <span class="node" data-node></span>
-    <h2 class="section-head"><span class="section-num">03</span> The Riders</h2>
+  <section class="section" id="riders" aria-labelledby="riders-h">
+    <span class="node" data-node aria-hidden="true"></span>
+    <h2 class="section-head" id="riders-h"><span class="section-num">03</span> The Riders</h2>
 
     <div class="riders-grid">
       <div class="riders-copy">
@@ -558,14 +639,21 @@ a:focus-visible, button:focus-visible{
         works as well at a wedding reception as it does at last call.</p>
         <p>We bring our own PA, we start on time, and we've never played the
         same set twice.</p>
+
+        <!-- REPLACE: confirm the instruments, then this paragraph is done -->
+        <p><strong>Trio or quartet.</strong> The recordings above are the trio.
+        Add Ross on ______ for a fuller sound when the room and the budget call
+        for it. Cocktail hour, ceremony, or a room that wants to dance &mdash;
+        we scale to fit.</p>
       </div>
 
       <div class="riders-list">
         <!-- REPLACE: correct instruments -->
-        <p class="member"><span class="member-name">Russ</span><span class="member-inst">instrument</span></p>
+        <!-- REPLACE: swap "instrument" for the real ones -->
         <p class="member"><span class="member-name">Jed</span><span class="member-inst">instrument</span></p>
         <p class="member"><span class="member-name">Wes</span><span class="member-inst">instrument</span></p>
         <p class="member"><span class="member-name">Brian</span><span class="member-inst">instrument</span></p>
+        <p class="member"><span class="member-name">Ross</span><span class="member-inst">instrument &middot; quartet</span></p>
       </div>
     </div>
 
@@ -578,9 +666,9 @@ a:focus-visible, button:focus-visible{
   </section>
 
   <!-- ========================= BOOKING ========================= -->
-  <section class="section section-book" id="booking">
-    <span class="node" data-node></span>
-    <h2 class="section-head"><span class="section-num">04</span> Booking</h2>
+  <section class="section section-book" id="booking" aria-labelledby="booking-h">
+    <span class="node" data-node aria-hidden="true"></span>
+    <h2 class="section-head" id="booking-h"><span class="section-num">04</span> Booking</h2>
     <p class="section-sub">Tell us the room, the date, and how long you need us.</p>
 
     <div class="book-lines">
@@ -593,7 +681,7 @@ a:focus-visible, button:focus-visible{
   </section>
 
   <footer class="foot">
-    <span class="node node-end" data-node></span>
+    <span class="node node-end" data-node aria-hidden="true"></span>
     <p class="foot-dim">&copy; <span id="year">2026</span> Jazz Circuit Riders</p>
   </footer>
 
@@ -664,9 +752,11 @@ a:focus-visible, button:focus-visible{
   tracks.forEach(function (track) {
     var btn = track.querySelector('.track-btn');
     var bar = track.querySelector('.track-bar');
-    var fill = track.querySelector('.track-fill');
     var time = track.querySelector('.track-time');
     var src = track.getAttribute('data-src');
+    var titleEl = track.querySelector('.track-title');
+    var label = titleEl ? titleEl.textContent.trim() : 'track';
+    var seeking = false;
 
     // preload='metadata' fetches only the header, not the whole song,
     // so this costs almost nothing and tells us the file is really there.
@@ -685,14 +775,18 @@ a:focus-visible, button:focus-visible{
     });
 
     audio.addEventListener('timeupdate', function () {
-      if (!audio.duration) return;
-      fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      if (!audio.duration || seeking) return;
+      var pct = audio.currentTime / audio.duration * 100;
+      bar.value = pct;
+      bar.style.setProperty('--pct', pct + '%');
       time.textContent = fmt(audio.duration - audio.currentTime);
     });
 
     audio.addEventListener('ended', function () {
       track.classList.remove('playing');
-      fill.style.width = '0%';
+      bar.value = 0;
+      bar.style.setProperty('--pct', '0%');
+      btn.setAttribute('aria-label', 'Play ' + label);
       audio.currentTime = 0;
       time.textContent = fmt(audio.duration);
       current = null;
@@ -707,7 +801,7 @@ a:focus-visible, button:focus-visible{
       if (audio.paused) {
         audio.play().then(function () {
           track.classList.add('playing');
-          btn.setAttribute('aria-label', 'Pause');
+          btn.setAttribute('aria-label', 'Pause ' + label);
           current = audio;
         }).catch(function () {
           track.classList.remove('playing');
@@ -715,15 +809,19 @@ a:focus-visible, button:focus-visible{
       } else {
         audio.pause();
         track.classList.remove('playing');
-        btn.setAttribute('aria-label', 'Play');
+        btn.setAttribute('aria-label', 'Play ' + label);
         current = null;
       }
     });
 
-    bar.addEventListener('click', function (e) {
-      if (!audio.duration) return;
-      var rect = bar.getBoundingClientRect();
-      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    // 'input' fires for mouse drag, touch AND arrow keys - one handler covers all.
+    bar.addEventListener('input', function () {
+      seeking = true;
+      bar.style.setProperty('--pct', bar.value + '%');
+    });
+    bar.addEventListener('change', function () {
+      seeking = false;
+      if (audio.duration) audio.currentTime = (bar.value / 100) * audio.duration;
     });
   });
 
