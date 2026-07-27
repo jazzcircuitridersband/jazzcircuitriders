@@ -8,8 +8,8 @@
      REPLACE: check the city, and the description wording.
      This title is what Google shows. Genre + city = bookings.
      ============================================================ -->
-<title>Jazz Circuit Riders — Jazz Trio &amp; Quartet for Hire</title>
-<meta name="description" content="Jazz Circuit Riders play the standards book — ballads, blues and bossa. Trio or quartet, with vocals, for clubs, restaurants, receptions and private events.">
+<title>Jazz Circuit Riders — Jazz Trio &amp; Quartet | Chelsea, MI</title>
+<meta name="description" content="Jazz trio and quartet based in Chelsea, Michigan, playing the standards book — ballads, blues and bossa. Available with vocals for clubs, restaurants, receptions and private events across Ann Arbor, Jackson and southeast Michigan.">
 
 <meta property="og:title" content="Jazz Circuit Riders">
 <meta property="og:description" content="Standards for rooms that listen.">
@@ -29,21 +29,65 @@
   "@type": "MusicGroup",
   "name": "Jazz Circuit Riders",
   "url": "https://jazzcircuitridersband.github.io/jazzcircuitriders/",
-  "genre": ["Jazz", "Jazz Standards", "Bebop"],
-  "description": "Jazz standards — ballads, blues and bossa. Trio or quartet, with vocals, for clubs, restaurants, receptions and private events.",
+  "genre": [
+    "Jazz",
+    "Jazz Standards",
+    "Bebop"
+  ],
+  "description": "Jazz trio and quartet based in Chelsea, Michigan. Standards - ballads, blues and bossa - with vocals, for clubs, restaurants, receptions and private events.",
   "email": "booking@jazzcircuitriders.com",
   "member": [
-    { "@type": "Person", "name": "Jed" },
-    { "@type": "Person", "name": "Wes" },
-    { "@type": "Person", "name": "Brian" },
-    { "@type": "Person", "name": "Ross" }
+    {
+      "@type": "Person",
+      "name": "Jed"
+    },
+    {
+      "@type": "Person",
+      "name": "Wes"
+    },
+    {
+      "@type": "Person",
+      "name": "Brian"
+    },
+    {
+      "@type": "Person",
+      "name": "Ross"
+    }
   ],
   "track": [
-    { "@type": "MusicRecording", "name": "Emily" },
-    { "@type": "MusicRecording", "name": "Watch What Happens" },
-    { "@type": "MusicRecording", "name": "Nature Boy" },
-    { "@type": "MusicRecording", "name": "Killer Joe" },
-    { "@type": "MusicRecording", "name": "Billie\u2019s Bounce" }
+    {
+      "@type": "MusicRecording",
+      "name": "Emily"
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Watch What Happens"
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Nature Boy"
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Killer Joe"
+    },
+    {
+      "@type": "MusicRecording",
+      "name": "Billie’s Bounce"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Chelsea",
+    "addressRegion": "MI",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    "Chelsea, MI",
+    "Ann Arbor, MI",
+    "Jackson, MI",
+    "Detroit, MI",
+    "Southeast Michigan"
   ]
 }
 </script>
@@ -600,6 +644,12 @@ body{
   border-top:1px solid rgba(141,160,182,.14);
 }
 .foot p{ margin:0; font-size:14px; color:var(--steel); }
+.foot-dim a{
+  color:var(--steel);
+  text-decoration:none;
+  border-bottom:1px solid rgba(141,160,182,.4);
+}
+.foot-dim a:hover{ color:var(--brass-lit); border-color:var(--brass-lit); }
 .foot-dim{ margin-top:8px !important; opacity:.6; font-family:var(--mono); font-size:11px; letter-spacing:.1em; }
 
 /* ---------- focus visibility (quality floor) ---------- */
@@ -619,12 +669,9 @@ a:focus-visible, button:focus-visible{
 
   <!-- ========================= HERO ========================= -->
   <header class="hero">
-    <span class="node" data-node aria-hidden="true"></span>
     <div class="hero-art" aria-hidden="true"></div>
     <div class="hero-body">
-      <!-- REPLACE: add your city and state, e.g. "Trio &amp; Quartet &middot; Jackson, Michigan"
-           A booker searching for a jazz group searches by place first. -->
-      <p class="eyebrow">Trio &amp; Quartet</p>
+      <p class="eyebrow">Trio &amp; Quartet &middot; Chelsea, Michigan</p>
       <h1 class="wordmark">
         <span>Jazz</span>
         <span>Circuit</span>
@@ -781,8 +828,7 @@ a:focus-visible, button:focus-visible{
 
   <footer class="foot">
     <span class="node node-end" data-node aria-hidden="true"></span>
-    <!-- REPLACE: photographer name -->
-    <p class="foot-dim">Photograph by ______ &nbsp;&middot;&nbsp; &copy; <span id="year">2026</span> Jazz Circuit Riders</p>
+    <p class="foot-dim">Photograph by <a href="https://www.staygold.photos/" target="_blank" rel="noopener" aria-label="Coley Kennedy, Stay Gold Photos &ndash; opens in a new tab">Coley Kennedy</a> &nbsp;&middot;&nbsp; &copy; <span id="year">2026</span> Jazz Circuit Riders</p>
   </footer>
 
 </div>
