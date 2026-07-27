@@ -494,13 +494,14 @@ a:focus-visible, button:focus-visible{
 
     <ol class="tracks">
       <!-- REPLACE: track titles + filenames. Best track first. -->
-      <li class="track" data-src="assets/audio/01-track-name.mp3">
-        <button class="track-btn" type="button" aria-label="Play track one">
+      <li class="track" data-src="assets/audio/emily.mp3">
+        <button class="track-btn" type="button" aria-label="Play Emily">
           <span class="ico-play" aria-hidden="true"></span>
         </button>
         <div class="track-meta">
-          <p class="track-title">Track One Title</p>
-          <p class="track-sub">Live at a room we like &middot; 2026</p>
+          <p class="track-title">Emily</p>
+          <!-- REPLACE: live or studio, and the year -->
+          <p class="track-sub">Studio &middot; 2026</p>
         </div>
         <div class="track-bar"><span class="track-fill"></span></div>
         <p class="track-time">0:00</p>
@@ -636,11 +637,15 @@ a:focus-visible, button:focus-visible{
 
   /* ============================================================
      2. AUDIO PLAYERS
-     One track at a time. Loads only when someone presses play,
-     so the page stays fast for people who never listen.
+     Each track checks whether its file actually exists and removes itself
+     if it doesn't. Upload one song and one player appears. Upload three and
+     three appear. Nothing to edit in between.
      ============================================================ */
   var tracks = Array.prototype.slice.call(document.querySelectorAll('.track'));
+  var listenSection = document.getElementById('listen');
   var current = null;
+  var pending = tracks.length;
+  var found = 0;
 
   function fmt(seconds) {
     if (!isFinite(seconds) || seconds < 0) seconds = 0;
@@ -649,64 +654,66 @@ a:focus-visible, button:focus-visible{
     return m + ':' + (s < 10 ? '0' : '') + s;
   }
 
+  function settle() {
+    pending--;
+    if (pending > 0) return;
+    // Nothing loaded at all - hide the section rather than show an empty one.
+    if (found === 0 && listenSection) listenSection.style.display = 'none';
+  }
+
   tracks.forEach(function (track) {
     var btn = track.querySelector('.track-btn');
     var bar = track.querySelector('.track-bar');
     var fill = track.querySelector('.track-fill');
     var time = track.querySelector('.track-time');
     var src = track.getAttribute('data-src');
-    var audio = null;
 
-    function build() {
-      if (audio) return audio;
-      audio = new Audio(src);
-      audio.preload = 'metadata';
+    // preload='metadata' fetches only the header, not the whole song,
+    // so this costs almost nothing and tells us the file is really there.
+    var audio = new Audio(src);
+    audio.preload = 'metadata';
 
-      audio.addEventListener('loadedmetadata', function () {
-        time.textContent = fmt(audio.duration);
-      });
+    audio.addEventListener('loadedmetadata', function () {
+      found++;
+      time.textContent = fmt(audio.duration);
+      settle();
+    });
 
-      audio.addEventListener('timeupdate', function () {
-        if (!audio.duration) return;
-        fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
-        time.textContent = fmt(audio.duration - audio.currentTime);
-      });
+    audio.addEventListener('error', function () {
+      track.parentNode && track.parentNode.removeChild(track);
+      settle();
+    });
 
-      audio.addEventListener('ended', function () {
-        track.classList.remove('playing');
-        fill.style.width = '0%';
-        audio.currentTime = 0;
-        current = null;
-      });
+    audio.addEventListener('timeupdate', function () {
+      if (!audio.duration) return;
+      fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      time.textContent = fmt(audio.duration - audio.currentTime);
+    });
 
-      audio.addEventListener('error', function () {
-        track.classList.remove('playing');
-        time.textContent = '—';
-        var sub = track.querySelector('.track-sub');
-        if (sub) sub.textContent = 'Audio file not found yet';
-      });
-
-      return audio;
-    }
+    audio.addEventListener('ended', function () {
+      track.classList.remove('playing');
+      fill.style.width = '0%';
+      audio.currentTime = 0;
+      time.textContent = fmt(audio.duration);
+      current = null;
+    });
 
     btn.addEventListener('click', function () {
-      var a = build();
-
-      if (current && current !== a) {
+      if (current && current !== audio) {
         current.pause();
         tracks.forEach(function (t) { t.classList.remove('playing'); });
       }
 
-      if (a.paused) {
-        a.play().then(function () {
+      if (audio.paused) {
+        audio.play().then(function () {
           track.classList.add('playing');
           btn.setAttribute('aria-label', 'Pause');
-          current = a;
+          current = audio;
         }).catch(function () {
           track.classList.remove('playing');
         });
       } else {
-        a.pause();
+        audio.pause();
         track.classList.remove('playing');
         btn.setAttribute('aria-label', 'Play');
         current = null;
@@ -714,7 +721,7 @@ a:focus-visible, button:focus-visible{
     });
 
     bar.addEventListener('click', function (e) {
-      if (!audio || !audio.duration) return;
+      if (!audio.duration) return;
       var rect = bar.getBoundingClientRect();
       audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
     });
