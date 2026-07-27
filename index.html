@@ -160,27 +160,36 @@ body{
 /* ============================================================
    HERO
    ============================================================ */
-.hero{
-  position:relative;
-  min-height:92vh;
-  display:flex;
-  align-items:flex-start;      /* type rides the dark curtain, band plays below */
-  padding:104px 0 90px;
-}
+
 @media (max-width: 759px){
   .hero{ min-height:86vh; padding-top:84px; }
 }
 
 .hero-body{ position:relative; z-index:1; }
 
+.hero{
+  position:relative;
+  min-height:92vh;
+  display:flex;
+  align-items:flex-start;
+  padding:104px 0 90px;
+}
+
 .hero-art{
   position:absolute;
-  inset:0 -50vw;
+  top:0; bottom:0;
+  /* exactly one viewport wide, and re-centred out of the rail's padding
+     so background sizing stays predictable */
+  left:50%;
+  width:100vw;
+  margin-left:calc(-50vw - (var(--gut) - 24px) / 2);
   z-index:0;
   background-color:var(--ink);
-  /* The photo is dark up top (curtain, 58/255) and bright below (floor, 202/255).
-     So: light scrim over the dark half where the name sits, heavy fade at the
-     bottom so the pale floor dissolves into the page instead of ending on a line. */
+  background-repeat:no-repeat;
+  filter:saturate(0);
+  /* Wide screens: fill the frame. Photo is dark up top (curtain) and bright
+     below (floor), so the scrim is heaviest where the name sits and at the
+     bottom edge, letting the pale floor dissolve into the page. */
   background-image:
     linear-gradient(to bottom,
       rgba(14,26,43,.72) 0%,
@@ -188,27 +197,59 @@ body{
       rgba(14,26,43,.30) 52%,
       rgba(14,26,43,.80) 84%,
       var(--ink) 100%),
-    image-set(url("assets/img/trio.webp") 1x);
+    url("assets/img/trio.webp");
   background-size:cover, cover;
   background-position:center, center 42%;
-  background-repeat:no-repeat;
-  /* marries the black-and-white photo to the navy without killing it */
-  filter:saturate(0);
 }
 
-@media (max-width: 759px){
-  /* narrow crop would lose the outer players - hold the centre and lighten
-     the scrim, since there is less photo to see */
+/* Tall screens. Cropping a 3:2 group shot to a portrait box throws away the
+   outer players - iPad portrait keeps only half the width. So stop cropping:
+   show the whole frame at full width across the top, and move the type below
+   it onto solid navy. Gradient stops are in vw so they land exactly where the
+   photograph ends (100vw / 1.5 = 66.7vw tall). */
+@media (max-aspect-ratio: 7/5){
+  .hero{
+    align-items:flex-end;
+    min-height:auto;
+    padding-top:calc(66.7vw + 26px);
+    padding-bottom:76px;
+  }
   .hero-art{
     background-image:
       linear-gradient(to bottom,
-        rgba(14,26,43,.78) 0%,
-        rgba(14,26,43,.50) 34%,
-        rgba(14,26,43,.42) 56%,
-        rgba(14,26,43,.86) 86%,
-        var(--ink) 100%),
-      image-set(url("assets/img/trio-small.webp") 1x);
-    background-position:center, 58% 44%;
+        rgba(14,26,43,.14) 0,
+        rgba(14,26,43,.14) 42vw,
+        rgba(14,26,43,.72) 60vw,
+        var(--ink) 67vw),
+      url("assets/img/trio.webp");
+    background-size:100% 100%, 100% auto;
+    background-position:top center, top center;
+  }
+}
+
+/* Phones get the smaller file - 73KB instead of 340KB */
+@media (max-aspect-ratio: 7/5) and (max-width: 759px){
+  .hero-art{
+    background-image:
+      linear-gradient(to bottom,
+        rgba(14,26,43,.14) 0,
+        rgba(14,26,43,.14) 42vw,
+        rgba(14,26,43,.72) 60vw,
+        var(--ink) 67vw),
+      url("assets/img/trio-small.webp");
+    background-size:100% 100%, 100% auto;
+    background-position:top center, top center;
+  }
+}
+@media (min-aspect-ratio: 7/5) and (max-width: 900px){
+  .hero-art{
+    background-image:
+      linear-gradient(to bottom,
+        rgba(14,26,43,.72) 0%, rgba(14,26,43,.42) 30%,
+        rgba(14,26,43,.30) 52%, rgba(14,26,43,.80) 84%, var(--ink) 100%),
+      url("assets/img/trio-small.webp");
+    background-size:cover, cover;
+    background-position:center, center 42%;
   }
 }
 
