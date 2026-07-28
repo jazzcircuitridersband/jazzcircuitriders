@@ -564,6 +564,31 @@ body{
 
 .riders-copy p{ margin:0 0 18px; max-width:56ch; }
 
+.member[open] .member-line{ color:var(--brass-lit); }
+.member-line{ cursor:pointer; list-style:none; }
+.member-line::-webkit-details-marker{ display:none; }
+.member-line::after{
+  content:"+";
+  font-family:var(--mono); font-size:15px; color:var(--brass);
+  margin-left:14px; flex:0 0 auto; transition:transform .2s ease;
+}
+.member[open] .member-line::after{ content:"\2212"; }
+.member-line:focus-visible{ outline:2px solid var(--brass-lit); outline-offset:4px; }
+
+.member-detail{
+  display:grid; grid-template-columns:1fr; gap:18px;
+  padding:18px 0 6px;
+}
+@media (min-width: 620px){
+  .member-detail{ grid-template-columns:230px 1fr; gap:24px; align-items:start; }
+}
+.member-detail img{
+  width:100%; height:auto; display:block;
+  filter:saturate(0);
+  border:1px solid rgba(201,146,46,.28);
+}
+.member-bio p{ margin:0 0 10px; font-size:15.5px; line-height:1.6; max-width:52ch; }
+
 .member{
   padding:14px 0;
   border-bottom:1px solid rgba(141,160,182,.14);
@@ -795,16 +820,36 @@ a:focus-visible, button:focus-visible{
                <p class="member-also">also plays with <a href="URL" target="_blank" rel="noopener">Name</a></p>
              Jed and Brian have no second project listed yet.
         -->
-        <div class="member">
-          <p class="member-line"><span class="member-name"><a href="https://www.jacksonmusicschool.org/what-we-offer/lessons/jed-fritzemeier/" target="_blank" rel="noopener" aria-label="Jed Fritzemeier &ndash; opens in a new tab">Jed</a></span><span class="member-inst">Bass, Vocals</span></p>
-        </div>
+        <details class="member">
+          <summary class="member-line">
+            <span class="member-name">Jed</span>
+            <span class="member-inst">Bass, Vocals</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/jed.webp" alt="Jed Fritzemeier playing double bass" width="900" height="600" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Director of Music Education for the Jackson Symphony Orchestra, where he also plays bass. Thirty-four years teaching orchestra, finishing in Chelsea, and a Michigan Teacher of the Year. He started playing jazz at fifteen; his son Wes brought him back to it.</p>
+              <p class="member-also"><a href="https://www.jacksonmusicschool.org/what-we-offer/lessons/jed-fritzemeier/" target="_blank" rel="noopener" aria-label="Jackson Symphony Community Music School &ndash; opens in a new tab">Jackson Symphony Community Music School</a></p>
+            </div>
+          </div>
+        </details>
         <div class="member">
           <p class="member-line"><span class="member-name">Wes</span><span class="member-inst">Tenor Guitar, Drums, Vocals</span></p>
           <p class="member-also">also plays with <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a> and <a href="https://www.bendanielsband.com/" target="_blank" rel="noopener" aria-label="Ben Daniels Band &ndash; opens in a new tab">Ben Daniels Band</a></p>
         </div>
-        <div class="member">
-          <p class="member-line"><span class="member-name"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="Brian Brill &ndash; opens in a new tab">Brian</a></span><span class="member-inst">Piano, Keys</span></p>
-        </div>
+        <details class="member">
+          <summary class="member-line">
+            <span class="member-name">Brian</span>
+            <span class="member-inst">Piano, Keys</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/brian.webp" alt="Brian Brill playing grand piano" width="900" height="600" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Pianist, composer and producer. He has scored for PBS, CBS Sports and Turner Classic Movies, written for Disney and GM, and produced or arranged for artists including Billy Strings. Six records of his own, most recently a 2024 work for choir and orchestra.</p>
+              <p class="member-also"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="brianbrillmusic.com &ndash; opens in a new tab">brianbrillmusic.com</a></p>
+            </div>
+          </div>
+        </details>
         <div class="member">
           <p class="member-line"><span class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross</a></span><span class="member-inst">Trumpet &middot; quartet</span></p>
           <p class="member-also">also plays with <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a></p>
