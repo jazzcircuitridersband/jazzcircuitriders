@@ -553,41 +553,36 @@ body{
 
 /* ---------- The Riders ---------- */
 .riders-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:40px;
+  display:block;          /* roster now owns the full width, not a third of it */
   margin-top:38px;
 }
-@media (min-width: 760px){
-  .riders-grid{ grid-template-columns:1.5fr 1fr; gap:56px; }
-}
 
-.riders-copy p{ margin:0 0 18px; max-width:56ch; }
 
-.member[open] .member-line{ color:var(--brass-lit); }
-.member-line{ cursor:pointer; list-style:none; }
-.member-line::-webkit-details-marker{ display:none; }
-.member-line::after{
-  content:"+";
-  font-family:var(--mono); font-size:15px; color:var(--brass);
-  margin-left:14px; flex:0 0 auto; transition:transform .2s ease;
-}
+.riders-copy{ max-width:58ch; margin-bottom:52px; }
+.riders-copy p{ margin:0 0 18px; }
 .member[open] .member-line::after{ content:"\2212"; }
 .member-line:focus-visible{ outline:2px solid var(--brass-lit); outline-offset:4px; }
 
 .member-detail{
-  display:grid; grid-template-columns:1fr; gap:18px;
-  padding:18px 0 6px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+  padding:20px 0 8px;
 }
 @media (min-width: 620px){
-  .member-detail{ grid-template-columns:230px 1fr; gap:24px; align-items:start; }
+  .member-detail{
+    grid-template-columns:250px minmax(0, 1fr);
+    gap:30px;
+    align-items:start;
+  }
 }
 .member-detail img{
   width:100%; height:auto; display:block;
   filter:saturate(0);
   border:1px solid rgba(201,146,46,.28);
 }
-.member-bio p{ margin:0 0 10px; font-size:15.5px; line-height:1.6; max-width:52ch; }
+.member-bio{ min-width:0; }
+.member-bio p{ margin:0 0 12px; font-size:16px; line-height:1.65; max-width:56ch; }
 
 .member{
   padding:14px 0;
