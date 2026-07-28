@@ -557,11 +557,31 @@ body{
   margin-top:38px;
 }
 
-
 .riders-copy{ max-width:58ch; margin-bottom:52px; }
 .riders-copy p{ margin:0 0 18px; }
-.member[open] .member-line::after{ content:"\2212"; }
-.member-line:focus-visible{ outline:2px solid var(--brass-lit); outline-offset:4px; }
+
+/* Expand markers belong only to rows that actually expand.
+   Wes and Ross are plain rows until their bios arrive - no marker. */
+details.member > .member-line{
+  cursor:pointer;
+  list-style:none;
+}
+details.member > .member-line::-webkit-details-marker{ display:none; }
+details.member > .member-line::after{
+  content:"+";
+  font-family:var(--mono);
+  font-size:17px;
+  line-height:1;
+  color:var(--brass);
+  flex:0 0 auto;
+  margin-left:14px;
+}
+details.member[open] > .member-line::after{ content:"\2212"; }
+details.member[open] > .member-line .member-name{ color:var(--brass-lit); }
+details.member > .member-line:focus-visible{
+  outline:2px solid var(--brass-lit);
+  outline-offset:4px;
+}
 
 .member-detail{
   display:grid;
