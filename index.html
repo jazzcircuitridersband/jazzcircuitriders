@@ -544,6 +544,13 @@ body{
 .show-right a{ color:var(--brass-lit); text-decoration:none; border-bottom:1px solid rgba(201,146,46,.5); }
 .show-right a:hover{ color:var(--cream); }
 
+.shows-status a{
+  color:var(--brass-lit);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.45);
+}
+.shows-status a:hover{ color:var(--cream); border-color:var(--cream); }
+
 .shows-status{
   color:var(--steel);
   font-family:var(--mono);
@@ -657,18 +664,6 @@ details.member > .member-line:focus-visible{
 }
 .member-also a:hover{ color:var(--cream); border-color:var(--cream); }
 
-.played{ margin-top:46px; }
-.played-label{
-  font-family:var(--mono); font-size:11px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--brass); margin:0 0 10px;
-}
-.played-list{
-  font-family:var(--display);
-  font-size:clamp(1.05rem, 3vw, 1.35rem);
-  line-height:1.5;
-  color:var(--cream);
-  margin:0;
-}
 
 /* ---------- Booking ---------- */
 .section-book{ padding-bottom:96px; }
@@ -850,7 +845,7 @@ a:focus-visible, button:focus-visible{
         <p>Jazz Circuit Riders is new. The players aren&rsquo;t.</p>
       </div>
 
-      <div class="riders-list">
+      <div>
         <!-- REPLACE: correct instruments -->
         <!-- Member names link to their own page where one exists.
              Other projects go on a .member-also line beneath:
@@ -1102,10 +1097,11 @@ a:focus-visible, button:focus-visible{
       .sort(function (a, b) { return parseLocal(a.date) - parseLocal(b.date); });
 
     if (!upcoming.length) {
-      // Nothing booked - hide the whole section rather than advertise a gap.
-      // Add a date to shows.json and it reappears on its own.
-      var sec = document.getElementById('circuit');
-      if (sec) sec.style.display = 'none';
+      // An empty calendar is not an embarrassment - to a booker it reads as
+      // availability. Say so plainly rather than hiding the section.
+      list.innerHTML =
+        '<li class="shows-status">We&rsquo;re booking now. Confirmed dates appear here. ' +
+        '<a href="#booking">Get yours on the calendar.</a></li>';
       return;
     }
 
