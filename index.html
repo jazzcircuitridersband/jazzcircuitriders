@@ -635,6 +635,16 @@ details.member > .member-line:focus-visible{
   text-align:right; flex:0 1 auto; min-width:0;
 }
 
+/* Links inside bio prose. These moved out of .member-also when the band
+   credits went inline, and lost their styling on the way. */
+.member-bio a{
+  color:var(--brass-lit);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.45);
+  transition:color .2s ease, border-color .2s ease;
+}
+.member-bio a:hover{ color:var(--cream); border-color:var(--cream); }
+
 .member-also{
   margin:7px 0 0;
   font-size:13.5px;
