@@ -312,6 +312,13 @@ body{
   margin:0 0 26px;
 }
 
+.wordmark-logo{ margin:0; line-height:0; }
+.wordmark-logo img{
+  width:clamp(230px, 36vw, 420px);
+  height:auto;
+  display:block;
+}
+
 .wordmark{
   font-family:var(--display);
   font-weight:400;
@@ -722,11 +729,7 @@ a:focus-visible, button:focus-visible{
     <div class="hero-art" aria-hidden="true"></div>
     <div class="hero-body">
       <p class="eyebrow">Trio &amp; Quartet &middot; Chelsea, Michigan</p>
-      <h1 class="wordmark">
-        <span>Jazz</span>
-        <span>Circuit</span>
-        <span>Riders</span>
-      </h1>
+      <h1 class="wordmark-logo"><img src="assets/img/logo.webp" alt="Jazz Circuit Riders" width="240" height="243" fetchpriority="high" decoding="async"></h1>
       <!-- REPLACE: your one-liner. Under 12 words. -->
       <p class="lede">Standards for rooms that listen.</p>
       <div class="hero-actions">
