@@ -1,1 +1,43 @@
+name: Test site
 
+# Runs on every push to main, on pull requests, and on demand from the
+# Actions tab. Uses nothing but Python's standard library, so there are no
+# dependencies to install and nothing to go stale.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Check the site before it goes out
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run site tests
+        run: python3 test_site.py
+
+      - name: Explain a failure in plain language
+        if: failure()
+        run: |
+          echo "### Something in this commit would break the site" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Open the **Run site tests** step above to see exactly what." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Most likely: a comma in \`shows.json\`.**" >> $GITHUB_STEP_SUMMARY
+          echo "Every entry needs a comma after it except the last one." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This matters because a broken \`shows.json\` does not show an" >> $GITHUB_STEP_SUMMARY
+          echo "error to visitors — the site quietly falls back to sample dates" >> $GITHUB_STEP_SUMMARY
+          echo "and looks completely normal. That is why this check exists." >> $GITHUB_STEP_SUMMARY
