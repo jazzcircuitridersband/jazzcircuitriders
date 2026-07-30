@@ -221,8 +221,8 @@ body{
   position:relative;
   min-height:92vh;
   display:flex;
-  align-items:flex-end;        /* ride low, over the pale floor, clear of the piano */
-  padding:104px 0 92px;
+  align-items:flex-end;
+  padding:104px 0 74px;
 }
 
 .hero-art{
@@ -244,9 +244,9 @@ body{
     linear-gradient(to bottom,
       rgba(14,26,43,.72) 0%,
       rgba(14,26,43,.42) 30%,
-      rgba(14,26,43,.30) 52%,
-      rgba(14,26,43,.34) 76%,
-      rgba(14,26,43,.90) 97%,
+      rgba(14,26,43,.28) 52%,
+      rgba(14,26,43,.30) 78%,
+      rgba(14,26,43,.92) 98%,
       var(--ink) 100%),
     url("assets/img/trio.webp");
   background-size:cover, cover;
@@ -313,9 +313,19 @@ body{
   margin:0 0 26px;
 }
 
-.wordmark-logo{ margin:0 0 4px; line-height:0; }
+.lockup{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:14px;
+}
+@media (min-width: 700px){
+  .lockup{ flex-direction:row; align-items:center; gap:34px; }
+  .lockup .lede{ margin:0; max-width:15ch; }
+}
+.wordmark-logo{ margin:0; line-height:0; }
 .wordmark-logo img{
-  width:clamp(190px, 26vw, 300px);
+  width:clamp(170px, 22vw, 250px);
   height:auto;
   display:block;
 }
@@ -337,8 +347,8 @@ body{
   font-family:var(--display);
   font-style:italic;
   font-size:clamp(1.15rem, 3.4vw, 1.6rem);
-  color:var(--cream);
-  opacity:.9;
+  color:var(--brass-lit);
+  opacity:1;
   max-width:22ch;
   margin:30px 0 40px;
 }
@@ -735,9 +745,11 @@ a:focus-visible, button:focus-visible{
     <div class="hero-art" aria-hidden="true"></div>
     <div class="hero-body">
       <p class="eyebrow">Trio &amp; Quartet &middot; Chelsea, Michigan</p>
-      <h1 class="wordmark-logo"><img src="assets/img/logo.webp" alt="Jazz Circuit Riders" width="240" height="243" fetchpriority="high" decoding="async"></h1>
+      <div class="lockup">
+        <h1 class="wordmark-logo"><img src="assets/img/logo.webp" alt="Jazz Circuit Riders" width="900" height="914" fetchpriority="high" decoding="async"></h1>
       <!-- REPLACE: your one-liner. Under 12 words. -->
-      <p class="lede">Standards for rooms that listen.</p>
+              <p class="lede">Standards for rooms that listen.</p>
+      </div>
       <div class="hero-actions">
         <a class="btn" href="#booking">Book the band</a>
         <a class="btn btn-ghost" href="#listen">Hear us first</a>
@@ -924,9 +936,9 @@ a:focus-visible, button:focus-visible{
 
   <footer class="foot">
     <span class="node node-end" data-node aria-hidden="true"></span>
-    <img class="foot-logo" src="assets/img/logo.webp"
+    <img class="foot-logo" src="assets/img/logo-sm.webp"
          alt="Jazz Circuit Riders logo: an upright bass with the word Jazz in gold script"
-         width="240" height="243" loading="lazy" decoding="async">
+         width="420" height="426" loading="lazy" decoding="async">
     <!-- REPLACE: link Romina's name once her site is up -->
     <p class="foot-dim">Logo by Romina Salas &nbsp;&middot;&nbsp; Photograph by <a href="https://www.staygold.photos/" target="_blank" rel="noopener" aria-label="Coley Kennedy, Stay Gold Photos &ndash; opens in a new tab">Coley Kennedy</a> &nbsp;&middot;&nbsp; &copy; <span id="year">2026</span> Jazz Circuit Riders</p>
   </footer>
