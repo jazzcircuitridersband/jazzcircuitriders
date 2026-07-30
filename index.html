@@ -221,8 +221,8 @@ body{
   position:relative;
   min-height:92vh;
   display:flex;
-  align-items:flex-start;
-  padding:104px 0 90px;
+  align-items:flex-end;        /* ride low, over the pale floor, clear of the piano */
+  padding:104px 0 92px;
 }
 
 .hero-art{
@@ -245,7 +245,8 @@ body{
       rgba(14,26,43,.72) 0%,
       rgba(14,26,43,.42) 30%,
       rgba(14,26,43,.30) 52%,
-      rgba(14,26,43,.80) 84%,
+      rgba(14,26,43,.34) 76%,
+      rgba(14,26,43,.90) 97%,
       var(--ink) 100%),
     url("assets/img/trio.webp");
   background-size:cover, cover;
@@ -310,6 +311,13 @@ body{
   text-transform:uppercase;
   color:var(--brass);
   margin:0 0 26px;
+}
+
+.wordmark-logo{ margin:0 0 4px; line-height:0; }
+.wordmark-logo img{
+  width:clamp(190px, 26vw, 300px);
+  height:auto;
+  display:block;
 }
 
 .wordmark{
@@ -727,11 +735,7 @@ a:focus-visible, button:focus-visible{
     <div class="hero-art" aria-hidden="true"></div>
     <div class="hero-body">
       <p class="eyebrow">Trio &amp; Quartet &middot; Chelsea, Michigan</p>
-      <h1 class="wordmark">
-        <span>Jazz</span>
-        <span>Circuit</span>
-        <span>Riders</span>
-      </h1>
+      <h1 class="wordmark-logo"><img src="assets/img/logo.webp" alt="Jazz Circuit Riders" width="240" height="243" fetchpriority="high" decoding="async"></h1>
       <!-- REPLACE: your one-liner. Under 12 words. -->
       <p class="lede">Standards for rooms that listen.</p>
       <div class="hero-actions">
