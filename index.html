@@ -221,8 +221,8 @@ body{
   position:relative;
   min-height:92vh;
   display:flex;
-  align-items:flex-end;
-  padding:104px 0 74px;
+  align-items:flex-start;
+  padding:104px 0 90px;
 }
 
 .hero-art{
@@ -244,9 +244,8 @@ body{
     linear-gradient(to bottom,
       rgba(14,26,43,.72) 0%,
       rgba(14,26,43,.42) 30%,
-      rgba(14,26,43,.28) 52%,
-      rgba(14,26,43,.30) 78%,
-      rgba(14,26,43,.92) 98%,
+      rgba(14,26,43,.30) 52%,
+      rgba(14,26,43,.80) 84%,
       var(--ink) 100%),
     url("assets/img/trio.webp");
   background-size:cover, cover;
@@ -313,23 +312,6 @@ body{
   margin:0 0 26px;
 }
 
-.lockup{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:14px;
-}
-@media (min-width: 700px){
-  .lockup{ flex-direction:row; align-items:center; gap:34px; }
-  .lockup .lede{ margin:0; max-width:15ch; }
-}
-.wordmark-logo{ margin:0; line-height:0; }
-.wordmark-logo img{
-  width:clamp(170px, 22vw, 250px);
-  height:auto;
-  display:block;
-}
-
 .wordmark{
   font-family:var(--display);
   font-weight:400;
@@ -347,8 +329,8 @@ body{
   font-family:var(--display);
   font-style:italic;
   font-size:clamp(1.15rem, 3.4vw, 1.6rem);
-  color:var(--brass-lit);
-  opacity:1;
+  color:var(--cream);
+  opacity:.9;
   max-width:22ch;
   margin:30px 0 40px;
 }
@@ -745,11 +727,13 @@ a:focus-visible, button:focus-visible{
     <div class="hero-art" aria-hidden="true"></div>
     <div class="hero-body">
       <p class="eyebrow">Trio &amp; Quartet &middot; Chelsea, Michigan</p>
-      <div class="lockup">
-        <h1 class="wordmark-logo"><img src="assets/img/logo.webp" alt="Jazz Circuit Riders" width="900" height="914" fetchpriority="high" decoding="async"></h1>
+      <h1 class="wordmark">
+        <span>Jazz</span>
+        <span>Circuit</span>
+        <span>Riders</span>
+      </h1>
       <!-- REPLACE: your one-liner. Under 12 words. -->
-              <p class="lede">Standards for rooms that listen.</p>
-      </div>
+      <p class="lede">Standards for rooms that listen.</p>
       <div class="hero-actions">
         <a class="btn" href="#booking">Book the band</a>
         <a class="btn btn-ghost" href="#listen">Hear us first</a>
