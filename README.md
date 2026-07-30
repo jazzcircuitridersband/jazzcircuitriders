@@ -3,7 +3,7 @@
 The band's website. Hosted free on GitHub Pages — every commit goes live in
 about a minute.
 
-**Live:** https://jazzcircuitridersband.github.io/jazzcircuitriders/
+**Live:** https://jazzcircuitriders.com
 
 ```
 index.html                    the entire site (styles and scripts are inside it)
