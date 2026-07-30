@@ -10,6 +10,8 @@
      ============================================================ -->
 <title>Jazz Circuit Riders — Jazz Trio &amp; Quartet | Chelsea, MI</title>
 <meta name="description" content="Jazz trio and quartet based in Chelsea, Michigan. Standards with vocals for clubs, restaurants, receptions and private events across southeast Michigan.">
+<link rel="preload" as="image" href="assets/img/trio.webp" fetchpriority="high" media="(min-width: 760px)">
+<link rel="preload" as="image" href="assets/img/trio-small.webp" fetchpriority="high" media="(max-width: 759px)">
 <link rel="canonical" href="https://jazzcircuitriders.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Jazz Circuit Riders">
@@ -21,6 +23,8 @@
 <meta property="og:url" content="https://jazzcircuitriders.com/">
 <meta property="og:image" content="https://jazzcircuitriders.com/assets/img/trio.webp">
 <meta property="og:image:alt" content="Jazz Circuit Riders playing as a trio - piano, upright bass, guitar and drums.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E1A2B">
 
 <!-- Structured data: tells Google this is a band, not just a page.
@@ -217,6 +221,7 @@ body{
 .hero{
   position:relative;
   min-height:92vh;
+  min-height:92svh;   /* stable while Safari hides its toolbar */
   display:flex;
   align-items:flex-start;
   padding:104px 0 90px;
@@ -254,7 +259,7 @@ body{
    show the whole frame at full width across the top, and move the type below
    it onto solid navy. Gradient stops are in vw so they land exactly where the
    photograph ends (100vw / 1.5 = 66.7vw tall). */
-@media (max-aspect-ratio: 7/5){
+@media (max-aspect-ratio: 7/5) and (max-width: 1024px){
   .hero{
     align-items:flex-end;
     min-height:auto;
