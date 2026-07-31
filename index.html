@@ -99,7 +99,11 @@
 }
 </script>
 
+<!-- Safari ignores SVG favicons entirely, so .ico carries it there.
+     sizes="any" stops Chrome downloading both files. -->
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 /* ============================================================
    JAZZ CIRCUIT RIDERS
