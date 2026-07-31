@@ -721,7 +721,7 @@ details.member > .member-line:focus-visible{
   width:140px; height:auto; display:block;
   margin:0 0 26px; opacity:.94;
 }
-.foot-dim{ margin-top:8px !important; opacity:.6; font-family:var(--mono); font-size:11px; letter-spacing:.1em; }
+.foot-dim{ margin-top:8px !important; font-family:var(--mono); font-size:11px; letter-spacing:.1em; }
 
 @media print{
   .grain, .hero-art, .rail::before, .node, .track-btn, .track-bar,
@@ -786,7 +786,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Johnny Mandel</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Emily">
-        <p class="track-time"><span class="sr-only">Time remaining </span>0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/watch-what-happens.mp3">
@@ -798,7 +798,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Michel Legrand</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Watch What Happens">
-        <p class="track-time"><span class="sr-only">Time remaining </span>0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/nature-boy.mp3">
@@ -810,7 +810,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">eden ahbez</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Nature Boy">
-        <p class="track-time"><span class="sr-only">Time remaining </span>0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/killer-joe.mp3">
@@ -822,7 +822,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Benny Golson</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Killer Joe">
-        <p class="track-time"><span class="sr-only">Time remaining </span>0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/billies-bounce.mp3">
@@ -834,7 +834,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Charlie Parker</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Billie's Bounce">
-        <p class="track-time"><span class="sr-only">Time remaining </span>0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
     </ol>
   </section>
@@ -1003,23 +1003,13 @@ a:focus-visible, button:focus-visible{
      three appear. Nothing to edit in between.
      ============================================================ */
   var tracks = Array.prototype.slice.call(document.querySelectorAll('.track'));
-  var listenSection = document.getElementById('listen');
   var current = null;
-  var pending = tracks.length;
-  var found = 0;
 
   function fmt(seconds) {
     if (!isFinite(seconds) || seconds < 0) seconds = 0;
     var m = Math.floor(seconds / 60);
     var s = Math.floor(seconds % 60);
     return m + ':' + (s < 10 ? '0' : '') + s;
-  }
-
-  function settle() {
-    pending--;
-    if (pending > 0) return;
-    // Nothing loaded at all - hide the section rather than show an empty one.
-    if (found === 0 && listenSection) listenSection.style.display = 'none';
   }
 
   tracks.forEach(function (track) {
@@ -1030,71 +1020,78 @@ a:focus-visible, button:focus-visible{
     var titleEl = track.querySelector('.track-title');
     var label = titleEl ? titleEl.textContent.trim() : 'track';
     var seeking = false;
+    var audio = null;
 
-    // preload='metadata' fetches only the header, not the whole song,
-    // so this costs almost nothing and tells us the file is really there.
-    var audio = new Audio(src);
-    audio.preload = 'metadata';
+    // Nothing is fetched until a play button is pressed. Creating Audio
+    // objects on load pulled 22MB of MP3 before anyone asked to hear a note,
+    // which starved the hero image and put Largest Contentful Paint at 52s.
+    function build() {
+      if (audio) return audio;
+      audio = new Audio(src);
+      audio.preload = 'auto';
 
-    audio.addEventListener('loadedmetadata', function () {
-      found++;
-      time.textContent = fmt(audio.duration);
-      settle();
-    });
+      audio.addEventListener('loadedmetadata', function () {
+        time.textContent = fmt(audio.duration);
+      });
 
-    audio.addEventListener('error', function () {
-      track.parentNode && track.parentNode.removeChild(track);
-      settle();
-    });
+      audio.addEventListener('timeupdate', function () {
+        if (!audio.duration || seeking) return;
+        var pct = audio.currentTime / audio.duration * 100;
+        bar.value = pct;
+        bar.style.setProperty('--pct', pct + '%');
+        time.textContent = fmt(audio.duration - audio.currentTime);
+      });
 
-    audio.addEventListener('timeupdate', function () {
-      if (!audio.duration || seeking) return;
-      var pct = audio.currentTime / audio.duration * 100;
-      bar.value = pct;
-      bar.style.setProperty('--pct', pct + '%');
-      time.textContent = fmt(audio.duration - audio.currentTime);
-    });
+      audio.addEventListener('ended', function () {
+        track.classList.remove('playing');
+        bar.value = 0;
+        bar.style.setProperty('--pct', '0%');
+        btn.setAttribute('aria-label', 'Play ' + label);
+        audio.currentTime = 0;
+        current = null;
+      });
 
-    audio.addEventListener('ended', function () {
-      track.classList.remove('playing');
-      bar.value = 0;
-      bar.style.setProperty('--pct', '0%');
-      btn.setAttribute('aria-label', 'Play ' + label);
-      audio.currentTime = 0;
-      time.textContent = fmt(audio.duration);
-      current = null;
-    });
+      audio.addEventListener('error', function () {
+        track.classList.remove('playing');
+        time.textContent = '\u2014';
+        btn.disabled = true;
+        btn.setAttribute('aria-label', label + ' is unavailable');
+      });
+
+      return audio;
+    }
 
     btn.addEventListener('click', function () {
-      if (current && current !== audio) {
+      var a = build();
+
+      if (current && current !== a) {
         current.pause();
         tracks.forEach(function (t) { t.classList.remove('playing'); });
       }
 
-      if (audio.paused) {
-        audio.play().then(function () {
+      if (a.paused) {
+        a.play().then(function () {
           track.classList.add('playing');
           btn.setAttribute('aria-label', 'Pause ' + label);
-          current = audio;
+          current = a;
         }).catch(function () {
           track.classList.remove('playing');
         });
       } else {
-        audio.pause();
+        a.pause();
         track.classList.remove('playing');
         btn.setAttribute('aria-label', 'Play ' + label);
         current = null;
       }
     });
 
-    // 'input' fires for mouse drag, touch AND arrow keys - one handler covers all.
     bar.addEventListener('input', function () {
       seeking = true;
       bar.style.setProperty('--pct', bar.value + '%');
     });
     bar.addEventListener('change', function () {
       seeking = false;
-      if (audio.duration) audio.currentTime = (bar.value / 100) * audio.duration;
+      if (audio && audio.duration) audio.currentTime = (bar.value / 100) * audio.duration;
     });
   });
 

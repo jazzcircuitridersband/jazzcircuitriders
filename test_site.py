@@ -355,11 +355,38 @@ def test_image_dimensions():
             fail('images', f'{src.group(1)} is {real[0]}x{real[1]} '
                            f'but declared {w.group(1)}x{hh.group(1)}')
 
+
+# --------------------------------------------------- performance regressions
+def test_audio_not_eager():
+    """Creating Audio objects at page load once pulled 22MB of MP3 before
+    anyone pressed play. LCP went to 52 seconds. Never again."""
+    m = re.search(r'tracks\.forEach\(function \(track\) \{(.*?)\n  \}\);', js, re.S)
+    if not m:
+        warn('perf', 'could not locate the track loop to check audio loading')
+        return
+    loop = m.group(1)
+    # every `new Audio(` must sit inside a function that runs on interaction
+    for hit in re.finditer(r'new Audio\(', loop):
+        before = loop[:hit.start()]
+        if 'function build' not in before:
+            fail('perf', 'Audio object created outside a click handler — '
+                         'this fetches every MP3 on page load')
+    if re.search(r"preload\s*=\s*['\"]metadata['\"]", loop) and 'function build' not in loop:
+        fail('perf', "preload='metadata' at page load fetches all audio")
+
+def test_no_opacity_on_text():
+    """Colour tokens can pass contrast and still fail once opacity composites
+    them against the background. Lighthouse caught one I missed."""
+    for m in re.finditer(r'(\.[\w-]+)\{([^}]*)\}', css):
+        name, decl = m.group(1), m.group(2)
+        if re.search(r'opacity:\s*0?\.[0-8]', decl) and 'font-size' in decl:
+            warn('contrast', f'{name} sets opacity on text — check the composited ratio')
+
 if __name__ == '__main__':
     for fn in [test_structure, test_jekyll_safe, test_assets_exist, test_images,
                test_links, test_css_html_coherence, test_accessibility,
                test_contrast, test_no_placeholders, test_seo,
-               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions]:
+               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text]:
         fn()
 
     for w in warns:
