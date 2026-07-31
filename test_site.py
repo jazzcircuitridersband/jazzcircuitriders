@@ -287,11 +287,40 @@ def test_audio_players():
             fail('audio', f'{name}: no visible title')
 
 
+
+# ------------------------------------------------------- unreferenced files
+def test_no_orphan_files():
+    """Files sitting in the repo that nothing points at. Runs against the real
+    checkout in CI, which is the only listing that counts."""
+    # needed but never linked from a page
+    expected = {
+        'index.html', 'shows.json', 'README.md', 'test_site.py',
+        'CNAME', 'robots.txt', 'sitemap.xml',
+        'favicon.svg', 'favicon.ico', 'apple-touch-icon.png',
+        '.gitignore', '.nojekyll',
+    }
+    body = re.sub(r'<!--.*?-->', '', html, flags=re.S)
+    refs = set(re.findall(r'(?:src|href)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"', body))
+    refs |= set(re.findall(r'url\("((?!data:)[^"]+)"\)', body))
+    refs |= set(re.findall(r"fetch\('([^']+)'", body))
+    refs = {r.lstrip('./') for r in refs}
+
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in ('.git', '.github', '__pycache__')]
+        for fn in filenames:
+            rel = os.path.relpath(os.path.join(dirpath, fn), ROOT).replace(os.sep, '/')
+            if rel in expected or rel in refs:
+                continue
+            if fn == '.gitkeep':
+                warn('orphans', f'{rel} — placeholder, folder has real files now')
+            else:
+                warn('orphans', f'{rel} — in the repo but nothing references it')
+
 if __name__ == '__main__':
     for fn in [test_structure, test_jekyll_safe, test_assets_exist, test_images,
                test_links, test_css_html_coherence, test_accessibility,
                test_contrast, test_no_placeholders, test_seo,
-               test_shows_json, test_audio_players]:
+               test_shows_json, test_audio_players, test_no_orphan_files]:
         fn()
 
     for w in warns:
