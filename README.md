@@ -5,16 +5,48 @@ about a minute.
 
 **Live:** https://jazzcircuitriders.com
 
+---
+
+## What's in here
+
+**The site**
+
 ```
-index.html                    the entire site (styles and scripts are inside it)
-shows.json                    the only file edited routinely
-test_site.py                  checks the site before it goes out
-favicon.svg
-.github/workflows/test.yml    runs the checks automatically on every commit
-assets/
-├── audio/                    MP3s
-└── img/                      photos and logo
+index.html              the entire site — styles and scripts are inside it
+shows.json              the only file edited routinely
+404.html                shown when a URL doesn't exist
+assets/audio/           MP3s
+assets/img/             photos and logo
 ```
+
+**Icons**
+
+```
+favicon.ico             browser tabs — Safari ignores SVG, so this one matters
+favicon.svg             browser tabs everywhere else
+apple-touch-icon.png    iOS home screen
+manifest.webmanifest    Android home screen
+```
+
+**Search engines**
+
+```
+robots.txt              tells crawlers what to index
+sitemap.xml             lists the page — update lastmod on real content changes
+```
+
+**Machinery — don't delete these**
+
+```
+CNAME                   the custom domain. Delete it and jazzcircuitriders.com stops working.
+.nojekyll               stops GitHub running the site through Jekyll. Empty on purpose.
+test_site.py            18 checks, run before every deploy
+.github/workflows/      runs those checks automatically on every commit
+README.md               this file
+```
+
+Everything except the `assets/` folders must stay at the **root**. `robots.txt`,
+`404.html` and `.nojekyll` are only recognised there.
 
 ---
 
@@ -37,6 +69,7 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
 ]
 ```
 
+- Keys are **lowercase**: `date`, `venue`, `city`, `time`, `ticketUrl`
 - `date` must be `YYYY-MM-DD`
 - Leave `ticketUrl` as `""` and the start time shows instead
 - Every entry needs a comma after it **except the last one**
@@ -52,16 +85,16 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
 
 That's deliberate. An empty calendar isn't an embarrassment — to someone
 trying to hire you it reads as availability. Add a date and real listings
-replace the message automatically. No code change, nothing to switch on.
+replace the message automatically.
 
-**Only uploaded some of the music?** The Listen section checks each MP3 and
-removes any track whose file isn't there. Upload two songs, two players
-appear. Add three more later and they show up on their own.
+**Audio doesn't load until you press play.** Track durations show a dash until
+then. This is on purpose: loading five MP3s up front meant 22 MB downloaded by
+every visitor, and the page took 52 seconds to finish. Now nothing is fetched
+until someone asks to hear something.
 
-**`shows.json` broken?** This is the one to know about. The site does **not**
-show an error — it quietly falls back to sample dates and looks completely
-normal. Safe for visitors, easy for us to miss. Which is exactly why the
-automated check exists.
+**`shows.json` broken?** The site does **not** show an error — it quietly falls
+back to sample dates and looks completely normal. Safe for visitors, easy for
+us to miss. That's exactly why the automated check exists.
 
 ---
 
@@ -71,27 +104,31 @@ Every commit runs `test_site.py` on GitHub's servers. Look at the **Actions**
 tab: green tick means fine, red X means something in that commit would break
 the site, and whoever pushed it gets an email.
 
-It checks twelve things, including malformed `shows.json`, images missing
-alt text, links with no styling, broken file paths, placeholder text left
-visible, and colour contrast.
+It checks 18 things — malformed `shows.json`, images missing alt text, links
+with no styling, broken file paths, placeholder text left visible, colour
+contrast, image dimensions that don't match the real files, and audio being
+loaded too early.
 
-**If you see a red X**, click into the run and read the failure — it names
-the problem in plain language. A stray comma in `shows.json` is by far the
-most common cause.
+**If you see a red X**, click into the run and read the failure. It names the
+problem in plain language and, for `shows.json`, tells you exactly what's wrong
+with which entry.
 
-To run it yourself before committing: `python3 test_site.py`
+Run it yourself before committing: `python3 test_site.py`
+
+**A red X does not take the site down.** Pages deploys regardless — the check
+is there to tell you, not to stop you.
 
 ---
 
 ## Adding media
 
 **Photos** → `assets/img/`
-WebP, under 250KB each. Process at squoosh.app (runs in your browser,
-nothing gets uploaded anywhere).
+WebP, under 250KB each. Process at squoosh.app — it runs in your browser and
+nothing gets uploaded anywhere. Generate at about 3× the size it'll be shown at.
 
 **Music** → `assets/audio/`
-MP3 at 192kbps, under 15MB each. Match the loudness across tracks —
-Audacity: Effect → Volume and Compression → Loudness Normalization → -14 LUFS.
+MP3 at 192kbps, under 15MB each. Match loudness across tracks — Audacity:
+Effect → Volume and Compression → Loudness Normalization → −14 LUFS.
 Filenames must match the `data-src` values in `index.html`.
 
 ---
@@ -99,8 +136,9 @@ Filenames must match the `data-src` values in `index.html`.
 ## Please don't
 
 - Rename or move `index.html` — it must stay at the root
+- Delete `CNAME` or `.nojekyll`
 - Use `../` in any file path — breaks when served from a subfolder
-- Add `{{` or `{%` anywhere — those fail the build and the site 404s
+- Add `{{` or `{%` anywhere — those can fail the build
 - Upload files while inside a subfolder unless that's where you want them
 
 ---
