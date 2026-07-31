@@ -11,7 +11,7 @@
 <title>Jazz Circuit Riders — Jazz Trio &amp; Quartet | Chelsea, MI</title>
 <meta name="description" content="Jazz trio and quartet based in Chelsea, Michigan. Standards with vocals for clubs, restaurants, receptions and private events across southeast Michigan.">
 <link rel="preload" as="image" href="assets/img/trio.webp" fetchpriority="high" media="(min-width: 760px)">
-<link rel="preload" as="image" href="assets/img/trio-portrait.webp" fetchpriority="high" media="(max-width: 759px)">
+<link rel="preload" as="image" href="assets/img/trio-small.webp" fetchpriority="high" media="(max-width: 759px)">
 <link rel="canonical" href="https://jazzcircuitriders.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Jazz Circuit Riders">
@@ -259,7 +259,7 @@ body{
    show the whole frame at full width across the top, and move the type below
    it onto solid navy. Gradient stops are in vw so they land exactly where the
    photograph ends (100vw / 1.5 = 66.7vw tall). */
-@media (max-aspect-ratio: 7/5) and (min-width: 760px) and (max-width: 1024px){
+@media (max-aspect-ratio: 7/5) and (max-width: 1024px){
   .hero{
     align-items:flex-end;
     min-height:auto;
@@ -280,25 +280,17 @@ body{
 }
 
 /* Phones get the smaller file - 73KB instead of 340KB */
-@media (max-width: 759px){
-  /* Phones get their own crop of the same photograph, so the layout matches
-     desktop instead of stacking. Composed for a tall frame. */
-  .hero{
-    align-items:flex-start;
-    min-height:78svh;
-    padding:92px 0 64px;
-  }
+@media (max-aspect-ratio: 7/5) and (max-width: 759px){
   .hero-art{
     background-image:
       linear-gradient(to bottom,
-        rgba(14,26,43,.80) 0%,
-        rgba(14,26,43,.55) 34%,
-        rgba(14,26,43,.44) 62%,
-        rgba(14,26,43,.86) 90%,
-        var(--ink) 100%),
-      url("assets/img/trio-portrait.webp");
-    background-size:cover, cover;
-    background-position:center, center 38%;
+        rgba(14,26,43,.14) 0,
+        rgba(14,26,43,.14) 42vw,
+        rgba(14,26,43,.72) 60vw,
+        var(--ink) 67vw),
+      url("assets/img/trio-small.webp");
+    background-size:100% 100%, 100% auto;
+    background-position:top center, top center;
   }
 }
 @media (min-aspect-ratio: 7/5) and (max-width: 900px){
