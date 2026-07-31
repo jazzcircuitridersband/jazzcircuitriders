@@ -20,6 +20,8 @@
 <meta property="og:title" content="Jazz Circuit Riders">
 <meta property="og:description" content="Standards for rooms that listen.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Jazz Circuit Riders">
+<meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://jazzcircuitriders.com/">
 <meta property="og:image" content="https://jazzcircuitriders.com/assets/img/trio.webp">
 <meta property="og:image:alt" content="Jazz Circuit Riders playing as a trio - piano, upright bass, guitar and drums.">
@@ -95,7 +97,9 @@
     "Jackson, MI",
     "Detroit, MI",
     "Southeast Michigan"
-  ]
+  ],
+  "image": "https://jazzcircuitriders.com/assets/img/trio.webp",
+  "logo": "https://jazzcircuitriders.com/assets/img/logo-sm.webp"
 }
 </script>
 
@@ -473,27 +477,27 @@ body{
   -webkit-appearance:none;
   appearance:none;
   width:100%;
-  height:18px;          /* generous hit area; the visible track is 2px */
+  height:26px;          /* WCAG 2.2 target size; the visible line is 3px */
   background:transparent;
   cursor:pointer;
   margin:0;
   padding:0;
 }
 .track-bar::-webkit-slider-runnable-track{
-  height:2px;
+  height:3px;
   background:linear-gradient(to right,
-    var(--brass-lit) 0 var(--pct,0%), rgba(141,160,182,.22) var(--pct,0%) 100%);
+    var(--brass-lit) 0 var(--pct,0%), rgba(141,160,182,.60) var(--pct,0%) 100%);
 }
 .track-bar::-webkit-slider-thumb{
   -webkit-appearance:none;
   width:11px; height:11px;
-  margin-top:-4.5px;
+  margin-top:-4px;
   border-radius:50%;
   background:var(--brass-lit);
 }
 .track-bar::-moz-range-track{
-  height:2px;
-  background:rgba(141,160,182,.22);
+  height:3px;
+  background:rgba(141,160,182,.60);
 }
 .track-bar::-moz-range-progress{
   height:2px;
@@ -634,7 +638,8 @@ details.member > .member-line:focus-visible{
   gap:16px;
   margin:0;
 }
-.member-name{ font-family:var(--display); font-size:1.15rem; color:var(--cream); }
+.member-name{ font-family:var(--display); font-size:1.15rem; color:var(--cream);
+  font-weight:400; margin:0; }
 .member-name a{
   color:var(--cream);
   text-decoration:none;
@@ -712,6 +717,17 @@ details.member > .member-line:focus-visible{
   margin:0 0 26px; opacity:.94;
 }
 .foot-dim{ margin-top:8px !important; opacity:.6; font-family:var(--mono); font-size:11px; letter-spacing:.1em; }
+
+@media print{
+  .grain, .hero-art, .rail::before, .node, .track-btn, .track-bar,
+  .track-time, .hero-actions{ display:none !important; }
+  body{ background:#fff; color:#000; }
+  .rail{ padding:0; max-width:none; }
+  a{ color:#000; }
+  .book-line::after{ content:" (" attr(href) ")"; font-size:.8em; }
+  .member-detail img{ max-width:180px; }
+  .section{ page-break-inside:avoid; border-top:1px solid #ccc; }
+}
 
 /* ---------- focus visibility (quality floor) ---------- */
 a:focus-visible, button:focus-visible{
@@ -860,7 +876,7 @@ a:focus-visible, button:focus-visible{
         -->
         <details class="member" open>
           <summary class="member-line">
-            <span class="member-name">Jed Fritzemeier</span>
+            <h3 class="member-name">Jed Fritzemeier</h3>
             <span class="member-inst">Double Bass, Bass Guitar, Vocals</span>
           </summary>
           <div class="member-detail">
@@ -876,7 +892,7 @@ a:focus-visible, button:focus-visible{
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <span class="member-name">Wes Fritzemeier</span>
+            <h3 class="member-name">Wes Fritzemeier</h3>
             <span class="member-inst">Tenor Guitar, Drums, Vocals</span>
           </summary>
           <div class="member-detail">
@@ -890,7 +906,7 @@ a:focus-visible, button:focus-visible{
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <span class="member-name">Brian Brill</span>
+            <h3 class="member-name">Brian Brill</h3>
             <span class="member-inst">Piano, Keys</span>
           </summary>
           <div class="member-detail">
@@ -906,7 +922,7 @@ a:focus-visible, button:focus-visible{
           </div>
         </details>
         <div class="member">
-          <p class="member-line"><span class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></span><span class="member-inst">Trumpet &middot; quartet</span></p>
+          <p class="member-line"><h3 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h3><span class="member-inst">Trumpet &middot; quartet</span></p>
           <p class="member-also">also plays with <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a></p>
         </div>
       </div>

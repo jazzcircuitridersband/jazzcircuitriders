@@ -297,7 +297,7 @@ def test_no_orphan_files():
         'index.html', 'shows.json', 'README.md', 'test_site.py',
         'CNAME', 'robots.txt', 'sitemap.xml',
         'favicon.svg', 'favicon.ico', 'apple-touch-icon.png',
-        '.gitignore', '.nojekyll',
+        '.gitignore', '.nojekyll', '404.html',
     }
     body = re.sub(r'<!--.*?-->', '', html, flags=re.S)
     refs = set(re.findall(r'(?:src|href)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"', body))
