@@ -263,9 +263,13 @@ def test_shows_json():
         fail('shows', 'shows.json must be a list')
         return
     for i, s in enumerate(data):
-        for k in ['date', 'venue', 'city']:
-            if k not in s:
-                fail('shows', f'entry {i} missing "{k}"')
+        # say what the entry actually IS - "missing date" on a string is useless
+        if not isinstance(s, dict):
+            fail('shows', f'entry {i} is a {type(s).__name__}, not an object: {str(s)[:60]!r}')
+            continue
+        missing = [k for k in ('date', 'venue', 'city') if k not in s]
+        if missing:
+            fail('shows', f'entry {i} missing {missing} — it has {sorted(s.keys())}')
         if 'date' in s and not re.fullmatch(r'\d{4}-\d{2}-\d{2}', str(s['date'])):
             fail('shows', f'entry {i} date "{s["date"]}" is not YYYY-MM-DD')
 
