@@ -404,6 +404,20 @@ body{
 }
 
 /* ---------- Listen ---------- */
+.encore{
+  margin:30px 0 0;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:1.2rem;
+  color:var(--brass-lit);
+}
+.encore a{
+  color:var(--brass-lit);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.5);
+}
+.encore a:hover{ color:var(--cream); border-color:var(--cream); }
+
 .tracks{ list-style:none; margin:38px 0 0; padding:0; }
 
 .track{
@@ -837,6 +851,9 @@ a:focus-visible, button:focus-visible{
         <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
     </ol>
+
+    <p class="encore" id="encore" aria-live="polite" hidden>That&rsquo;s the whole set.
+    If you&rsquo;re still here, <a href="#booking">we should probably talk</a>.</p>
   </section>
 
   <!-- ========================= THE CIRCUIT (shows) ========================= -->
@@ -970,6 +987,11 @@ a:focus-visible, button:focus-visible{
 (function () {
   'use strict';
 
+  console.log('%cJazz Circuit Riders', 'font:italic 20px Palatino,serif;color:#E8B75C');
+  console.log('Standards for rooms that listen. Chelsea, Michigan.\n' +
+              'Built by hand: no framework, no tracker, no build step.\n' +
+              'Listen to all five and the set has an encore.');
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- year in the footer ---------- */
@@ -1004,6 +1026,7 @@ a:focus-visible, button:focus-visible{
      ============================================================ */
   var tracks = Array.prototype.slice.call(document.querySelectorAll('.track'));
   var current = null;
+  var finished = [];   // tracks played all the way through
 
   function fmt(seconds) {
     if (!isFinite(seconds) || seconds < 0) seconds = 0;
@@ -1043,6 +1066,12 @@ a:focus-visible, button:focus-visible{
       });
 
       audio.addEventListener('ended', function () {
+        // Heard the whole thing? Note it. Five of five earns the encore.
+        if (finished.indexOf(src) === -1) finished.push(src);
+        if (finished.length === tracks.length) {
+          var enc = document.getElementById('encore');
+          if (enc) enc.hidden = false;
+        }
         track.classList.remove('playing');
         bar.value = 0;
         bar.style.setProperty('--pct', '0%');
