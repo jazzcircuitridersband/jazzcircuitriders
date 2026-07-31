@@ -1,0 +1,12 @@
+{
+  "name": "Jazz Circuit Riders",
+  "short_name": "JCR",
+  "description": "Jazz trio and quartet based in Chelsea, Michigan.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0E1A2B",
+  "theme_color": "#0E1A2B",
+  "icons": [
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

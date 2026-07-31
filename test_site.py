@@ -297,7 +297,7 @@ def test_no_orphan_files():
         'index.html', 'shows.json', 'README.md', 'test_site.py',
         'CNAME', 'robots.txt', 'sitemap.xml',
         'favicon.svg', 'favicon.ico', 'apple-touch-icon.png',
-        '.gitignore', '.nojekyll', '404.html',
+        '.gitignore', '.nojekyll', '404.html', 'manifest.webmanifest',
     }
     body = re.sub(r'<!--.*?-->', '', html, flags=re.S)
     refs = set(re.findall(r'(?:src|href)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"', body))
@@ -316,11 +316,50 @@ def test_no_orphan_files():
             else:
                 warn('orphans', f'{rel} — in the repo but nothing references it')
 
+
+# ------------------------------------------------- image dimension accuracy
+def _img_size(path):
+    """Read width/height from PNG or WebP headers. No dependencies."""
+    with open(path, 'rb') as f:
+        head = f.read(40)
+    if head[:8] == b'\x89PNG\r\n\x1a\n':
+        return int.from_bytes(head[16:20],'big'), int.from_bytes(head[20:24],'big')
+    if head[:4] == b'RIFF' and head[8:12] == b'WEBP':
+        fmt = head[12:16]
+        if fmt == b'VP8 ':
+            return int.from_bytes(head[26:28],'little') & 0x3fff, int.from_bytes(head[28:30],'little') & 0x3fff
+        if fmt == b'VP8L':
+            b = int.from_bytes(head[21:25],'little')
+            return (b & 0x3fff)+1, ((b >> 14) & 0x3fff)+1
+        if fmt == b'VP8X':
+            return (int.from_bytes(head[24:27],'little'))+1, (int.from_bytes(head[27:30],'little'))+1
+    return None
+
+def test_image_dimensions():
+    """An image reused somewhere bigger than it was made for goes soft, and
+    nothing errors. Declared width/height must match the real file."""
+    for tag in re.findall(r'<img\b[^>]*>', body):
+        src = re.search(r'src="([^"]+)"', tag)
+        w   = re.search(r'width="(\d+)"', tag)
+        hh  = re.search(r'height="(\d+)"', tag)
+        if not (src and w and hh):
+            continue
+        p = os.path.join(ROOT, src.group(1))
+        if not os.path.exists(p):
+            continue
+        real = _img_size(p)
+        if not real:
+            warn('images', f'{src.group(1)} — could not read dimensions')
+            continue
+        if (real[0], real[1]) != (int(w.group(1)), int(hh.group(1))):
+            fail('images', f'{src.group(1)} is {real[0]}x{real[1]} '
+                           f'but declared {w.group(1)}x{hh.group(1)}')
+
 if __name__ == '__main__':
     for fn in [test_structure, test_jekyll_safe, test_assets_exist, test_images,
                test_links, test_css_html_coherence, test_accessibility,
                test_contrast, test_no_placeholders, test_seo,
-               test_shows_json, test_audio_players, test_no_orphan_files]:
+               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions]:
         fn()
 
     for w in warns:
