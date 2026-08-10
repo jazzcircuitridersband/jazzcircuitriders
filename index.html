@@ -643,6 +643,9 @@ details.member > .member-line:focus-visible{
   }
 }
 .member-detail img{
+  max-height:230px;
+  object-fit:cover;
+  object-position:center top;   /* portrait shots keep their heads */
   width:100%; height:auto; display:block;
   filter:saturate(0);
   border:1px solid rgba(201,146,46,.28);
@@ -953,7 +956,7 @@ a:focus-visible, button:focus-visible{
             <span class="member-inst">Drums, Vibraphone, Percussion</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/jonathan.webp" alt="Jonathan Brown playing drums" width="509" height="339" loading="lazy" decoding="async">
+            <img src="assets/img/jonathan.webp" alt="Jonathan Brown playing drums" width="509" height="690" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Drummer, vibraphonist and chamber percussionist based in Ann Arbor.
               He plays drum set with Chelsea&rsquo;s own <a href="https://jessmerritt.bandcamp.com/" target="_blank" rel="noopener" aria-label="Jess Merritt &ndash; opens in a new tab">Jess Merritt</a>, drums and mallets
