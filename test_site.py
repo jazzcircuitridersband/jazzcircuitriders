@@ -386,11 +386,22 @@ def test_no_opacity_on_text():
         if re.search(r'opacity:\s*0?\.[0-8]', decl) and 'font-size' in decl:
             warn('contrast', f'{name} sets opacity on text — check the composited ratio')
 
+
+# ------------------------------------------------------- invalid HTML nesting
+def test_no_invalid_nesting():
+    """A <p> cannot contain a block element. Browsers silently close the <p>
+    first, which quietly restructures the DOM and breaks styling that assumed
+    the original shape."""
+    for m in re.finditer(r'<p\b[^>]*>(.*?)</p>', body, re.S):
+        for bad in ('<div', '<h1', '<h2', '<h3', '<h4', '<ul', '<ol', '<section', '<p '):
+            if bad in m.group(1):
+                fail('html', f'{bad}> inside a <p> — invalid, browsers will reparse it')
+
 if __name__ == '__main__':
     for fn in [test_structure, test_jekyll_safe, test_assets_exist, test_images,
                test_links, test_css_html_coherence, test_accessibility,
                test_contrast, test_no_placeholders, test_seo,
-               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text]:
+               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text, test_no_invalid_nesting]:
         fn()
 
     for w in warns:

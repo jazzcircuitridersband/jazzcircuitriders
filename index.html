@@ -60,6 +60,10 @@
     },
     {
       "@type": "Person",
+      "name": "Jonathan Brown"
+    },
+    {
+      "@type": "Person",
       "name": "Ross"
     }
   ],
@@ -928,7 +932,7 @@ a:focus-visible, button:focus-visible{
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name">Brian Brill</h3>
+            <h3 class="member-name"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="Brian Brill &ndash; opens in a new tab">Brian Brill</a></h3>
             <span class="member-inst">Piano, Keys</span>
           </summary>
           <div class="member-detail">
@@ -939,12 +943,32 @@ a:focus-visible, button:focus-visible{
               Fast Tracks, has scored for PBS, CBS Sports and Turner Classic Movies,
               and has produced or arranged for artists including Billy Strings. Six
               records of his own, most recently a 2024 work for choir and orchestra.</p>
-              <p class="member-also"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="brianbrillmusic.com &ndash; opens in a new tab">brianbrillmusic.com</a></p>
+            </div>
+          </div>
+        </details>
+
+        <details class="member" open>
+          <summary class="member-line">
+            <h3 class="member-name"><a href="https://jbmimusic.squarespace.com/" target="_blank" rel="noopener" aria-label="Jonathan Brown &ndash; opens in a new tab">Jonathan Brown</a></h3>
+            <span class="member-inst">Drums, Vibraphone, Percussion</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/jonathan.webp" alt="Jonathan Brown playing drums" width="509" height="339" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Drummer, vibraphonist and chamber percussionist based in Ann Arbor.
+              He plays drum set with Chelsea&rsquo;s own <a href="https://jessmerritt.bandcamp.com/" target="_blank" rel="noopener" aria-label="Jess Merritt &ndash; opens in a new tab">Jess Merritt</a>, drums and mallets
+              for Cici Blind and the Spectacles, and vibraphone with the retro lounge
+              exotica outfit Yellowhammer. He&rsquo;s a member of the <a href="https://www.portlandpercussiongroup.com/" target="_blank" rel="noopener" aria-label="Portland Percussion Group &ndash; opens in a new tab">Portland Percussion Group</a>, whose album <a href="https://newfocusrecordings.bandcamp.com/album/patterns-form" target="_blank" rel="noopener" aria-label="Patterns and Form &ndash; opens in a new tab">Patterns and Form</a> is out on New Focus Records, and he performs
+              regularly with the Jackson and Toledo symphonies. He teaches privately
+              and leads the Rudolf Steiner School of Ann Arbor Steel Drum Ensemble.</p>
             </div>
           </div>
         </details>
         <div class="member">
-          <p class="member-line"><h3 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h3><span class="member-inst">Trumpet &middot; quartet</span></p>
+          <div class="member-line">
+            <h3 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h3>
+            <span class="member-inst">Trumpet &middot; quartet</span>
+          </div>
           <p class="member-also">also plays with <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a></p>
         </div>
       </div>
@@ -987,10 +1011,14 @@ a:focus-visible, button:focus-visible{
 (function () {
   'use strict';
 
-  console.log('%cJazz Circuit Riders', 'font:italic 20px Palatino,serif;color:#E8B75C');
-  console.log('Standards for rooms that listen. Chelsea, Michigan.\n' +
-              'Built by hand: no framework, no tracker, no build step.\n' +
-              'Listen to all five and the set has an encore.');
+  // No %c styling here - consoles that don't support it print the raw CSS,
+  // which looks like a bug rather than a signature.
+  console.log(
+    'Jazz Circuit Riders\n' +
+    'Standards for rooms that listen. Chelsea, Michigan.\n' +
+    'No framework, no tracker, no build step.\n' +
+    'Listen to all five and the set has an encore.'
+  );
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
