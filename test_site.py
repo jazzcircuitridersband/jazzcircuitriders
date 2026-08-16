@@ -106,7 +106,9 @@ def test_links():
                   if re.search(r'(^|[\s>.#\])])a(\s*[:,{]|$)', s) or '.' in s]
 
     for tag in re.findall(r'<a\b[^>]*>', body_no_comments):
-        if 'target="_blank"' in tag and 'rel="noopener"' not in tag:
+        rel = re.search(r'rel="([^"]*)"', tag)
+        rel_tokens = rel.group(1).split() if rel else []
+        if 'target="_blank"' in tag and 'noopener' not in rel_tokens:
             fail('links', f'new-tab link without rel=noopener: {tag[:70]}')
 
     # walk the DOM crudely: track open class'd elements to know each link's ancestry
