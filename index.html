@@ -698,7 +698,6 @@ details.member > .member-line:focus-visible{
 }
 .member-also a:hover{ color:var(--cream); border-color:var(--cream); }
 
-
 /* ---------- Booking ---------- */
 .section-book{ padding-bottom:96px; }
 
@@ -894,12 +893,6 @@ a:focus-visible, button:focus-visible{
       </div>
 
       <div>
-        <!-- REPLACE: correct instruments -->
-        <!-- Member names link to their own page where one exists.
-             Other projects go on a .member-also line beneath:
-               <p class="member-also">also plays with <a href="URL" target="_blank" rel="noopener">Name</a></p>
-             Jed and Brian have no second project listed yet.
-        -->
         <details class="member" open>
           <summary class="member-line">
             <h3 class="member-name">Jed Fritzemeier</h3>
@@ -964,13 +957,26 @@ a:focus-visible, button:focus-visible{
             </div>
           </div>
         </details>
-        <div class="member">
-          <div class="member-line">
+        <details class="member" open>
+          <summary class="member-line">
             <h3 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h3>
-            <span class="member-inst">Trumpet &middot; quartet</span>
+            <span class="member-inst">Trumpet, Flugelhorn</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/ross.webp" alt="Ross Huff holding a trumpet" width="800" height="1200" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Ross Huff is a trumpeter, flugelhornist, and independent artist.
+              He currently performs with the ensembles Cici Blind and the Spectacles,
+              the <a href="https://www.facebook.com/TheMacpodz/" target="_blank" rel="noopener" aria-label="Macpodz &ndash; opens in a new tab">Macpodz</a>, Rhyta Musik, <a href="http://www.jivecolossus.com/" target="_blank" rel="noopener" aria-label="Jive Colossus &ndash; opens in a new tab">Jive Colossus</a>, the <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a>,
+              Yellowhammer, and the <a href="https://www.facebook.com/rollietussingmusic/" target="_blank" rel="noopener" aria-label="Rollie Tussing Trio &ndash; opens in a new tab">Rollie Tussing Trio</a>. In addition to instructing
+              trumpet students ranging in age from 9 to 65, by necessity he&rsquo;s become
+              an arranger, composer, transcriptionist, producer, director, recording
+              artist, tour manager, copy writer, and bandleader. In cases of emergency
+              he can be a sound engineer and run the chuck wagon. Ross is also the
+              musical director of the beloved <a href="https://theragbirds.com/holidayshow/" target="_blank" rel="noopener" aria-label="Ebird and Friends Holiday Show &ndash; opens in a new tab">Ebird and Friends Holiday Show</a>, which plays the Ark each December.</p>
+            </div>
           </div>
-          <p class="member-also">also plays with <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a></p>
-        </div>
+        </details>
       </div>
     </div>
   </section>
