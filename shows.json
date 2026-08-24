@@ -1,9 +1,10 @@
 [
   {
     "date": "2026-08-25",
-    "venue": "The Valiant Bar & Grill",
+    "venue": "Valiant Bar & Grill",
     "city": "Chelsea, MI",
     "time": "7:30 PM",
-    "note": "First stop on the circuit."
+    "note": "First stop on the circuit.",
+    "venueUrl": "https://www.valiantgrill.com/"
   }
 ]
