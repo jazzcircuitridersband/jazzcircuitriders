@@ -1,9 +1,10 @@
 [
-  {
-    "date": "2026-09-24",
+  {  "date": "2026-09-24",
     "venue": "Valiant Bar & Grill",
     "city": "Chelsea, MI",
     "time": "7:30 PM",
-    "ticketUrl": "https://www.valiantgrill.com/"
+    "venueUrl": "https://www.valiantgrill.com/",
+    "link": "",
+    "linkText": ""
   }
-]
+    ]
