@@ -61,17 +61,21 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
 [
   {
     "date": "2026-09-14",
-    "venue": "The Blue Room",
+    "venue": "The Valiant Bar & Grill",
     "city": "Chelsea, MI",
-    "time": "9:00 PM",
-    "ticketUrl": ""
+    "time": "7:30 PM",
+    "link": "https://www.facebook.com/events/123456",
+    "linkText": "Details"
   }
 ]
 ```
 
-- Keys are **lowercase**: `date`, `venue`, `city`, `time`, `ticketUrl`
-- `date` must be `YYYY-MM-DD`
-- Leave `ticketUrl` as `""` and the start time shows instead
+- Required: `date`, `venue`, `city`. Optional: `time`, `link`, `linkText`.
+- Keys are **lowercase**. `date` must be `YYYY-MM-DD`.
+- **`link` is for whatever suits the night** — a Facebook event, the venue's
+  page, a ticket seller. Most gigs won't need one.
+- `linkText` is the words people click. Leave it out and it says "Details".
+- The time always shows, with or without a link.
 - Every entry needs a comma after it **except the last one**
 - **Past dates disappear on their own.** Never delete anything.
 

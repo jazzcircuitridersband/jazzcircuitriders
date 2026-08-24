@@ -542,6 +542,7 @@ body{
 /* ---------- The Circuit (shows) ---------- */
 .shows{ list-style:none; margin:38px 0 0; padding:0; }
 
+.show-sep{ color:var(--steel); opacity:.5; margin:0 .5em; }
 .show{
   display:grid;
   grid-template-columns:96px 1fr auto;
@@ -1212,9 +1213,15 @@ a:focus-visible, button:focus-visible{
       var d = parseLocal(s.date);
       var date = MONTHS[d.getMonth()] + ' ' + d.getDate();
 
-      var right = s.ticketUrl
-        ? '<a href="' + esc(s.ticketUrl) + '" rel="noopener">Tickets</a>'
-        : esc(s.time || '');
+      // Time always shows. An optional link sits beside it — a venue page,
+      // a Facebook event, tickets, whatever the night calls for.
+      var bits = [];
+      if (s.time) bits.push(esc(s.time));
+      if (s.link) {
+        bits.push('<a href="' + esc(s.link) + '" target="_blank" ' +
+                  'rel="noopener noreferrer">' + esc(s.linkText || 'Details') + '</a>');
+      }
+      var right = bits.join('<span class="show-sep">&middot;</span>');
 
       return '<li class="show">' +
         '<span class="show-date">' + date + '</span>' +
