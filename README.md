@@ -64,6 +64,7 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
     "venue": "The Valiant Bar & Grill",
     "city": "Chelsea, MI",
     "time": "7:30 PM",
+    "venueUrl": "https://thevaliantchelsea.com",
     "link": "https://www.facebook.com/events/123456",
     "linkText": "Details"
   }
@@ -75,6 +76,9 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
 - **`link` is for whatever suits the night** — a Facebook event, the venue's
   page, a ticket seller. Most gigs won't need one.
 - `linkText` is the words people click. Leave it out and it says "Details".
+- `venueUrl` makes the **venue name** itself a link — use it for the venue's
+  own page, and keep `link` for the Facebook event or tickets. Two links, no
+  extra clutter, because the venue name is already on screen.
 - The time always shows, with or without a link.
 - Every entry needs a comma after it **except the last one**
 - **Past dates disappear on their own.** Never delete anything.

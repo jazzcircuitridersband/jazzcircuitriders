@@ -380,6 +380,7 @@ body{
    SECTIONS
    ============================================================ */
 .section{
+  scroll-margin-top:32px;
   position:relative;
   padding:76px 0;
   border-top:1px solid rgba(141,160,182,.14);
@@ -542,6 +543,9 @@ body{
 /* ---------- The Circuit (shows) ---------- */
 .shows{ list-style:none; margin:38px 0 0; padding:0; }
 
+.show-venue a{ color:inherit; text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.35); }
+.show-venue a:hover{ color:var(--brass-lit); border-bottom-color:var(--brass-lit); }
 .show-sep{ color:var(--steel); opacity:.5; margin:0 .5em; }
 .show{
   display:grid;
@@ -1225,7 +1229,11 @@ a:focus-visible, button:focus-visible{
 
       return '<li class="show">' +
         '<span class="show-date">' + date + '</span>' +
-        '<span class="show-venue">' + esc(s.venue) +
+        '<span class="show-venue">' +
+          (s.venueUrl
+            ? '<a href="' + esc(s.venueUrl) + '" target="_blank" rel="noopener noreferrer">'
+              + esc(s.venue) + '</a>'
+            : esc(s.venue)) +
           '<span class="show-city">' + esc(s.city) + '</span>' +
         '</span>' +
         '<span class="show-right">' + right + '</span>' +
