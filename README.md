@@ -61,11 +61,11 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
 [
   {
     "date": "2026-09-14",
-    "venue": "The Valiant Bar & Grill",
+    "venue": "The Example Room",
     "city": "Chelsea, MI",
     "time": "7:30 PM",
-    "venueUrl": "https://thevaliantchelsea.com",
-    "link": "https://www.facebook.com/events/123456",
+    "venueUrl": "https://example.com",
+    "link": "https://www.facebook.com/events/000000",
     "linkText": "Details"
   }
 ]
