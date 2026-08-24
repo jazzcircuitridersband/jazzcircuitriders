@@ -546,6 +546,16 @@ body{
 .show-venue a{ color:inherit; text-decoration:none;
   border-bottom:1px solid rgba(201,146,46,.35); }
 .show-venue a:hover{ color:var(--brass-lit); border-bottom-color:var(--brass-lit); }
+.show-note{
+  display:block;
+  margin-top:5px;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:.92rem;
+  color:var(--brass-lit);
+  letter-spacing:0;
+  text-transform:none;
+}
 .show-sep{ color:var(--steel); opacity:.5; margin:0 .5em; }
 .show{
   display:grid;
@@ -1234,7 +1244,9 @@ a:focus-visible, button:focus-visible{
             ? '<a href="' + esc(s.venueUrl) + '" target="_blank" rel="noopener noreferrer">'
               + esc(s.venue) + '</a>'
             : esc(s.venue)) +
-          '<span class="show-city">' + esc(s.city) + '</span>' +
+          '<span class="show-city">' + esc(s.city) +
+          (s.note ? '<span class="show-note">' + esc(s.note) + '</span>' : '') +
+        '</span>' +
         '</span>' +
         '<span class="show-right">' + right + '</span>' +
       '</li>';

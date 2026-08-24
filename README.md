@@ -50,6 +50,24 @@ Everything except the `assets/` folders must stay at the **root**. `robots.txt`,
 
 ---
 
+## Linking to a section
+
+These four work as deep links and **must never be renamed** — they're in
+Facebook posts, printed material and emails, and those links are permanent.
+
+| Link | Lands at |
+|---|---|
+| `jazzcircuitriders.com/#listen` | the tracks |
+| `jazzcircuitriders.com/#circuit` | dates |
+| `jazzcircuitriders.com/#riders` | the roster |
+| `jazzcircuitriders.com/#booking` | booking details |
+
+The content **inside** a section can be rearranged freely — split the roster,
+reorder it, add sub-headings. Only the section id is a promise to the outside
+world. `test_site.py` fails the build if one of them disappears.
+
+---
+
 ## Adding a show
 
 Edit **`shows.json`**. Nothing else.
@@ -64,6 +82,7 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
     "venue": "The Example Room",
     "city": "Chelsea, MI",
     "time": "7:30 PM",
+    "note": "First stop on the circuit.",
     "venueUrl": "https://example.com",
     "link": "https://www.facebook.com/events/000000",
     "linkText": "Details"
@@ -76,6 +95,8 @@ github.com → this repo → tap `shows.json` → **pencil icon** → edit →
 - **`link` is for whatever suits the night** — a Facebook event, the venue's
   page, a ticket seller. Most gigs won't need one.
 - `linkText` is the words people click. Leave it out and it says "Details".
+- `note` adds a line of context under the city — "First stop on the circuit",
+  "With Ross on trumpet", "Outdoors, bring a chair". Leave it out for a normal gig.
 - `venueUrl` makes the **venue name** itself a link — use it for the venue's
   own page, and keep `link` for the Facebook event or tickets. Two links, no
   extra clutter, because the venue name is already on screen.
