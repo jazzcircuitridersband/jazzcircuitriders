@@ -399,11 +399,23 @@ def test_no_invalid_nesting():
             if bad in m.group(1):
                 fail('html', f'{bad}> inside a <p> — invalid, browsers will reparse it')
 
+
+# --------------------------------------------------- published anchor stability
+PUBLISHED_ANCHORS = ['listen', 'circuit', 'riders', 'booking']
+
+def test_published_anchors_exist():
+    """These ids have been used in Facebook posts, emails and printed material.
+    Those links are permanent; the ids have to be too. Restructure the content
+    inside a section freely — never rename the section id."""
+    for a in PUBLISHED_ANCHORS:
+        if not re.search(r'id="%s"' % re.escape(a), body):
+            fail('anchors', f'#{a} is gone — external links point at it and will break')
+
 if __name__ == '__main__':
     for fn in [test_structure, test_jekyll_safe, test_assets_exist, test_images,
                test_links, test_css_html_coherence, test_accessibility,
                test_contrast, test_no_placeholders, test_seo,
-               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text, test_no_invalid_nesting]:
+               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text, test_no_invalid_nesting, test_published_anchors_exist]:
         fn()
 
     for w in warns:
