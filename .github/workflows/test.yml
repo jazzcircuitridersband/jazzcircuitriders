@@ -28,16 +28,17 @@ jobs:
       - name: Run site tests
         run: python3 test_site.py
 
-      - name: Explain a failure in plain language
+      - name: Put the real failure in the summary
         if: failure()
         run: |
           echo "### Something in this commit would break the site" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Open the **Run site tests** step above to see exactly what." >> $GITHUB_STEP_SUMMARY
+          echo "The exact failures are below — no guessing needed." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Most likely: a comma in \`shows.json\`.**" >> $GITHUB_STEP_SUMMARY
-          echo "Every entry needs a comma after it except the last one." >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          python3 test_site.py 2>&1 | grep -E "FAIL" >> $GITHUB_STEP_SUMMARY || true
+          echo '```' >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "This matters because a broken \`shows.json\` does not show an" >> $GITHUB_STEP_SUMMARY
-          echo "error to visitors — the site quietly falls back to sample dates" >> $GITHUB_STEP_SUMMARY
-          echo "and looks completely normal. That is why this check exists." >> $GITHUB_STEP_SUMMARY
+          echo "Each line names the file and the problem. A failure does **not**" >> $GITHUB_STEP_SUMMARY
+          echo "take the site down — the page stays live and this is a warning" >> $GITHUB_STEP_SUMMARY
+          echo "that something on it is wrong." >> $GITHUB_STEP_SUMMARY
