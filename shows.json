@@ -12,15 +12,19 @@
     "venue": "JD's Stage Bistro",
     "city": "Chelsea, MI",
     "time": "9:00 – 11:00 PM",
-    "note": "Late night, after Late Night Chelsea.",
-    "venueUrl": "https://chelseamich.com/events/late-night-chelsea/"
+    "venueUrl": "https://jdsstagebistro.com/",
+    "note": "After party to follow Late Night Chelsea.",
+    "link": "https://chelseamich.com/events/late-night-chelsea/",
+    "linkText": "Late Night Chelsea Event"
   },
   {
     "date": "2026-09-27",
     "venue": "JD's Stage Bistro",
     "city": "Chelsea, MI",
-    "time": "6:30 – 8:00 PM",
-    "note": "Stay Tuned, tickets avaialable soon!"
+    "time": "6:00 - 7:15PM",
+    "time": "7:30 - 8:00PM",
+    "venueUrl": "https://jdsstagebistro.com/",
+    "note": "Stay tuned, tickets available soon!"
 
   }
 ]
