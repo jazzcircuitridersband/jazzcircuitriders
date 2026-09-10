@@ -556,6 +556,7 @@ body{
   letter-spacing:0;
   text-transform:none;
 }
+.show-cover{ color:var(--steel); }
 .show-sep{ color:var(--steel); opacity:.5; margin:0 .5em; }
 .show{
   display:grid;
@@ -1199,7 +1200,12 @@ a:focus-visible, button:focus-visible{
 
     var upcoming = shows
       .filter(function (s) { return parseLocal(s.date) >= today; })
-      .sort(function (a, b) { return parseLocal(a.date) - parseLocal(b.date); });
+      .sort(function (a, b) {
+      var d = parseLocal(a.date) - parseLocal(b.date);
+      if (d !== 0) return d;
+      // two sets on one night: earlier one first
+      return (a.time || '').localeCompare(b.time || '', undefined, { numeric: true });
+    });
 
     if (!upcoming.length) {
       // An empty calendar is not an embarrassment - to a booker it reads as
@@ -1218,6 +1224,7 @@ a:focus-visible, button:focus-visible{
       // a Facebook event, tickets, whatever the night calls for.
       var bits = [];
       if (s.time) bits.push(esc(s.time));
+      if (s.cover) bits.push('<span class="show-cover">' + esc(s.cover) + '</span>');
       if (s.link) {
         bits.push('<a href="' + esc(s.link) + '" target="_blank" ' +
                   'rel="noopener noreferrer">' + esc(s.linkText || 'Details') + '</a>');
