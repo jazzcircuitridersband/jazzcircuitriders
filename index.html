@@ -557,6 +557,7 @@ body{
   text-transform:none;
 }
 .show-cover{ color:var(--steel); }
+.show-set-break{ display:block; height:4px; }
 .show-sep{ color:var(--steel); opacity:.5; margin:0 .5em; }
 .show{
   display:grid;
@@ -1204,7 +1205,8 @@ a:focus-visible, button:focus-visible{
       var d = parseLocal(a.date) - parseLocal(b.date);
       if (d !== 0) return d;
       // two sets on one night: earlier one first
-      return (a.time || '').localeCompare(b.time || '', undefined, { numeric: true });
+      var at = [].concat(a.time || '')[0], bt = [].concat(b.time || '')[0];
+      return String(at).localeCompare(String(bt), undefined, { numeric: true });
     });
 
     if (!upcoming.length) {
@@ -1223,7 +1225,12 @@ a:focus-visible, button:focus-visible{
       // Time always shows. An optional link sits beside it — a venue page,
       // a Facebook event, tickets, whatever the night calls for.
       var bits = [];
-      if (s.time) bits.push(esc(s.time));
+      if (s.time) {
+        // a string, or an array when there's more than one set
+        var times = Object.prototype.toString.call(s.time) === '[object Array]'
+          ? s.time : [s.time];
+        bits.push(times.map(esc).join('<span class="show-set-break"></span>'));
+      }
       if (s.cover) bits.push('<span class="show-cover">' + esc(s.cover) + '</span>');
       if (s.link) {
         bits.push('<a href="' + esc(s.link) + '" target="_blank" ' +

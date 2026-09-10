@@ -411,11 +411,33 @@ def test_published_anchors_exist():
         if not re.search(r'id="%s"' % re.escape(a), body):
             fail('anchors', f'#{a} is gone — external links point at it and will break')
 
+
+# ------------------------------------------------ duplicate keys in shows.json
+def test_shows_no_duplicate_keys():
+    """JSON allows a key twice and silently keeps the last one. A second
+    "time" field means the first one vanishes with no error anywhere."""
+    try:
+        raw = open(os.path.join(ROOT, 'shows.json'), encoding='utf-8').read()
+    except FileNotFoundError:
+        return
+    def catch(pairs):
+        seen = {}
+        for k, v in pairs:
+            if k in seen:
+                fail('shows', f'"{k}" appears twice in the same entry — '
+                              f'JSON keeps only the last, so "{seen[k]}" is being dropped')
+            seen[k] = v
+        return seen
+    try:
+        json.loads(raw, object_pairs_hook=catch)
+    except json.JSONDecodeError:
+        pass   # the parse check already reports this
+
 if __name__ == '__main__':
     for fn in [test_structure, test_jekyll_safe, test_assets_exist, test_images,
                test_links, test_css_html_coherence, test_accessibility,
                test_contrast, test_no_placeholders, test_seo,
-               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text, test_no_invalid_nesting, test_published_anchors_exist]:
+               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text, test_no_invalid_nesting, test_published_anchors_exist, test_shows_no_duplicate_keys]:
         fn()
 
     for w in warns:
