@@ -32,17 +32,16 @@ manifest.webmanifest    Android home screen
 
 ```
 robots.txt              tells crawlers what to index
-sitemap.xml             lists the page — update lastmod on real content changes
+sitemap.xml             update lastmod on real content changes
 ```
 
 **Machinery — don't delete these**
 
 ```
-CNAME                   the custom domain. Delete it and jazzcircuitriders.com stops working.
+CNAME                   the custom domain. Delete it and the site stops working.
 .nojekyll               stops GitHub running the site through Jekyll. Empty on purpose.
-test_site.py            18 checks, run before every deploy
-.github/workflows/      runs those checks automatically on every commit
-README.md               this file
+test_site.py            checks the site before it goes out
+.github/workflows/      runs those checks on every commit
 ```
 
 Everything except the `assets/` folders must stay at the **root**. `robots.txt`,
@@ -50,80 +49,68 @@ Everything except the `assets/` folders must stay at the **root**. `robots.txt`,
 
 ---
 
-## Linking to a section
-
-These four work as deep links and **must never be renamed** — they're in
-Facebook posts, printed material and emails, and those links are permanent.
-
-| Link | Lands at |
-|---|---|
-| `jazzcircuitriders.com/#listen` | the tracks |
-| `jazzcircuitriders.com/#circuit` | dates |
-| `jazzcircuitriders.com/#riders` | the roster |
-| `jazzcircuitriders.com/#booking` | booking details |
-
-The content **inside** a section can be rearranged freely — split the roster,
-reorder it, add sub-headings. Only the section id is a promise to the outside
-world. `test_site.py` fails the build if one of them disappears.
-
----
-
 ## Adding a show
 
 Edit **`shows.json`**. Nothing else.
 
-github.com → this repo → tap `shows.json` → **pencil icon** → edit →
-**Commit changes**. Works from a phone.
+Tap the file → **pencil icon** → edit → **Commit changes**. Works from a phone.
 
 ```json
 [
   {
-    "date": "2026-09-14",
-    "venue": "The Example Room",
-    "city": "Chelsea, MI",
-    "time": "7:30 PM",
-    "note": "First stop on the circuit.",
-    "venueUrl": "https://example.com",
-    "link": "https://www.facebook.com/events/000000",
-    "linkText": "Details"
+    "date": "2026-01-15",
+    "venue": "Venue Name",
+    "city": "Town, ST",
+    "time": "7:30 – 9:00 PM"
   }
 ]
 ```
 
-- Required: `date`, `venue`, `city`. Optional: `time`, `link`, `linkText`.
+**Required:** `date`, `venue`, `city`.
+**Optional:** `time`, `cover`, `note`, `link`, `linkText`, `venueUrl`.
+
+| Field | What it does |
+|---|---|
+| `time` | Free text. A start, or a range when the finish matters. |
+| `cover` | Shows beside the time. `"$10 suggested"`, `"No cover"`. |
+| `note` | A line under the city — a guest player, an unusual detail. |
+| `link` | A Facebook event, tickets, anything. |
+| `linkText` | The words people click. Defaults to "Details". |
+| `venueUrl` | Makes the venue name itself a link. |
+
+Rules that matter:
+
 - Keys are **lowercase**. `date` must be `YYYY-MM-DD`.
-- **`link` is for whatever suits the night** — a Facebook event, the venue's
-  page, a ticket seller. Most gigs won't need one.
-- `linkText` is the words people click. Leave it out and it says "Details".
-- `note` adds a line of context under the city — "First stop on the circuit",
-  "With Ross on trumpet", "Outdoors, bring a chair". Leave it out for a normal gig.
-- `venueUrl` makes the **venue name** itself a link — use it for the venue's
-  own page, and keep `link` for the Facebook event or tickets. Two links, no
-  extra clutter, because the venue name is already on screen.
-- The time always shows, with or without a link.
-- Every entry needs a comma after it **except the last one**
+- Comma after every entry **except the last one**.
 - **Past dates disappear on their own.** Never delete anything.
+- **Only confirmed dates go in here.** Un-announcing is worse than announcing late.
+
+---
+
+## Linking to a section
+
+These work as deep links and **must never be renamed** — they're in posts and
+printed material, and those links are permanent.
+
+`#listen` · `#circuit` · `#riders` · `#booking`
+
+Content inside a section can be rearranged freely. Only the id is a promise.
+`test_site.py` fails the build if one disappears.
 
 ---
 
 ## What the site does on its own
 
-**No dates booked?** The Circuit section stays visible and says:
+**No dates booked?** The dates section stays visible and invites booking. That's
+deliberate — an empty calendar reads as availability, not inexperience.
 
-> We're booking now. Confirmed dates appear here. *Get yours on the calendar.*
-
-That's deliberate. An empty calendar isn't an embarrassment — to someone
-trying to hire you it reads as availability. Add a date and real listings
-replace the message automatically.
-
-**Audio doesn't load until you press play.** Track durations show a dash until
-then. This is on purpose: loading five MP3s up front meant 22 MB downloaded by
-every visitor, and the page took 52 seconds to finish. Now nothing is fetched
-until someone asks to hear something.
+**Audio doesn't load until you press play.** Durations show a dash until then.
+Loading it up front meant 22MB downloaded by every visitor and a page that took
+52 seconds to finish.
 
 **`shows.json` broken?** The site does **not** show an error — it quietly falls
-back to sample dates and looks completely normal. Safe for visitors, easy for
-us to miss. That's exactly why the automated check exists.
+back to sample dates and looks completely normal. Safe for visitors, easy to
+miss. That's why the automated check exists.
 
 ---
 
@@ -133,32 +120,26 @@ Every commit runs `test_site.py` on GitHub's servers. Look at the **Actions**
 tab: green tick means fine, red X means something in that commit would break
 the site, and whoever pushed it gets an email.
 
-It checks 18 things — malformed `shows.json`, images missing alt text, links
-with no styling, broken file paths, placeholder text left visible, colour
-contrast, image dimensions that don't match the real files, and audio being
-loaded too early.
+**A red X does not take the site down.** Pages deploys regardless — the check
+tells you, it doesn't stop you.
 
-**If you see a red X**, click into the run and read the failure. It names the
-problem in plain language and, for `shows.json`, tells you exactly what's wrong
-with which entry.
+Click into a failed run and read the failure. It names the problem in plain
+language and, for `shows.json`, says exactly what's wrong with which entry.
 
 Run it yourself before committing: `python3 test_site.py`
-
-**A red X does not take the site down.** Pages deploys regardless — the check
-is there to tell you, not to stop you.
 
 ---
 
 ## Adding media
 
 **Photos** → `assets/img/`
-WebP, under 250KB each. Process at squoosh.app — it runs in your browser and
-nothing gets uploaded anywhere. Generate at about 3× the size it'll be shown at.
+WebP, under 250KB. Process at squoosh.app — runs in your browser, nothing gets
+uploaded. Generate at about 3× the size it'll be shown at.
 
 **Music** → `assets/audio/`
-MP3 at 192kbps, under 15MB each. Match loudness across tracks — Audacity:
-Effect → Volume and Compression → Loudness Normalization → −14 LUFS.
-Filenames must match the `data-src` values in `index.html`.
+MP3 at 192kbps, under 15MB. Match loudness across tracks — Audacity: Effect →
+Volume and Compression → Loudness Normalization → −14 LUFS. Filenames must
+match the `data-src` values in `index.html`.
 
 ---
 
@@ -168,11 +149,9 @@ Filenames must match the `data-src` values in `index.html`.
 - Delete `CNAME` or `.nojekyll`
 - Use `../` in any file path — breaks when served from a subfolder
 - Add `{{` or `{%` anywhere — those can fail the build
-- Upload files while inside a subfolder unless that's where you want them
 
 ---
 
 ## After any edit
 
-**Open the live site and check.** Thirty seconds now beats a season of
-wrong dates.
+**Open the live site and check.** Thirty seconds now beats a season of wrong dates.
