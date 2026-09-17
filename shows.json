@@ -17,7 +17,14 @@
     "link": "https://chelseamich.com/events/late-night-chelsea/",
     "linkText": "Late Night Chelsea"
   },
-    {
+  {
+    "date": "2026-09-24",
+    "venue": "Private Event",
+    "city": "Chelsea, MI",
+    "time": "6:00 – 8:00 PM"
+  },
+  
+  {
     "date": "2026-09-19",
     "venue": "Private Event",
     "city": "Chelsea, MI",
