@@ -21,13 +21,13 @@
     "date": "2026-09-19",
     "venue": "Private Event",
     "city": "Chelsea, MI",
-    "time": "7:00 – 8:30 PM"
+    "time": "7:00 – 8:30 PM",
   },
     {
     "date": "2026-09-24",
     "venue": "Private Event",
     "city": "Chelsea, MI",
-    "time": "6:00 – 8:00 PM",
+    "time": "6:00 – 8:00 PM"
   },
 
 ]
