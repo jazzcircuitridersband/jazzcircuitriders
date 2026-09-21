@@ -11,30 +11,30 @@
     "date": "2026-09-12",
     "venue": "JD's Stage Bistro",
     "city": "Chelsea, MI",
-    "time": "9:00 – 11:00 PM",
+    "time": "9:00 - 11:00 PM",
     "note": "After party to follow Late Night Chelsea.",
     "venueUrl": "https://jdsstagebistro.com/",
     "link": "https://chelseamich.com/events/late-night-chelsea/",
     "linkText": "Late Night Chelsea"
-  },  
+  },
   {
     "date": "2026-09-19",
     "venue": "Private Event",
     "city": "Chelsea, MI",
-    "time": "7:00 – 8:30 PM",
+    "time": "7:00 - 8:30 PM"
   },
   {
     "date": "2026-09-24",
     "venue": "Private Event",
     "city": "Chelsea, MI",
-    "time": "6:00 – 8:00 PM",
+    "time": "6:00 - 8:00 PM"
   },
   {
     "date": "2026-10-03",
     "venue": "JD's Stage Bistro",
     "city": "Chelsea, MI",
-    "time": "9:00 – 11:00 PM",
+    "time": "9:00 - 11:00 PM",
     "note": "Late Night Jazz in Chelsea",
     "venueUrl": "https://jdsstagebistro.com/"
-  }  
+  }
 ]
