@@ -295,6 +295,48 @@ def test_audio_players():
 
 
 # ------------------------------------------------------- unreferenced files
+def _shows_file_refs():
+    """Every value in shows.json that looks like a path into this repo."""
+    p = os.path.join(ROOT, 'shows.json')
+    try:
+        data = json.load(open(p))
+    except Exception:
+        return set()
+    out = set()
+    for s in data if isinstance(data, list) else []:
+        if not isinstance(s, dict):
+            continue
+        for v in s.values():
+            if isinstance(v, str) and not v.startswith(('http:', 'https:', 'mailto:', '#')) \
+               and re.search(r'\.\w{2,5}$', v) and '/' in v:
+                out.add(v.lstrip('./'))
+    return out
+
+
+def test_shows_posters_exist():
+    """A poster path that 404s leaves a broken image on the busiest section
+    of the site. The row still renders, so nothing else would catch it."""
+    # the renderer hardcodes one width/height for every poster, so every
+    # poster file has to actually be that size or the box reserves wrong
+    # the poster markup lives inside <script>, which `body` strips out
+    m = re.search(r's\.poster.{0,400}?width="(\d+)" height="(\d+)"', html, re.S)
+    if not m:
+        fail('shows', 'could not find the poster width/height in the renderer '
+                      '- the size check below is not running')
+        return
+    want = (int(m.group(1)), int(m.group(2)))
+
+    for rel in _shows_file_refs():
+        p = os.path.join(ROOT, rel)
+        if not os.path.exists(p):
+            fail('shows', f'shows.json points at {rel}, which is not in the repo')
+            continue
+        real = _img_size(p)
+        if real and real != want:
+            fail('shows', f'{rel} is {real[0]}x{real[1]} but the poster markup '
+                          f'declares {want[0]}x{want[1]}')
+
+
 def test_no_orphan_files():
     """Files sitting in the repo that nothing points at. Runs against the real
     checkout in CI, which is the only listing that counts."""
@@ -309,6 +351,9 @@ def test_no_orphan_files():
     refs = set(re.findall(r'(?:src|href)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"', body))
     refs |= set(re.findall(r'url\("((?!data:)[^"]+)"\)', body))
     refs |= set(re.findall(r"fetch\('([^']+)'", body))
+    # shows.json points at real files too (gig posters). Without this, adding
+    # a poster would get it flagged as an orphan and nobody would trust the check.
+    refs |= _shows_file_refs()
     refs = {r.lstrip('./') for r in refs}
 
     for dirpath, dirnames, filenames in os.walk(ROOT):
@@ -434,10 +479,15 @@ def test_shows_no_duplicate_keys():
         pass   # the parse check already reports this
 
 if __name__ == '__main__':
-    for fn in [test_structure, test_jekyll_safe, test_assets_exist, test_images,
-               test_links, test_css_html_coherence, test_accessibility,
-               test_contrast, test_no_placeholders, test_seo,
-               test_shows_json, test_audio_players, test_no_orphan_files, test_image_dimensions, test_audio_not_eager, test_no_opacity_on_text, test_no_invalid_nesting, test_published_anchors_exist, test_shows_no_duplicate_keys]:
+    # Every test_* in this file runs, in the order it is written. This used to
+    # be a hand-kept list, which meant a new test could sit here doing nothing
+    # and the suite would still say "all checks passed". Don't go back to that.
+    checks = [v for k, v in list(globals().items())
+              if k.startswith('test_') and callable(v)]
+    if not checks:
+        print('  FAIL  runner: no tests found - the suite is not actually running')
+        sys.exit(1)
+    for fn in checks:
         fn()
 
     for w in warns:

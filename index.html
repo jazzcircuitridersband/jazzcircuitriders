@@ -569,6 +569,27 @@ body{
 }
 .show:first-child{ border-top:1px solid rgba(141,160,182,.14); }
 
+/* A gig poster, when there is one. Sits on its own row under the venue so
+   rows with art and rows without still line up down the page. The file is
+   540px wide so it stays sharp on a retina screen; CSS is what sizes it. */
+.show-poster{
+  grid-column:2 / -1;
+  align-self:start;
+  justify-self:start;
+  margin-top:16px;
+  display:block;
+  line-height:0;                      /* kills the descender gap under the img */
+  border:1px solid rgba(141,160,182,.22);
+  border-radius:2px;
+}
+.show-poster img{ display:block; width:184px; height:auto; }
+.show-poster:hover{ border-color:var(--brass-lit); }
+.show-poster:focus-visible{
+  border-color:var(--brass-lit);
+  outline:2px solid var(--brass-lit);
+  outline-offset:3px;
+}
+
 .show-date{
   font-family:var(--mono);
   font-size:12.5px;
@@ -615,6 +636,8 @@ body{
 @media (max-width: 599px){
   .show{ grid-template-columns:1fr; gap:6px; }
   .show-right{ margin-top:6px; }
+  .show-poster{ grid-column:1; margin-top:12px; }
+  .show-poster img{ width:180px; }
 }
 
 /* ---------- The Riders ---------- */
@@ -1238,6 +1261,22 @@ a:focus-visible, button:focus-visible{
       }
       var right = bits.join('<span class="show-sep">&middot;</span>');
 
+      // Optional gig poster. Lazy — it is well below the fold, and the
+      // width/height attributes reserve the box so nothing jumps as it loads.
+      var poster = '';
+      if (s.poster) {
+        var palt = s.posterAlt ||
+          ('Poster for Jazz Circuit Riders at ' + s.venue + ', ' + date);
+        poster =
+          '<a class="show-poster" href="' + esc(s.poster) + '" target="_blank" ' +
+            'rel="noopener" aria-label="' + esc(palt) + ' &ndash; opens the full poster in a new tab">' +
+            // alt="" on purpose: the link above already carries the description,
+            // and a screen reader should not hear the same sentence twice.
+            '<img src="' + esc(s.poster) + '" alt="" ' +
+                 'width="540" height="540" loading="lazy" decoding="async">' +
+          '</a>';
+      }
+
       return '<li class="show">' +
         '<span class="show-date">' + date + '</span>' +
         '<span class="show-venue">' +
@@ -1250,6 +1289,7 @@ a:focus-visible, button:focus-visible{
         '</span>' +
         '</span>' +
         '<span class="show-right">' + right + '</span>' +
+        poster +
       '</li>';
     }).join('');
   }

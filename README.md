@@ -67,7 +67,8 @@ Tap the file → **pencil icon** → edit → **Commit changes**. Works from a p
 ```
 
 **Required:** `date`, `venue`, `city`.
-**Optional:** `time`, `cover`, `note`, `link`, `linkText`, `venueUrl`.
+**Optional:** `time`, `cover`, `note`, `link`, `linkText`, `venueUrl`,
+`poster`, `posterAlt`.
 
 | Field | What it does |
 |---|---|
@@ -77,10 +78,15 @@ Tap the file → **pencil icon** → edit → **Commit changes**. Works from a p
 | `link` | A Facebook event, tickets, anything. |
 | `linkText` | The words people click. Defaults to "Details". |
 | `venueUrl` | Makes the venue name itself a link. |
+| `poster` | Artwork for that date, e.g. `"assets/img/poster-oct3.webp"`. |
+| `posterAlt` | What the poster says, for screen readers and for search. |
 
 Rules that matter:
 
 - Keys are **lowercase**. `date` must be `YYYY-MM-DD`.
+- A `poster` must be a **540 × 540 `.webp`** living in `assets/img/`. The
+  page displays it small and links to the full file; the test suite fails
+  the build if the size is wrong or the file is missing.
 - Comma after every entry **except the last one**.
 - **Past dates disappear on their own.** Never delete anything.
 - **Only confirmed dates go in here.** Un-announcing is worse than announcing late.
