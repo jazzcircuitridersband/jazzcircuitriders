@@ -570,24 +570,93 @@ body{
 .show:first-child{ border-top:1px solid rgba(141,160,182,.14); }
 
 /* A gig poster, when there is one. Sits on its own row under the venue so
-   rows with art and rows without still line up down the page. The file is
-   540px wide so it stays sharp on a retina screen; CSS is what sizes it. */
+   rows with art and rows without still line up down the page. Big enough to
+   read without clicking; the file is 900px so it survives the enlargement. */
 .show-poster{
   grid-column:2 / -1;
   align-self:start;
   justify-self:start;
-  margin-top:16px;
+  margin-top:20px;
   display:block;
+  position:relative;
   line-height:0;                      /* kills the descender gap under the img */
   border:1px solid rgba(141,160,182,.22);
   border-radius:2px;
+  cursor:zoom-in;
 }
-.show-poster img{ display:block; width:184px; height:auto; }
+.show-poster img{ display:block; width:300px; height:auto; }
 .show-poster:hover{ border-color:var(--brass-lit); }
 .show-poster:focus-visible{
   border-color:var(--brass-lit);
   outline:2px solid var(--brass-lit);
   outline-offset:3px;
+}
+
+/* The enlarge hint. Hidden until you point at it or tab to it, so the
+   artwork is never defaced at rest. Not drawn on touch at all - there the
+   poster is already near full width and there is nothing to enlarge to. */
+.show-poster::after{
+  content:"Enlarge";
+  opacity:0;
+  transition:opacity .18s ease;
+  position:absolute;
+  right:0; bottom:0;
+  padding:7px 11px;
+  min-height:24px;                    /* WCAG 2.5.8 - not a target, but sized like one */
+  box-sizing:border-box;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  line-height:1.1;
+  color:var(--cream);
+  background:rgba(14,26,43,.86);
+  border-top:1px solid rgba(201,146,46,.45);
+  border-left:1px solid rgba(201,146,46,.45);
+}
+.show-poster:hover::after,
+.show-poster:focus-visible::after{ opacity:1; color:var(--brass-lit); }
+@media (hover: none){ .show-poster::after{ content:none; } }
+@media (prefers-reduced-motion: reduce){ .show-poster::after{ transition:none; } }
+
+/* ---------- Poster lightbox ---------- */
+/* A native <dialog>: Esc, focus handling and the inert background come from
+   the browser. Clicking the poster used to leave the site for a bare image
+   file, which read as a broken link. This keeps people on the page. */
+#lightbox{
+  border:0;
+  padding:0;
+  background:transparent;
+  max-width:min(92vw, 720px);
+  max-height:92vh;
+  overflow:visible;
+}
+#lightbox::backdrop{ background:rgba(6,12,21,.88); }
+#lightbox img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid rgba(201,146,46,.35);
+  border-radius:2px;
+}
+#lightbox-close{
+  position:absolute;
+  top:-14px; right:-14px;
+  width:44px; height:44px;            /* comfortably past the 24px minimum */
+  border-radius:50%;
+  border:1px solid rgba(201,146,46,.55);
+  background:var(--ink);
+  color:var(--cream);
+  font-family:var(--mono);
+  font-size:19px;
+  line-height:1;
+  cursor:pointer;
+}
+#lightbox-close:hover{ color:var(--brass-lit); border-color:var(--brass-lit); }
+#lightbox-close:focus-visible{ outline:2px solid var(--brass-lit); outline-offset:3px; }
+@media (max-width: 599px){
+  #lightbox{ max-width:94vw; }
+  #lightbox-close{ top:-10px; right:-10px; width:40px; height:40px; }
 }
 
 .show-date{
@@ -636,8 +705,8 @@ body{
 @media (max-width: 599px){
   .show{ grid-template-columns:1fr; gap:6px; }
   .show-right{ margin-top:6px; }
-  .show-poster{ grid-column:1; margin-top:12px; }
-  .show-poster img{ width:180px; }
+  .show-poster{ grid-column:1; margin-top:14px; }
+  .show-poster img{ width:100%; max-width:340px; }
 }
 
 /* ---------- The Riders ---------- */
@@ -1045,6 +1114,14 @@ a:focus-visible, button:focus-visible{
 
 </div>
 
+<!-- Poster lightbox. Empty until a poster is clicked; the browser handles
+     Esc, focus and making the page behind it inert. -->
+<dialog id="lightbox" aria-label="Gig poster">
+  <button id="lightbox-close" type="button" aria-label="Close the poster">&times;</button>
+  <!-- the image element is built by the script when a poster is opened, so
+       this markup never holds a path to a poster that has been retired -->
+</dialog>
+
 <script>
 /* ============================================================
    JAZZ CIRCUIT RIDERS — main.js
@@ -1268,12 +1345,14 @@ a:focus-visible, button:focus-visible{
         var palt = s.posterAlt ||
           ('Poster for Jazz Circuit Riders at ' + s.venue + ', ' + date);
         poster =
-          '<a class="show-poster" href="' + esc(s.poster) + '" target="_blank" ' +
-            'rel="noopener" aria-label="' + esc(palt) + ' &ndash; opens the full poster in a new tab">' +
+          // The href stays real. JS turns the click into a lightbox; without
+          // JS it still opens the poster rather than doing nothing at all.
+          '<a class="show-poster" href="' + esc(s.poster) + '" ' +
+            'aria-label="' + esc(palt) + ' &ndash; enlarge">' +
             // alt="" on purpose: the link above already carries the description,
             // and a screen reader should not hear the same sentence twice.
             '<img src="' + esc(s.poster) + '" alt="" ' +
-                 'width="540" height="540" loading="lazy" decoding="async">' +
+                 'width="900" height="900" loading="lazy" decoding="async">' +
           '</a>';
       }
 
@@ -1293,6 +1372,43 @@ a:focus-visible, button:focus-visible{
       '</li>';
     }).join('');
   }
+
+  /* ---- poster lightbox -------------------------------------------------
+     Delegated off the list, so it works for rows that do not exist yet when
+     this runs. If <dialog> is missing (old Safari), we leave the anchor
+     alone and the poster opens normally - degraded, never dead. */
+  (function () {
+    var dlg = document.getElementById('lightbox');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+
+    var close = document.getElementById('lightbox-close');
+    var img   = document.createElement('img');
+    img.width = 900; img.height = 900;
+    img.decoding = 'async';
+    dlg.appendChild(img);
+
+    list.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a.show-poster') : null;
+      if (!a) return;
+      // let cmd/ctrl/shift-click and middle-click do the normal thing
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      img.src = a.getAttribute('href');
+      img.alt = (a.getAttribute('aria-label') || 'Gig poster')
+                  .replace(/\s*[-–]\s*enlarge$/i, '');
+      dlg.showModal();
+    });
+
+    close.addEventListener('click', function () { dlg.close(); });
+
+    // clicking anywhere off the poster closes it, the way people expect
+    dlg.addEventListener('click', function (e) {
+      if (e.target !== img && e.target !== close) dlg.close();
+    });
+
+    // drop the src on close so a stale poster never flashes on the next open
+    dlg.addEventListener('close', function () { img.removeAttribute('src'); });
+  }());
 
   // A missing shows.json is obvious and harmless — you'll notice the dates
   // are wrong. A MALFORMED shows.json is the dangerous one: the site quietly
