@@ -60,11 +60,11 @@
     },
     {
       "@type": "Person",
-      "name": "Jonathan Brown"
+      "name": "Ross Huff"
     },
     {
       "@type": "Person",
-      "name": "Ross Huff"
+      "name": "Jonathan Brown"
     }
   ],
   "track": [
@@ -718,8 +718,28 @@ body{
 .riders-copy{ max-width:58ch; margin-bottom:52px; }
 .riders-copy p{ margin:0 0 18px; }
 
+/* The trio and the stable. A small label and one line of framing - not two
+   different card treatments. The stable is here to be hired, not ranked. */
+.roster-group + .roster-group{ margin-top:56px; }
+.roster-label{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin:0 0 8px;
+}
+.roster-note{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:1.02rem;
+  color:var(--steel);
+  max-width:52ch;
+  margin:0 0 26px;
+}
+
 /* Expand markers belong only to rows that actually expand.
-   Wes and Ross are plain rows until their bios arrive - no marker. */
+   Every player has a bio now; this stays scoped so a future plain row is safe. */
 details.member > .member-line{
   cursor:pointer;
   list-style:none;
@@ -998,7 +1018,9 @@ a:focus-visible, button:focus-visible{
         <p>Jazz Circuit Riders is new. The players aren&rsquo;t.</p>
       </div>
 
-      <div>
+      <div class="roster-group">
+        <p class="roster-label">The Trio</p>
+        <p class="roster-note">The constant &mdash; the three who make up the band.</p>
         <details class="member" open>
           <summary class="member-line">
             <h3 class="member-name">Jed Fritzemeier</h3>
@@ -1045,24 +1067,12 @@ a:focus-visible, button:focus-visible{
             </div>
           </div>
         </details>
+      </div>
 
-        <details class="member" open>
-          <summary class="member-line">
-            <h3 class="member-name"><a href="https://www.jonbrowndrums.com/" target="_blank" rel="noopener" aria-label="Jonathan Brown &ndash; opens in a new tab">Jonathan Brown</a></h3>
-            <span class="member-inst">Drums, Vibraphone, Percussion</span>
-          </summary>
-          <div class="member-detail">
-            <img src="assets/img/jonathan.webp" alt="Jonathan Brown playing drums" width="509" height="690" loading="lazy" decoding="async">
-            <div class="member-bio">
-              <p>Drummer, vibraphonist and chamber percussionist based in Ann Arbor.
-              He plays drum set with Chelsea&rsquo;s own <a href="https://jessmerritt.bandcamp.com/" target="_blank" rel="noopener" aria-label="Jess Merritt &ndash; opens in a new tab">Jess Merritt</a>, drums and mallets
-              for Cici Blind and the Spectacles, and vibraphone with the retro lounge
-              exotica outfit Yellowhammer. He&rsquo;s a member of the <a href="https://www.portlandpercussiongroup.com/" target="_blank" rel="noopener" aria-label="Portland Percussion Group &ndash; opens in a new tab">Portland Percussion Group</a>, whose album <a href="https://newfocusrecordings.bandcamp.com/album/patterns-form" target="_blank" rel="noopener" aria-label="Patterns and Form &ndash; opens in a new tab">Patterns and Form</a> is out on New Focus Records, and he performs
-              regularly with the Jackson and Toledo symphonies. He teaches privately
-              and leads the <a href="https://www.steinerschool.org/" target="_blank" rel="noopener" aria-label="Rudolf Steiner School of Ann Arbor &ndash; opens in a new tab">Rudolf Steiner School of Ann Arbor</a> Steel Drum Ensemble.</p>
-            </div>
-          </div>
-        </details>
+      <div class="roster-group">
+        <p class="roster-label">The Stable</p>
+        <p class="roster-note">Players who ride with us. Every one of them is worth
+        hiring for your own night &mdash; their other projects are linked below.</p>
         <details class="member" open>
           <summary class="member-line">
             <h3 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h3>
@@ -1080,6 +1090,23 @@ a:focus-visible, button:focus-visible{
               artist, tour manager, copy writer, and bandleader. In cases of emergency
               he can be a sound engineer and run the chuck wagon. Ross is also the
               musical director of the beloved <a href="https://theragbirds.com/holidayshow/" target="_blank" rel="noopener" aria-label="Ebird and Friends Holiday Show &ndash; opens in a new tab">Ebird and Friends Holiday Show</a>, which plays the Ark each December.</p>
+            </div>
+          </div>
+        </details>
+        <details class="member" open>
+          <summary class="member-line">
+            <h3 class="member-name"><a href="https://www.jonbrowndrums.com/" target="_blank" rel="noopener" aria-label="Jonathan Brown &ndash; opens in a new tab">Jonathan Brown</a></h3>
+            <span class="member-inst">Drums, Vibraphone, Percussion</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/jonathan.webp" alt="Jonathan Brown playing drums" width="509" height="690" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Drummer, vibraphonist and chamber percussionist based in Ann Arbor.
+              He plays drum set with Chelsea&rsquo;s own <a href="https://jessmerritt.bandcamp.com/" target="_blank" rel="noopener" aria-label="Jess Merritt &ndash; opens in a new tab">Jess Merritt</a>, drums and mallets
+              for Cici Blind and the Spectacles, and vibraphone with the retro lounge
+              exotica outfit Yellowhammer. He&rsquo;s a member of the <a href="https://www.portlandpercussiongroup.com/" target="_blank" rel="noopener" aria-label="Portland Percussion Group &ndash; opens in a new tab">Portland Percussion Group</a>, whose album <a href="https://newfocusrecordings.bandcamp.com/album/patterns-form" target="_blank" rel="noopener" aria-label="Patterns and Form &ndash; opens in a new tab">Patterns and Form</a> is out on New Focus Records, and he performs
+              regularly with the Jackson and Toledo symphonies. He teaches privately
+              and leads the <a href="https://www.steinerschool.org/" target="_blank" rel="noopener" aria-label="Rudolf Steiner School of Ann Arbor &ndash; opens in a new tab">Rudolf Steiner School of Ann Arbor</a> Steel Drum Ensemble.</p>
             </div>
           </div>
         </details>

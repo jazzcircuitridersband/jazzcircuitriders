@@ -294,6 +294,59 @@ def test_audio_players():
 
 
 
+# ------------------------------------------------------------ the roster
+def _roster_groups():
+    """{group label: [member names]} for every roster-group on the page."""
+    out = {}
+    for m in re.finditer(r'<div class="roster-group">(.*?)\n      </div>', html, re.S):
+        block = m.group(1)
+        label = re.search(r'roster-label">([^<]+)', block)
+        names = [re.sub(r'<[^>]+>', '', n).strip()
+                 for n in re.findall(r'<h3 class="member-name">(.*?)</h3>', block, re.S)]
+        out[label.group(1).strip() if label else '(unlabelled)'] = names
+    return out
+
+
+def test_roster_groups():
+    """The trio and the stable. A player in both, or in neither, is a mistake
+    nobody would notice by reading - the page still renders perfectly."""
+    groups = _roster_groups()
+    if not groups:
+        fail('roster', 'no roster groups found - the trio/stable split is gone')
+        return
+
+    grouped = [n for names in groups.values() for n in names]
+    allnames = [re.sub(r'<[^>]+>', '', n).strip()
+                for n in re.findall(r'<h3 class="member-name">(.*?)</h3>', body, re.S)]
+
+    for n in allnames:
+        if n not in grouped:
+            fail('roster', f'{n} is on the page but in no roster group')
+    for n in set(grouped):
+        if grouped.count(n) > 1:
+            fail('roster', f'{n} appears in more than one roster group')
+    for label, names in groups.items():
+        if not names:
+            fail('roster', f'roster group "{label}" has nobody in it')
+
+
+def test_member_instruments():
+    """Every player needs an instrument line. The poster and member-card
+    scripts read it straight off this page - a missing one ships blank art."""
+    for m in re.finditer(r'<h3 class="member-name">(.*?)</h3>\s*'
+                         r'<span class="member-inst">([^<]*)</span>', body, re.S):
+        name = re.sub(r'<[^>]+>', '', m.group(1)).strip()
+        if not m.group(2).strip():
+            fail('roster', f'{name} has an empty instrument line')
+
+    names = re.findall(r'<h3 class="member-name">', body)
+    paired = re.findall(r'<h3 class="member-name">.*?</h3>\s*<span class="member-inst">',
+                        body, re.S)
+    if len(names) != len(paired):
+        fail('roster', f'{len(names)} players but {len(paired)} instrument lines - '
+                       'the name/instrument pairing the art pipeline reads is broken')
+
+
 # ------------------------------------------------------- unreferenced files
 def _shows_file_refs():
     """Every value in shows.json that looks like a path into this repo."""
