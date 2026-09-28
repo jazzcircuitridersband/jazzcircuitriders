@@ -35,12 +35,15 @@ def test_structure():
         fail('structure', 'file does not end with </html>')
 
     # Paired tags. A greedy regex edit once ate an entire member block and
-    # this is what caught it.
+    # this is what caught it. Comments are stripped first: a comment that
+    # mentions a tag by name is prose, not markup, and counting it has
+    # produced a false failure twice now.
+    markup = re.sub(r'<!--.*?-->', '', html, flags=re.S)
     for tag in ['html','head','body','main','header','footer','section','div',
                 'p','a','span','ul','ol','li','details','summary','h1','h2',
                 'style','script','button']:
-        o = len(re.findall(r'<%s[\s>]' % tag, html))
-        c = len(re.findall(r'</%s>' % tag, html))
+        o = len(re.findall(r'<%s[\s>]' % tag, markup))
+        c = len(re.findall(r'</%s>' % tag, markup))
         if o != c:
             fail('structure', f'<{tag}> unbalanced: {o} open, {c} close')
 
