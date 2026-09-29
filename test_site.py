@@ -253,6 +253,46 @@ def test_seo():
         fail('seo', 'canonical and og:url disagree')
 
 
+def test_og_image():
+    """The share image: does it exist, is it the right shape, and do the
+    declared dimensions tell the truth?
+
+    test_seo() only checks that the STRING og:image appears. A typo in the
+    filename breaks every link preview and the site itself looks perfectly
+    fine - you only find out when someone shares it. Meta's own docs say a
+    1.91:1 image displays in full and anything else may be cropped, so a photo
+    swap to a 3:2 shot silently hands Facebook the crop decision.
+    """
+    m = re.search(r'<meta[^>]+property="og:image"[^>]+content="([^"]+)"', html)
+    if not m:
+        return                      # test_seo already fails on a missing tag
+    url = m.group(1)
+    origin = re.search(r'<meta[^>]+property="og:url"[^>]+content="(https?://[^"/]+)', html)
+    rel = url[len(origin.group(1)) + 1:] if origin and url.startswith(origin.group(1)) else url
+    path = os.path.join(ROOT, rel)
+    if not os.path.exists(path):
+        fail('og', f'og:image points at {rel}, which is not in the repo')
+        return
+    try:
+        from PIL import Image
+        w, h = Image.open(path).size
+    except Exception:
+        return                      # no Pillow in this environment; skip quietly
+
+    if w < 600 or h < 315:
+        fail('og', f'og:image is {w}x{h}; Meta needs 600x315 for a large preview')
+    ratio = w / h
+    if abs(ratio - 1.91) > 0.06:
+        fail('og', f'og:image is {w}x{h} ({ratio:.2f}:1). Meta displays 1.91:1 '
+                   f'in full and crops the rest - at {w} wide that is {round(w / 1.91)} tall')
+    for prop, actual in (('og:image:width', w), ('og:image:height', h)):
+        d = re.search(r'<meta[^>]+property="%s"[^>]+content="(\d+)"' % prop, html)
+        if d and int(d.group(1)) != actual:
+            fail('og', f'{prop} says {d.group(1)} but the file is {actual}')
+        elif not d:
+            warn('og', f'{prop} not declared - Facebook renders the first scrape better with it')
+
+
 # ------------------------------------------------------------------ shows
 def test_shows_json():
     p = os.path.join(ROOT, 'shows.json')
@@ -410,6 +450,14 @@ def test_no_orphan_files():
     # shows.json points at real files too (gig posters). Without this, adding
     # a poster would get it flagged as an orphan and nobody would trust the check.
     refs |= _shows_file_refs()
+    # OG and Twitter-card images are ABSOLUTE urls inside meta content="...",
+    # which the pattern above deliberately skips and which is not src= or href=
+    # either. Without this the share image is permanently reported as an orphan,
+    # and a warning nobody trusts is worse than no warning at all. The origin is
+    # read from og:url so this keeps working if the domain ever changes.
+    origin = re.search(r'<meta[^>]+property="og:url"[^>]+content="(https?://[^"/]+)', body)
+    if origin:
+        refs |= set(re.findall(re.escape(origin.group(1)) + r'/([^"]+)"', body))
     refs = {r.lstrip('./') for r in refs}
 
     for dirpath, dirnames, filenames in os.walk(ROOT):
