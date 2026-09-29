@@ -40,13 +40,15 @@
     "linkText": "Facebook event",
     "poster": "assets/img/poster-2026-10-03.webp",
     "posterAlt": "Poster: Jazz Circuit Riders quartet at JD's Stage Bistro, Saturday October 3, 9 to 11 PM. Jed Fritzemeier, Brian Brill, Ross Huff and Jonathan Brown."
-  }
+  },
   {
     "date": "2026-10-24",
     "venue": "JD's Stage Bistro",
     "city": "Chelsea, MI",
     "time": "9:00 - 11:00 PM",
     "note": "Late Night Jazz in Chelsea",
-    "venueUrl": "https://jdsstagebistro.com/"
+    "venueUrl": "https://jdsstagebistro.com/",
+    "poster": "assets/img/poster-2026-10-24.webp",
+    "posterAlt": "Poster: Jazz Circuit Riders at JD's Stage Bistro, Chelsea, Michigan. Saturday October 24, 9 to 11 PM. Late night jazz."
   }
 ]
