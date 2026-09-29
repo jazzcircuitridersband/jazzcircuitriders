@@ -803,6 +803,12 @@ details.member > .member-line:focus-visible{
   text-decoration:none;
   border-bottom:1px solid rgba(201,146,46,.45);
   transition:color .2s ease, border-color .2s ease;
+  /* These names measured 21px tall, under the 24px minimum for a touch
+     target. Vertical padding on an INLINE element grows its hit box without
+     affecting line layout, so this buys 12px of tap area and moves nothing.
+     Measured: 21px -> 33px, roster rows and page height identical.
+     (display:inline-block also works but pushes Jonathan's row 15px taller.) */
+  padding-block:6px;
 }
 .member-name a:hover{ color:var(--brass-lit); border-color:var(--brass-lit); }
 .member-inst{
