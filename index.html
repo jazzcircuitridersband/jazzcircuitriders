@@ -72,6 +72,10 @@
     {
       "@type": "Person",
       "name": "Daniel Hicks"
+    },
+    {
+      "@type": "Person",
+      "name": "Joe Fee"
     }
   ],
   "track": [
@@ -411,6 +415,23 @@ body{
   vertical-align:middle;
   margin-right:16px;
   transform:translateY(-.35em);
+}
+.live{
+  margin:34px 0 0;
+}
+.live-video{
+  display:block;
+  width:100%;
+  height:auto;                        /* the 1280x720 attrs hold the box while
+                                         it loads, so nothing jumps */
+  border:1px solid var(--ink-3);
+  border-radius:6px;
+  background:var(--ink-2);
+}
+.live-cap{
+  color:var(--steel);
+  font-size:14px;
+  margin:10px 0 0;
 }
 .section-sub{
   color:var(--steel);
@@ -994,6 +1015,23 @@ a:focus-visible, button:focus-visible{
       </li>
     </ol>
 
+    <!-- The quartet at JD's. Self-hosted rather than embedded: an embed pulls
+         a third-party player and its tracking into every page view, for the
+         sake of one 3MB file. preload="none" means this costs a visitor
+         nothing at all until they press play, so the page stays as fast as it
+         was. Black and white because every other photograph on this site is,
+         and because the room's stage wash is so blue that in colour the
+         players disappear into the curtain behind them. -->
+    <figure class="live">
+      <video class="live-video" controls preload="none" playsinline
+             poster="assets/img/video-poster.jpg" width="1280" height="720">
+        <source src="assets/video/jcr-live-jds.mp4" type="video/mp4">
+        <p>Your browser can&rsquo;t play this clip.
+        <a href="assets/video/jcr-live-jds.mp4">Download it instead</a>.</p>
+      </video>
+      <figcaption class="live-cap">The quartet at JD&rsquo;s Stage Bistro, Chelsea.</figcaption>
+    </figure>
+
     <p class="encore" id="encore" aria-live="polite" hidden>That&rsquo;s the whole set.
     If you&rsquo;re still here, <a href="#booking">we should probably talk</a>.</p>
   </section>
@@ -1149,12 +1187,23 @@ a:focus-visible, button:focus-visible{
         <!-- Plain rows, not <details>: no bio yet, so nothing to expand and
              no marker inviting a click that does nothing. They become
              <details> the moment a bio and a photo arrive. -->
-        <div class="member">
-          <div class="member-line">
+        <details class="member" open>
+          <summary class="member-line">
             <h3 class="member-name">Joe Fee</h3>
             <span class="member-inst">Upright Bass, Bass Guitar, Tuba</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/joe.webp" alt="Joe Fee playing upright bass" width="500" height="500" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Joe Fee has been an active member of the Southeast Michigan
+              music community since the early 2010&rsquo;s, appearing in a wide
+              variety of ensembles and contexts playing upright bass, bass
+              guitar, and tuba. He is a graduate of the <a href="https://smtd.umich.edu/" target="_blank" rel="noopener" aria-label="University of Michigan School of Music, Theatre &amp; Dance &ndash; opens in a new tab">University of Michigan&rsquo;s
+              School of Music, Theater, and Dance</a>, but please don&rsquo;t ask him
+              to act or pirouette.</p>
+            </div>
           </div>
-        </div>
+        </details>
         <div class="member">
           <div class="member-line">
             <h3 class="member-name">Lori Bittle Minnick</h3>

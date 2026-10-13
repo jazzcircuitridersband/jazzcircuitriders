@@ -49,6 +49,30 @@
     "note": "Late Night Jazz in Chelsea",
     "venueUrl": "https://jdsstagebistro.com/",
     "poster": "assets/img/poster-2026-10-24.webp",
-    "posterAlt": "Poster: Jazz Circuit Riders at JD's Stage Bistro, Chelsea, Michigan. Saturday October 24, 9 to 11 PM. Late night jazz."
+    "posterAlt": "Poster: Jazz Circuit Riders quartet at JD's Stage Bistro, Saturday October 24, 9 to 11 PM. Brian Brill, Ross Huff, Joe Fee and Jonathan Brown."
+  },
+  {
+    "date": "2026-11-06",
+    "venue": "JD's Stage Bistro",
+    "city": "Chelsea, MI",
+    "time": "5:30 - 7:30 PM",
+    "note": "Quartet, for Wine, Walk & Shop weekend.",
+    "venueUrl": "https://jdsstagebistro.com/",
+    "link": "https://chelseamich.com/events/wine-walk-shop/",
+    "linkText": "Wine, Walk & Shop",
+    "poster": "assets/img/poster-2026-11-06.webp",
+    "posterAlt": "Poster: Jazz Circuit Riders quartet at JD's Stage Bistro, Friday November 6, 5:30 to 7:30 PM. Wes Fritzemeier, Jed Fritzemeier, Brian Brill and Ross Huff."
+  },
+  {
+    "date": "2026-11-07",
+    "venue": "JD's Stage Bistro",
+    "city": "Chelsea, MI",
+    "time": "5:30 - 7:30 PM",
+    "note": "Piano trio, for Wine, Walk & Shop weekend.",
+    "venueUrl": "https://jdsstagebistro.com/",
+    "link": "https://chelseamich.com/events/wine-walk-shop/",
+    "linkText": "Wine, Walk & Shop",
+    "poster": "assets/img/poster-2026-11-07.webp",
+    "posterAlt": "Poster: Jazz Circuit Riders piano trio at JD's Stage Bistro, Saturday November 7, 5:30 to 7:30 PM. Jed Fritzemeier, Daniel Hicks and Jonathan Brown."
   }
 ]

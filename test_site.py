@@ -71,7 +71,9 @@ def test_jekyll_safe():
 def test_assets_exist():
     """Every local reference must point at a file that is actually here.
     A hero once pointed at an image that had never existed."""
-    refs = set(re.findall(r'(?:src|href)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"', body_no_comments))
+    refs = set(re.findall(
+        r'(?:src|href|poster)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"',
+        body_no_comments))
     refs |= set(re.findall(r'url\("((?!data:)[^"]+)"\)', css))
     for r in sorted(refs):
         if '..' in r:
@@ -444,7 +446,11 @@ def test_no_orphan_files():
         '.gitignore', '.nojekyll', '404.html', 'manifest.webmanifest',
     }
     body = re.sub(r'<!--.*?-->', '', html, flags=re.S)
-    refs = set(re.findall(r'(?:src|href)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"', body))
+    # poster= is here because it was missing: a <video poster="..."> frame got
+    # reported as an orphan forever, which is how a real orphan gets ignored.
+    # Same failure the og: meta tags had before the block further down.
+    refs = set(re.findall(
+        r'(?:src|href|poster)="((?!https?:|mailto:|tel:|#|data:)[^"]+)"', body))
     refs |= set(re.findall(r'url\("((?!data:)[^"]+)"\)', body))
     refs |= set(re.findall(r"fetch\('([^']+)'", body))
     # shows.json points at real files too (gig posters). Without this, adding
