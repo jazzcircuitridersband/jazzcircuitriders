@@ -589,7 +589,7 @@ body{
 .show-sep{ color:var(--steel); opacity:.5; margin:0 .5em; }
 .show{
   display:grid;
-  grid-template-columns:96px 1fr auto;
+  grid-template-columns:132px 1fr auto;
   gap:20px;
   align-items:baseline;
   padding:20px 0;
@@ -687,16 +687,33 @@ body{
   #lightbox-close{ top:-10px; right:-10px; width:40px; height:40px; }
 }
 
-.show-date{
+/* The date column. It used to be a single 12.5px mono line - smaller than the
+   body text and smaller than the venue beside it - which answered "where"
+   before "when" on a page whose venue is nearly always the same room. The
+   weekday leads because "Saturday" settles whether you are free faster than
+   "the 24th" does; the posters have worked this way since October. */
+.show-date{ display:block; }
+.show-day{
+  display:block;
   font-family:var(--mono);
-  font-size:12.5px;
-  letter-spacing:.1em;
+  font-size:11px;
+  letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--brass);
+  margin-bottom:2px;
+}
+.show-num{
+  display:block;
+  font-family:var(--display);
+  font-size:27px;
+  line-height:1.05;
+  color:var(--cream);
 }
 .show-venue{
   font-family:var(--display);
-  font-size:1.2rem;
+  /* stepped back from 1.2rem: still the anchor of the row, no longer the
+     loudest thing on it */
+  font-size:1.05rem;
   color:var(--cream);
 }
 .show-city{
@@ -708,8 +725,10 @@ body{
 }
 .show-right{
   font-family:var(--mono);
-  font-size:12px;
-  color:var(--steel);
+  /* 14.5 cream, not 12 steel: the time is the second thing anyone decides on,
+     and it was styled as a caption */
+  font-size:14.5px;
+  color:var(--cream);
   white-space:nowrap;
 }
 .show-right a{ color:var(--brass-lit); text-decoration:none; border-bottom:1px solid rgba(201,146,46,.5); }
@@ -951,7 +970,24 @@ a:focus-visible, button:focus-visible{
   <section class="section" id="listen" aria-labelledby="listen-h">
     <span class="node" data-node aria-hidden="true"></span>
     <h2 class="section-head" id="listen-h"><span class="section-num">01</span> Listen</h2>
-    <p class="section-sub">Standards, recorded by Jed, Wes and Brian.</p>
+    <p class="section-sub">Three of us on the recordings. Four of us on the video.</p>
+
+    <!-- The quartet at JD's. Self-hosted rather than embedded: an embed pulls
+         a third-party player and its tracking into every page view, for the
+         sake of one 3MB file. preload="none" means this costs a visitor
+         nothing at all until they press play, so the page stays as fast as it
+         was. Black and white because every other photograph on this site is,
+         and because the room's stage wash is so blue that in colour the
+         players disappear into the curtain behind them. -->
+    <figure class="live">
+      <video class="live-video" controls preload="none" playsinline
+             poster="assets/img/video-poster.jpg" width="1280" height="720">
+        <source src="assets/video/jcr-live-jds.mp4" type="video/mp4">
+        <p>Your browser can&rsquo;t play this clip.
+        <a href="assets/video/jcr-live-jds.mp4">Download it instead</a>.</p>
+      </video>
+      <figcaption class="live-cap">The quartet at JD&rsquo;s Stage Bistro, Chelsea.</figcaption>
+    </figure>
 
     <ol class="tracks">
       <li class="track" data-src="assets/audio/emily.mp3">
@@ -1014,23 +1050,6 @@ a:focus-visible, button:focus-visible{
         <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
     </ol>
-
-    <!-- The quartet at JD's. Self-hosted rather than embedded: an embed pulls
-         a third-party player and its tracking into every page view, for the
-         sake of one 3MB file. preload="none" means this costs a visitor
-         nothing at all until they press play, so the page stays as fast as it
-         was. Black and white because every other photograph on this site is,
-         and because the room's stage wash is so blue that in colour the
-         players disappear into the curtain behind them. -->
-    <figure class="live">
-      <video class="live-video" controls preload="none" playsinline
-             poster="assets/img/video-poster.jpg" width="1280" height="720">
-        <source src="assets/video/jcr-live-jds.mp4" type="video/mp4">
-        <p>Your browser can&rsquo;t play this clip.
-        <a href="assets/video/jcr-live-jds.mp4">Download it instead</a>.</p>
-      </video>
-      <figcaption class="live-cap">The quartet at JD&rsquo;s Stage Bistro, Chelsea.</figcaption>
-    </figure>
 
     <p class="encore" id="encore" aria-live="polite" hidden>That&rsquo;s the whole set.
     If you&rsquo;re still here, <a href="#booking">we should probably talk</a>.</p>
@@ -1406,6 +1425,7 @@ a:focus-visible, button:focus-visible{
   var FALLBACK_SHOWS = [];
 
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var list = document.getElementById('shows-list');
   if (!list) return;
 
@@ -1447,7 +1467,9 @@ a:focus-visible, button:focus-visible{
 
     list.innerHTML = upcoming.map(function (s) {
       var d = parseLocal(s.date);
-      var date = MONTHS[d.getMonth()] + ' ' + d.getDate();
+      var date = '<span class="show-day">' + DAYS[d.getDay()] + '</span>'
+                 + '<span class="show-num">' + MONTHS[d.getMonth()] + ' '
+                 + d.getDate() + '</span>';
 
       // Time always shows. An optional link sits beside it — a venue page,
       // a Facebook event, tickets, whatever the night calls for.
