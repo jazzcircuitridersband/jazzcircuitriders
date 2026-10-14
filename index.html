@@ -358,9 +358,15 @@ body{
   font-family:var(--display);
   font-style:italic;
   font-size:clamp(1.15rem, 3.4vw, 1.6rem);
+  /* 'Standards for rooms that / listen.' left one word stranded. balance
+     alone could not help: the measure was only 282px, too narrow for the
+     line to even out. Widening it to 22ch gives balance something to work
+     with. */
+  max-width:34ch;
+  text-wrap:balance;
   color:var(--cream);
   opacity:.9;
-  max-width:22ch;
+  max-width:34ch;
   margin:30px 0 40px;
 }
 
@@ -572,7 +578,12 @@ body{
 .shows{ list-style:none; margin:38px 0 0; padding:0; }
 
 .show-venue a{ color:inherit; text-decoration:none;
-  border-bottom:1px solid rgba(201,146,46,.35); }
+  border-bottom:1px solid rgba(201,146,46,.35);
+  /* Measured 115x20 - under the 24px minimum. Vertical padding on an INLINE
+     element grows the hit box without moving anything, the same fix already
+     used on the roster names. These are standalone links in a row, not links
+     inside a sentence, so the inline exemption does not cover them. */
+  padding-block:5px; }
 .show-venue a:hover{ color:var(--brass-lit); border-bottom-color:var(--brass-lit); }
 .show-note{
   display:block;
@@ -731,7 +742,9 @@ body{
   color:var(--cream);
   white-space:nowrap;
 }
-.show-right a{ color:var(--brass-lit); text-decoration:none; border-bottom:1px solid rgba(201,146,46,.5); }
+.show-right a{ color:var(--brass-lit); text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.5);
+  padding-block:5px; }        /* measured 148x17, same reason as above */
 .show-right a:hover{ color:var(--cream); }
 
 .shows-status a{
@@ -768,14 +781,28 @@ body{
 /* The trio and the stable. A small label and one line of framing - not two
    different card treatments. The stable is here to be hired, not ranked. */
 .roster-group + .roster-group{ margin-top:56px; }
+/* These were paragraphs at 12px: the label organising the roster was the smallest
+   text inside it, quieter than its own 16px note and 11px below the names it
+   groups - and the gap widened when the names went to 23px. More
+   importantly they were paragraphs, so the document outline ran h2 "The
+   Riders" straight into eight flat h3 names. Anyone navigating by headings
+   got no sign that the first three are the band and the rest ride with it,
+   which is the single distinction a booker most needs. Now h3, with the
+   players as h4 beneath them, and set with a rule so the eye reads a divider.
+   It stays mono caps rather than growing to compete with a name - case,
+   tracking and colour carry the rank, not size. */
 .roster-label{
   font-family:var(--mono);
-  font-size:12px;
+  font-size:15px;
   letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--brass);
-  margin:0 0 8px;
+  font-weight:400;
+  margin:0 0 10px;
+  padding-top:22px;
+  border-top:1px solid rgba(201,146,46,.22);
 }
+.roster-group:first-child .roster-label{ padding-top:0; border-top:0; }
 .roster-note{
   font-family:var(--display);
   font-style:italic;
@@ -802,7 +829,13 @@ details.member > .member-line::after{
   margin-left:14px;
 }
 details.member[open] > .member-line::after{ content:"\2212"; }
-details.member[open] > .member-line .member-name{ color:var(--brass-lit); }
+/* REMOVED: details.member[open] .member-name{ color:brass-lit }
+   It painted the h3 brass - the site's LINK colour - while .member-name a
+   below sets cream and wins inside an actual link. The result was exactly
+   backwards: the four names you can click rendered as plain text, and three
+   of the four you cannot rendered as links. Every entry also ships `open`,
+   so the state it was meant to signal never varied. Names are cream now; the
+   four that are links carry the brass underline and go brass on hover. */
 details.member > .member-line:focus-visible{
   outline:2px solid var(--brass-lit);
   outline-offset:4px;
@@ -822,7 +855,16 @@ details.member > .member-line:focus-visible{
   }
 }
 .member-detail img{
-    width:100%; height:auto; display:block;
+  /* The source frames are four different shapes - 900x600 landscape, 800x1200
+     portrait, 509x690, 500x500 - so in a 150px column every entry came out a
+     different height and the roster read as ragged rather than as a set. One
+     square box with cover cropping fixes it without recutting a single file.
+     object-position is set per player, inline, from the face coordinates the
+     poster generator already uses; a plain centre crop puts Brian's face half
+     out of frame. */
+  width:100%; aspect-ratio:1 / 1; height:auto; display:block;
+  object-fit:cover;
+  object-position:50% 30%;          /* fallback; overridden per image */
   filter:saturate(0);
   border:1px solid rgba(201,146,46,.28);
 }
@@ -835,13 +877,22 @@ details.member > .member-line:focus-visible{
 }
 .member-line{
   display:flex;
-  justify-content:space-between;
+  /* was space-between, which pushed the instruments to the far edge and left
+     a void across a 1280px screen - the two stopped reading as one line */
+  justify-content:flex-start;
   align-items:baseline;
-  gap:16px;
+  gap:22px;
   margin:0;
 }
-.member-name{ font-family:var(--display); font-size:1.15rem; color:var(--cream);
-  font-weight:400; margin:0; }
+.member-line .member-inst{ margin-right:auto; }
+/* 1.45rem (23px), up from 1.15rem (18.4px). At the old size a player's name
+   was only 15% larger than the bio paragraph beneath it - not enough step for
+   a heading - and smaller than a TRACK TITLE at 19.5px, which put the tunes
+   above the people on a band's own site. 23px sits above the track titles and
+   below the gig date at 27px, which is the right order: the date is the one
+   thing a visitor acts on. */
+.member-name{ font-family:var(--display); font-size:1.45rem; color:var(--cream);
+  font-weight:400; margin:0; line-height:1.2; }
 .member-name a{
   color:var(--cream);
   text-decoration:none;
@@ -1089,15 +1140,15 @@ a:focus-visible, button:focus-visible{
       </div>
 
       <div class="roster-group">
-        <p class="roster-label">The Trio</p>
+        <h3 class="roster-label">The Trio</h3>
         <p class="roster-note">The constant &mdash; the three who make up the band.</p>
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name">Jed Fritzemeier</h3>
+            <h4 class="member-name">Jed Fritzemeier</h4>
             <span class="member-inst">Double Bass, Bass Guitar, Vocals</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/jed.webp" alt="Jed Fritzemeier playing double bass" width="900" height="600" loading="lazy" decoding="async">
+            <img src="assets/img/jed.webp" style="object-position:37% 20%" alt="Jed Fritzemeier playing double bass" width="900" height="600" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>His middle school orchestra director, &ldquo;Doc&rdquo; Daycleth Walker,
               got him into jazz. Two years of lessons later he joined the Doc Walker
@@ -1109,11 +1160,11 @@ a:focus-visible, button:focus-visible{
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name">Wes Fritzemeier</h3>
+            <h4 class="member-name">Wes Fritzemeier</h4>
             <span class="member-inst">Tenor Guitar, Drums, Vocals</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/wes.webp" alt="Wes Fritzemeier with fiddle and mandolin" width="900" height="600" loading="lazy" decoding="async">
+            <img src="assets/img/wes.webp" style="object-position:48% 26%" alt="Wes Fritzemeier with fiddle and mandolin" width="900" height="600" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Suzuki violin at five, and thirty years playing across the Midwest since.
               Tenor guitar, mandolin, violin, bass and drums. He holds weekly residencies at
@@ -1123,11 +1174,11 @@ a:focus-visible, button:focus-visible{
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="Brian Brill &ndash; opens in a new tab">Brian Brill</a></h3>
+            <h4 class="member-name"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="Brian Brill &ndash; opens in a new tab">Brian Brill</a></h4>
             <span class="member-inst">Piano, Keys</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/brian.webp" alt="Brian Brill playing grand piano" width="900" height="600" loading="lazy" decoding="async">
+            <img src="assets/img/brian.webp" style="object-position:69% 22%" alt="Brian Brill playing grand piano" width="900" height="600" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Pianist, composer and producer, out of jazz and classical with a
               long-running soft spot for electronica. He toured with his own quartet,
@@ -1140,16 +1191,16 @@ a:focus-visible, button:focus-visible{
       </div>
 
       <div class="roster-group">
-        <p class="roster-label">The Stable</p>
+        <h3 class="roster-label">The Stable</h3>
         <p class="roster-note">Players who ride with us. Every one of them is worth
         hiring for your own night &mdash; their other projects are linked below.</p>
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h3>
+            <h4 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h4>
             <span class="member-inst">Trumpet, Flugelhorn</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/ross.webp" alt="Ross Huff holding a trumpet" width="800" height="1200" loading="lazy" decoding="async">
+            <img src="assets/img/ross.webp" style="object-position:41% 27%" alt="Ross Huff holding a trumpet" width="800" height="1200" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Trumpeter, flugelhornist, and independent artist.
               He currently performs with the ensembles Cici Blind and the Spectacles,
@@ -1165,11 +1216,11 @@ a:focus-visible, button:focus-visible{
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name"><a href="https://www.jonbrowndrums.com/" target="_blank" rel="noopener" aria-label="Jonathan Brown &ndash; opens in a new tab">Jonathan Brown</a></h3>
+            <h4 class="member-name"><a href="https://www.jonbrowndrums.com/" target="_blank" rel="noopener" aria-label="Jonathan Brown &ndash; opens in a new tab">Jonathan Brown</a></h4>
             <span class="member-inst">Drums, Vibraphone, Percussion</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/jonathan.webp" alt="Jonathan Brown playing drums" width="509" height="690" loading="lazy" decoding="async">
+            <img src="assets/img/jonathan.webp" style="object-position:29% 18%" alt="Jonathan Brown playing drums" width="509" height="690" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Drummer, vibraphonist and chamber percussionist based in Ann Arbor.
               He plays drum set with Chelsea&rsquo;s own <a href="https://jessmerritt.bandcamp.com/" target="_blank" rel="noopener" aria-label="Jess Merritt &ndash; opens in a new tab">Jess Merritt</a>, drums and mallets
@@ -1183,11 +1234,11 @@ a:focus-visible, button:focus-visible{
 
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name"><a href="https://danielhicksmusic.com/" target="_blank" rel="noopener" aria-label="Daniel Hicks &ndash; opens in a new tab">Daniel Hicks</a></h3>
+            <h4 class="member-name"><a href="https://danielhicksmusic.com/" target="_blank" rel="noopener" aria-label="Daniel Hicks &ndash; opens in a new tab">Daniel Hicks</a></h4>
             <span class="member-inst">Piano, Keys</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/daniel.webp" alt="Daniel Hicks at a grand piano" width="800" height="1200" loading="lazy" decoding="async">
+            <img src="assets/img/daniel.webp" style="object-position:44% 30%" alt="Daniel Hicks at a grand piano" width="800" height="1200" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Versatile pianist, composer and producer out of Indianapolis,
               in Jackson since 2023. An in-demand sideman, he has worked with
@@ -1208,11 +1259,11 @@ a:focus-visible, button:focus-visible{
              <details> the moment a bio and a photo arrive. -->
         <details class="member" open>
           <summary class="member-line">
-            <h3 class="member-name">Joe Fee</h3>
+            <h4 class="member-name">Joe Fee</h4>
             <span class="member-inst">Upright Bass, Bass Guitar, Tuba</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/joe.webp" alt="Joe Fee playing upright bass" width="500" height="500" loading="lazy" decoding="async">
+            <img src="assets/img/joe.webp" style="object-position:39% 30%" alt="Joe Fee playing upright bass" width="500" height="500" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Joe Fee has been an active member of the Southeast Michigan
               music community since the early 2010&rsquo;s, appearing in a wide
@@ -1225,7 +1276,7 @@ a:focus-visible, button:focus-visible{
         </details>
         <div class="member">
           <div class="member-line">
-            <h3 class="member-name">Lori Bittle Minnick</h3>
+            <h4 class="member-name">Lori Bittle Minnick</h4>
             <span class="member-inst">Vocals</span>
           </div>
         </div>

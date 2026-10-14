@@ -346,8 +346,13 @@ def _roster_groups():
     for m in re.finditer(r'<div class="roster-group">(.*?)\n      </div>', html, re.S):
         block = m.group(1)
         label = re.search(r'roster-label">([^<]+)', block)
-        names = [re.sub(r'<[^>]+>', '', n).strip()
-                 for n in re.findall(r'<h3 class="member-name">(.*?)</h3>', block, re.S)]
+        # h3 OR h4: the group labels became h3 so the roster has a real
+        # outline (h2 Riders > h3 Trio/Stable > h4 players) instead of eight
+        # flat h3s. Matching either keeps this test honest through that
+        # change rather than silently finding nobody, which is what it did.
+        names = [re.sub(r'<[^>]+>', '', body).strip()
+                 for _lvl, body in re.findall(
+                     r'<h([34]) class="member-name">(.*?)</h\1>', block, re.S)]
         out[label.group(1).strip() if label else '(unlabelled)'] = names
     return out
 
