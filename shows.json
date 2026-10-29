@@ -42,6 +42,15 @@
     "posterAlt": "Poster: Jazz Circuit Riders quartet at JD's Stage Bistro, Saturday October 3, 9 to 11 PM. Jed Fritzemeier, Brian Brill, Ross Huff and Jonathan Brown."
   },
   {
+    "date": "2026-10-24",
+    "venue": "Venue to be announced",
+    "city": "Chelsea, MI",
+    "time": "9:00 - 11:00 PM",
+    "note": "Stay tuned.",
+    "poster": "assets/img/poster-2026-10-24.webp",
+    "posterAlt": "Poster: Jazz Circuit Riders quartet, venue to come. Saturday October 24, 9 to 11 PM. Brian Brill, Ross Huff, Joe Fee and Jonathan Brown."
+  },
+  {
     "date": "2026-11-06",
     "venue": "JD's Stage Bistro",
     "city": "Chelsea, MI",
@@ -51,7 +60,7 @@
     "link": "https://chelseamich.com/events/wine-walk-shop/",
     "linkText": "Wine, Walk & Shop",
     "poster": "assets/img/poster-2026-11-06.webp",
-    "posterAlt": "Poster: Jazz Circuit Riders quartet at JD's Stage Bistro, Friday November 6, 5:30 to 7:30 PM. Wes Fritzemeier, Jed Fritzemeier, Brian Brill and Ross Huff."
+    "posterAlt": "Poster: Jazz Circuit Riders quartet at JD's Stage Bistro. Friday November 6, 5:30 to 7:30 PM. Wes Fritzemeier, Jed Fritzemeier, Daniel Hicks and Ross Huff."
   },
   {
     "date": "2026-11-07",
