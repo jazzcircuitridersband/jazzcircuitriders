@@ -1,0 +1,626 @@
+{
+ "_note": "Played shows, newest first. Every tune links to a YouTube Music search.",
+ "shows": [
+  {
+   "date": "2026-11-07",
+   "venue": "JD's Stage Bistro",
+   "city": "Chelsea, MI",
+   "billing": "Piano trio",
+   "occasion": "Wine, Walk & Shop weekend, night two",
+   "lineup": [
+    "Jed Fritzemeier",
+    "Daniel Hicks",
+    "Jonathan Brown"
+   ],
+   "video": {
+    "src": "media/jcr-2026-11-07-jds.mp4",
+    "label": "Saturday night"
+   },
+   "sets": [],
+   "no_setlist": "Set list not recorded."
+  },
+  {
+   "date": "2026-11-06",
+   "venue": "JD's Stage Bistro",
+   "city": "Chelsea, MI",
+   "billing": "Quartet",
+   "occasion": "Wine, Walk & Shop weekend, night one",
+   "lineup": [
+    "Wes Fritzemeier",
+    "Jed Fritzemeier",
+    "Daniel Hicks",
+    "Ross Huff"
+   ],
+   "video": {
+    "src": "media/jcr-2026-11-06-jds.mp4",
+    "label": "Friday night, 45 seconds"
+   },
+   "sets": [
+    {
+     "name": "Set 1",
+     "tunes": [
+      {
+       "n": 1,
+       "title": "Killer Joe",
+       "composer": "Benny Golson",
+       "year": "1960",
+       "note": "Med.-slow swing",
+       "listen": "https://music.youtube.com/search?q=Killer%20Joe%20Benny%20Golson%20jazz"
+      },
+      {
+       "n": 2,
+       "title": "The Preacher",
+       "composer": "Horace Silver",
+       "year": "1955",
+       "note": "2-beat, med-up",
+       "listen": "https://music.youtube.com/search?q=The%20Preacher%20Horace%20Silver%20jazz"
+      },
+      {
+       "n": 3,
+       "title": "Moonglow",
+       "composer": "Hudson / DeLange / Mills",
+       "year": "1934",
+       "note": "Medium ballad",
+       "listen": "https://music.youtube.com/search?q=Moonglow%20Hudson%20/%20DeLange%20/%20Mills%20jazz"
+      },
+      {
+       "n": 4,
+       "title": "Emily",
+       "composer": "Mandel / Mercer",
+       "year": "1964",
+       "note": "Easy 3",
+       "listen": "https://music.youtube.com/search?q=Emily%20Mandel%20/%20Mercer%20jazz"
+      },
+      {
+       "n": 5,
+       "title": "Beach Samba",
+       "composer": "Cunha / Ribeiro",
+       "year": "1967",
+       "note": "Mellow samba",
+       "listen": "https://music.youtube.com/search?q=Beach%20Samba%20Cunha%20/%20Ribeiro%20jazz"
+      },
+      {
+       "n": 6,
+       "title": "So What",
+       "composer": "Miles Davis",
+       "year": "1959",
+       "note": "Med. jazz",
+       "listen": "https://music.youtube.com/search?q=So%20What%20Miles%20Davis%20jazz"
+      },
+      {
+       "n": 7,
+       "title": "St. Thomas",
+       "composer": "Sonny Rollins",
+       "year": "1956",
+       "note": "Calypso",
+       "listen": "https://music.youtube.com/search?q=St.%20Thomas%20Sonny%20Rollins%20jazz"
+      },
+      {
+       "n": 8,
+       "title": "Chelsea Bridge",
+       "composer": "Billy Strayhorn",
+       "year": "1941",
+       "note": "Ballad",
+       "listen": "https://music.youtube.com/search?q=Chelsea%20Bridge%20Billy%20Strayhorn%20jazz"
+      },
+      {
+       "n": 9,
+       "title": "The Girl From Ipanema",
+       "composer": "Antonio Carlos Jobim",
+       "year": "1962",
+       "note": "Bossa",
+       "listen": "https://music.youtube.com/search?q=The%20Girl%20From%20Ipanema%20Antonio%20Carlos%20Jobim%20jazz"
+      },
+      {
+       "n": 10,
+       "title": "Music To Watch Girls By",
+       "composer": "Sid Ramin / Bob Crewe",
+       "year": "1966",
+       "note": "Medium",
+       "listen": "https://music.youtube.com/search?q=Music%20To%20Watch%20Girls%20By%20Sid%20Ramin%20/%20Bob%20Crewe%20jazz"
+      },
+      {
+       "n": 11,
+       "title": "I'm an Old Cowhand",
+       "composer": "Johnny Mercer",
+       "year": "1936",
+       "note": "Moderately fast",
+       "listen": "https://music.youtube.com/search?q=I%27m%20an%20Old%20Cowhand%20Johnny%20Mercer%20jazz"
+      },
+      {
+       "n": 12,
+       "title": "Flintstone's Theme",
+       "composer": "Bryson / Goldberg",
+       "year": "1960",
+       "note": "Swing",
+       "listen": "https://music.youtube.com/search?q=Flintstone%27s%20Theme%20Bryson%20/%20Goldberg%20jazz"
+      }
+     ]
+    },
+    {
+     "name": "Set 2",
+     "tunes": [
+      {
+       "n": 1,
+       "title": "Billie's Bounce",
+       "composer": "Charlie Parker",
+       "year": "1945",
+       "note": "Blues",
+       "listen": "https://music.youtube.com/search?q=Billie%27s%20Bounce%20Charlie%20Parker%20jazz"
+      },
+      {
+       "n": 2,
+       "title": "Wave",
+       "composer": "Antonio Carlos Jobim",
+       "year": "1967",
+       "note": "Bossa",
+       "listen": "https://music.youtube.com/search?q=Wave%20Antonio%20Carlos%20Jobim%20jazz"
+      },
+      {
+       "n": 3,
+       "title": "Someday My Prince Will Come",
+       "composer": "Frank Churchill",
+       "year": "1937",
+       "note": "Med. jazz waltz",
+       "listen": "https://music.youtube.com/search?q=Someday%20My%20Prince%20Will%20Come%20Frank%20Churchill%20jazz"
+      },
+      {
+       "n": 4,
+       "title": "What the World Needs Now",
+       "composer": "Bacharach / David",
+       "year": "1965",
+       "note": "Quarter = 110",
+       "listen": "https://music.youtube.com/search?q=What%20the%20World%20Needs%20Now%20Bacharach%20/%20David%20jazz"
+      },
+      {
+       "n": 5,
+       "title": "Yesterday",
+       "composer": "Lennon / McCartney",
+       "year": "1965",
+       "note": "Ballad",
+       "listen": "https://music.youtube.com/search?q=Yesterday%20Lennon%20/%20McCartney%20jazz"
+      },
+      {
+       "n": 6,
+       "title": "Moanin'",
+       "composer": "Bobby Timmons",
+       "year": "1958",
+       "note": "Soul jazz",
+       "listen": "https://music.youtube.com/search?q=Moanin%27%20Bobby%20Timmons%20jazz"
+      },
+      {
+       "n": 7,
+       "title": "The Look of Love",
+       "composer": "Bacharach / David",
+       "year": "1967",
+       "note": "Med. rock ballad",
+       "listen": "https://music.youtube.com/search?q=The%20Look%20of%20Love%20Bacharach%20/%20David%20jazz"
+      },
+      {
+       "n": 8,
+       "title": "You Are So Beautiful",
+       "composer": "Preston / Fisher",
+       "year": "1974",
+       "note": "Pop ballad",
+       "listen": "https://music.youtube.com/search?q=You%20Are%20So%20Beautiful%20Preston%20/%20Fisher%20jazz"
+      },
+      {
+       "n": 9,
+       "title": "Someday My Prince Will Come",
+       "composer": "Frank Churchill",
+       "year": "1937",
+       "note": "Med. jazz waltz",
+       "listen": "https://music.youtube.com/search?q=Someday%20My%20Prince%20Will%20Come%20Frank%20Churchill%20jazz"
+      },
+      {
+       "n": 10,
+       "title": "Willow Weep For Me",
+       "composer": "Ann Ronnell",
+       "year": "1932",
+       "note": "Bluesy",
+       "listen": "https://music.youtube.com/search?q=Willow%20Weep%20For%20Me%20Ann%20Ronnell%20jazz"
+      },
+      {
+       "n": 11,
+       "title": "This Guy's In Love With You",
+       "composer": "Bacharach / David",
+       "year": "1968",
+       "note": "Ballad",
+       "listen": "https://music.youtube.com/search?q=This%20Guy%27s%20In%20Love%20With%20You%20Bacharach%20/%20David%20jazz"
+      },
+      {
+       "n": 12,
+       "title": "The Odd Couple",
+       "composer": "Neal Hefti",
+       "year": "1968",
+       "note": "Moderately, steady beat",
+       "listen": "https://music.youtube.com/search?q=The%20Odd%20Couple%20Neal%20Hefti%20jazz"
+      },
+      {
+       "n": 13,
+       "title": "St. Thomas",
+       "composer": "Sonny Rollins",
+       "year": "1956",
+       "note": "Calypso",
+       "listen": "https://music.youtube.com/search?q=St.%20Thomas%20Sonny%20Rollins%20jazz"
+      },
+      {
+       "n": 14,
+       "title": "Mercy, Mercy, Mercy",
+       "composer": "Joe Zawinul",
+       "year": "1966",
+       "note": "Gospel / funk",
+       "listen": "https://music.youtube.com/search?q=Mercy%2C%20Mercy%2C%20Mercy%20Joe%20Zawinul%20jazz"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "venue": "JD's Stage Bistro",
+   "city": "Chelsea, MI",
+   "billing": "Quartet",
+   "lineup": [
+    "Jed Fritzemeier",
+    "Brian Brill",
+    "Ross Huff",
+    "Jonathan Brown"
+   ],
+   "sets": [
+    {
+     "name": "Set 1",
+     "tunes": [
+      {
+       "n": 1,
+       "title": "Killer Joe",
+       "composer": "Benny Golson",
+       "year": "1960",
+       "note": "medium shuffle, minor vamp",
+       "listen": "https://music.youtube.com/search?q=Killer%20Joe%20Benny%20Golson%20jazz"
+      },
+      {
+       "n": 2,
+       "title": "Com'in Home Baby",
+       "composer": "Ben Tucker",
+       "year": "1961",
+       "note": "groove, bass-led",
+       "listen": "https://music.youtube.com/search?q=Com%27in%20Home%20Baby%20Ben%20Tucker%20jazz"
+      },
+      {
+       "n": 3,
+       "title": "Song for My Father",
+       "composer": "Horace Silver",
+       "year": "1964",
+       "note": "bossa feel, hard bop",
+       "listen": "https://music.youtube.com/search?q=Song%20for%20My%20Father%20Horace%20Silver%20jazz"
+      },
+      {
+       "n": 4,
+       "title": "Emily",
+       "composer": "Johnny Mandel",
+       "year": "1964",
+       "note": "jazz waltz, ballad",
+       "listen": "https://music.youtube.com/search?q=Emily%20Johnny%20Mandel%20jazz"
+      },
+      {
+       "n": 5,
+       "title": "Work Song",
+       "composer": "Nat Adderley",
+       "year": "1960",
+       "note": "minor blues \u2014 bass intro",
+       "listen": "https://music.youtube.com/search?q=Work%20Song%20Nat%20Adderley%20jazz"
+      },
+      {
+       "n": 6,
+       "title": "Little Sunflower",
+       "composer": "Freddie Hubbard",
+       "year": "1967",
+       "note": "modal, trumpet feature",
+       "listen": "https://music.youtube.com/search?q=Little%20Sunflower%20Freddie%20Hubbard%20jazz"
+      },
+      {
+       "n": 7,
+       "title": "O Barquinho",
+       "composer": "Roberto Menescal",
+       "year": "1961",
+       "note": "bossa nova",
+       "listen": "https://music.youtube.com/search?q=O%20Barquinho%20Roberto%20Menescal%20jazz"
+      },
+      {
+       "n": 8,
+       "title": "In Walked Bud",
+       "composer": "Thelonious Monk",
+       "year": "1947",
+       "note": "bop, Monk",
+       "listen": "https://music.youtube.com/search?q=In%20Walked%20Bud%20Thelonious%20Monk%20jazz"
+      },
+      {
+       "n": 9,
+       "title": "Take 5",
+       "composer": "Paul Desmond",
+       "year": "1959",
+       "note": "5/4",
+       "listen": "https://music.youtube.com/search?q=Take%205%20Paul%20Desmond%20jazz"
+      },
+      {
+       "n": 10,
+       "title": "Gravy Waltz",
+       "composer": "Steve Allen / Ray Brown",
+       "year": "1963",
+       "note": "jazz waltz, bass tune",
+       "listen": "https://music.youtube.com/search?q=Gravy%20Waltz%20Steve%20Allen%20/%20Ray%20Brown%20jazz"
+      },
+      {
+       "n": 11,
+       "title": "Fritzstones",
+       "composer": "after Hoyt Curtin",
+       "year": "1960",
+       "note": "the Flintstones, renamed",
+       "listen": "https://music.youtube.com/search?q=Fritzstones%20after%20Hoyt%20Curtin%20jazz"
+      }
+     ]
+    },
+    {
+     "name": "Set 2",
+     "tunes": [
+      {
+       "n": 1,
+       "title": "Billie's Bounce",
+       "composer": "Charlie Parker",
+       "year": "1945",
+       "note": "blues in F, bop",
+       "listen": "https://music.youtube.com/search?q=Billie%27s%20Bounce%20Charlie%20Parker%20jazz"
+      },
+      {
+       "n": 2,
+       "title": "Moan'in",
+       "composer": "Bobby Timmons",
+       "year": "1958",
+       "note": "hard bop, call and response",
+       "listen": "https://music.youtube.com/search?q=Moan%27in%20Bobby%20Timmons%20jazz"
+      },
+      {
+       "n": 3,
+       "title": "Stranger in Paradise",
+       "composer": "Borodin / Wright & Forrest",
+       "year": "1953",
+       "note": "ballad, from Kismet",
+       "listen": "https://music.youtube.com/search?q=Stranger%20in%20Paradise%20Borodin%20/%20Wright%20%26%20Forrest%20jazz"
+      },
+      {
+       "n": 4,
+       "title": "Take the A Train",
+       "composer": "Billy Strayhorn",
+       "year": "1939",
+       "note": "swing, the Ellington signature",
+       "listen": "https://music.youtube.com/search?q=Take%20the%20A%20Train%20Billy%20Strayhorn%20jazz"
+      },
+      {
+       "n": 5,
+       "title": "Watch What Happens",
+       "composer": "Michel Legrand",
+       "year": "1964",
+       "note": "bossa feel",
+       "listen": "https://music.youtube.com/search?q=Watch%20What%20Happens%20Michel%20Legrand%20jazz"
+      },
+      {
+       "n": 6,
+       "title": "It Had To Be You",
+       "composer": "Isham Jones",
+       "year": "1924",
+       "note": "standard, medium swing",
+       "listen": "https://music.youtube.com/search?q=It%20Had%20To%20Be%20You%20Isham%20Jones%20jazz"
+      },
+      {
+       "n": 7,
+       "title": "Yardbird Suite",
+       "composer": "Charlie Parker",
+       "year": "1946",
+       "note": "bop head",
+       "listen": "https://music.youtube.com/search?q=Yardbird%20Suite%20Charlie%20Parker%20jazz"
+      },
+      {
+       "n": 8,
+       "title": "Wave",
+       "composer": "Antonio Carlos Jobim",
+       "year": "1967",
+       "note": "bossa nova",
+       "listen": "https://music.youtube.com/search?q=Wave%20Antonio%20Carlos%20Jobim%20jazz"
+      },
+      {
+       "n": 9,
+       "title": "Nature Boy",
+       "composer": "eden ahbez",
+       "year": "1948",
+       "note": "dark ballad, minor",
+       "listen": "https://music.youtube.com/search?q=Nature%20Boy%20eden%20ahbez%20jazz"
+      },
+      {
+       "n": 10,
+       "title": "Mr. P.C.",
+       "composer": "John Coltrane",
+       "year": "1959",
+       "note": "fast minor blues, for a bass player",
+       "listen": "https://music.youtube.com/search?q=Mr.%20P.C.%20John%20Coltrane%20jazz"
+      },
+      {
+       "n": 11,
+       "title": "Mercy, Mercy, Mercy",
+       "composer": "Joe Zawinul",
+       "year": "1966",
+       "note": "soul jazz, the closer",
+       "listen": "https://music.youtube.com/search?q=Mercy%2C%20Mercy%2C%20Mercy%20Joe%20Zawinul%20jazz"
+      }
+     ]
+    }
+   ],
+   "video": {
+    "src": "media/jcr-2026-10-03-jds.mp4",
+    "label": "The late set, 45 seconds"
+   }
+  },
+  {
+   "date": "2026-09-12",
+   "venue": "JD's Stage Bistro",
+   "city": "Chelsea, MI",
+   "billing": "Trio",
+   "lineup": [
+    "Jed Fritzemeier",
+    "Wes Fritzemeier",
+    "Brian Brill"
+   ],
+   "sets": [
+    {
+     "name": "Set list",
+     "tunes": [
+      {
+       "n": 1,
+       "title": "Killer Joe",
+       "composer": "Benny Golson",
+       "year": null,
+       "note": "bass intro",
+       "listen": "https://music.youtube.com/search?q=Killer%20Joe%20Benny%20Golson%20jazz"
+      },
+      {
+       "n": 2,
+       "title": "Comin' Home Baby",
+       "composer": "Ben Tucker / Bob Dorough",
+       "year": null,
+       "note": "guitar + bass intro",
+       "listen": "https://music.youtube.com/search?q=Comin%27%20Home%20Baby%20Ben%20Tucker%20/%20Bob%20Dorough%20jazz"
+      },
+      {
+       "n": 3,
+       "title": "Someday My Prince Will Come",
+       "composer": "Frank Churchill",
+       "year": null,
+       "note": "piano + bass intro",
+       "listen": "https://music.youtube.com/search?q=Someday%20My%20Prince%20Will%20Come%20Frank%20Churchill%20jazz"
+      },
+      {
+       "n": 4,
+       "title": "Watch What Happens",
+       "composer": "Michel Legrand",
+       "year": null,
+       "note": "guitar intro",
+       "listen": "https://music.youtube.com/search?q=Watch%20What%20Happens%20Michel%20Legrand%20jazz"
+      },
+      {
+       "n": 5,
+       "title": "Cry Me A River",
+       "composer": "Arthur Hamilton",
+       "year": null,
+       "note": "no guitar",
+       "listen": "https://music.youtube.com/search?q=Cry%20Me%20A%20River%20Arthur%20Hamilton%20jazz"
+      },
+      {
+       "n": 6,
+       "title": "Sway",
+       "composer": "Pablo Beltr\u00e1n Ruiz",
+       "year": null,
+       "note": "guitar lead only",
+       "listen": "https://music.youtube.com/search?q=Sway%20Pablo%20Beltr%C3%A1n%20Ruiz%20jazz"
+      },
+      {
+       "n": 7,
+       "title": "Jordu",
+       "composer": "Duke Jordan",
+       "year": null,
+       "note": null,
+       "listen": "https://music.youtube.com/search?q=Jordu%20Duke%20Jordan%20jazz"
+      },
+      {
+       "n": 8,
+       "title": "Emily",
+       "composer": "Johnny Mandel",
+       "year": null,
+       "note": null,
+       "listen": "https://music.youtube.com/search?q=Emily%20Johnny%20Mandel%20jazz"
+      },
+      {
+       "n": 9,
+       "title": "Flintstones",
+       "composer": "Hoyt Curtin",
+       "year": null,
+       "note": null,
+       "listen": "https://music.youtube.com/search?q=Flintstones%20Hoyt%20Curtin%20jazz"
+      },
+      {
+       "n": 10,
+       "title": "Do I Ever Cross Your Mind",
+       "composer": "Dolly Parton",
+       "year": null,
+       "note": "Wes/Jed?",
+       "listen": "https://music.youtube.com/search?q=Do%20I%20Ever%20Cross%20Your%20Mind%20Dolly%20Parton%20jazz"
+      },
+      {
+       "n": 11,
+       "title": "How Sweet It Is To Be Loved By You",
+       "composer": "Holland\u2013Dozier\u2013Holland",
+       "year": null,
+       "note": null,
+       "listen": "https://music.youtube.com/search?q=How%20Sweet%20It%20Is%20To%20Be%20Loved%20By%20You%20Holland%E2%80%93Dozier%E2%80%93Holland%20jazz"
+      },
+      {
+       "n": 12,
+       "title": "Billie's Bounce",
+       "composer": "Charlie Parker",
+       "year": null,
+       "note": "unison start, bowed bass",
+       "listen": "https://music.youtube.com/search?q=Billie%27s%20Bounce%20Charlie%20Parker%20jazz"
+      },
+      {
+       "n": 13,
+       "title": "The Odd Couple",
+       "composer": "Neal Hefti",
+       "year": null,
+       "note": "piano intro",
+       "listen": "https://music.youtube.com/search?q=The%20Odd%20Couple%20Neal%20Hefti%20jazz"
+      },
+      {
+       "n": 14,
+       "title": "Nature Boy",
+       "composer": "eden ahbez",
+       "year": null,
+       "note": null,
+       "listen": "https://music.youtube.com/search?q=Nature%20Boy%20eden%20ahbez%20jazz"
+      },
+      {
+       "n": 15,
+       "title": "Moanin'",
+       "composer": "Bobby Timmons",
+       "year": null,
+       "note": "bass intro",
+       "listen": "https://music.youtube.com/search?q=Moanin%27%20Bobby%20Timmons%20jazz"
+      },
+      {
+       "n": 16,
+       "title": "Inchworm",
+       "composer": "Frank Loesser",
+       "year": null,
+       "note": "piano + bass, guitar descant",
+       "listen": "https://music.youtube.com/search?q=Inchworm%20Frank%20Loesser%20jazz"
+      },
+      {
+       "n": 17,
+       "title": "Sunny",
+       "composer": "Bobby Hebb",
+       "year": null,
+       "note": "bomp bomp bomp",
+       "listen": "https://music.youtube.com/search?q=Sunny%20Bobby%20Hebb%20jazz"
+      },
+      {
+       "n": 18,
+       "title": "Mercy, Mercy, Mercy",
+       "composer": "Joe Zawinul",
+       "year": null,
+       "note": "bass intro, IN C",
+       "listen": "https://music.youtube.com/search?q=Mercy%2C%20Mercy%2C%20Mercy%20Joe%20Zawinul%20jazz"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
