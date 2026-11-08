@@ -8,21 +8,26 @@
      REPLACE: check the city, and the description wording.
      This title is what Google shows. Genre + city = bookings.
      ============================================================ -->
-<title>Jazz Circuit Riders — Jazz Trio &amp; Quartet | Chelsea, MI</title>
-<meta name="description" content="Jazz trio and quartet based in Chelsea, Michigan. Standards with vocals for clubs, restaurants, receptions and private events across southeast Michigan.">
+<title>Jazz Circuit Riders — Jazz Band for Hire | Chelsea, MI</title>
+<meta name="description" content="Live jazz from Chelsea, Michigan. Standards with vocals for clubs, restaurants, receptions and private events across southeast Michigan.">
 <link rel="preload" as="image" href="assets/img/trio.webp" fetchpriority="high" media="(min-width: 760px)">
 <link rel="preload" as="image" href="assets/img/trio-small.webp" fetchpriority="high" media="(max-width: 759px)">
 <link rel="canonical" href="https://jazzcircuitriders.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Jazz Circuit Riders">
-<meta name="twitter:description" content="Standards for rooms that listen. Jazz trio and quartet, Chelsea, Michigan.">
-<meta name="twitter:image" content="https://jazzcircuitriders.com/assets/img/trio.webp">
+<meta name="twitter:description" content="Standards for rooms that listen. Live jazz from Chelsea, Michigan.">
+<meta name="twitter:image" content="https://jazzcircuitriders.com/assets/img/og-1200x628.jpg">
 <meta property="og:title" content="Jazz Circuit Riders">
 <meta property="og:description" content="Standards for rooms that listen.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Jazz Circuit Riders">
+<meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://jazzcircuitriders.com/">
-<meta property="og:image" content="https://jazzcircuitriders.com/assets/img/trio.webp">
-<meta property="og:image:alt" content="Jazz Circuit Riders playing as a trio - piano, upright bass, guitar and drums.">
+<meta property="og:image" content="https://jazzcircuitriders.com/assets/img/og-1200x628.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="628">
+  <meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Jazz Circuit Riders playing - piano, upright bass, guitar and drums.">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E1A2B">
@@ -41,24 +46,36 @@
     "Jazz Standards",
     "Bebop"
   ],
-  "description": "Jazz trio and quartet based in Chelsea, Michigan. Standards - ballads, blues and bossa - with vocals, for clubs, restaurants, receptions and private events.",
+  "description": "Live jazz from Chelsea, Michigan. Standards - ballads, blues and bossa - with vocals, for clubs, restaurants, receptions and private events.",
   "email": "booking@jazzcircuitriders.com",
   "member": [
     {
       "@type": "Person",
-      "name": "Jed"
+      "name": "Jed Fritzemeier"
     },
     {
       "@type": "Person",
-      "name": "Wes"
+      "name": "Wes Fritzemeier"
     },
     {
       "@type": "Person",
-      "name": "Brian"
+      "name": "Brian Brill"
     },
     {
       "@type": "Person",
-      "name": "Ross"
+      "name": "Ross Huff"
+    },
+    {
+      "@type": "Person",
+      "name": "Jonathan Brown"
+    },
+    {
+      "@type": "Person",
+      "name": "Daniel Hicks"
+    },
+    {
+      "@type": "Person",
+      "name": "Joe Fee"
     }
   ],
   "track": [
@@ -95,11 +112,21 @@
     "Jackson, MI",
     "Detroit, MI",
     "Southeast Michigan"
+  ],
+  "image": "https://jazzcircuitriders.com/assets/img/trio.webp",
+  "logo": "https://jazzcircuitriders.com/assets/img/logo-sm.webp",
+  "sameAs": [
+    "https://www.facebook.com/jazzcircuitriders"
   ]
 }
 </script>
 
+<!-- Safari ignores SVG favicons entirely, so .ico carries it there.
+     sizes="any" stops Chrome downloading both files. -->
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
 <style>
 /* ============================================================
    JAZZ CIRCUIT RIDERS
@@ -331,9 +358,15 @@ body{
   font-family:var(--display);
   font-style:italic;
   font-size:clamp(1.15rem, 3.4vw, 1.6rem);
+  /* 'Standards for rooms that / listen.' left one word stranded. balance
+     alone could not help: the measure was only 282px, too narrow for the
+     line to even out. Widening it to 22ch gives balance something to work
+     with. */
+  max-width:34ch;
+  text-wrap:balance;
   color:var(--cream);
   opacity:.9;
-  max-width:22ch;
+  max-width:34ch;
   margin:30px 0 40px;
 }
 
@@ -364,6 +397,7 @@ body{
    SECTIONS
    ============================================================ */
 .section{
+  scroll-margin-top:32px;
   position:relative;
   padding:76px 0;
   border-top:1px solid rgba(141,160,182,.14);
@@ -388,6 +422,23 @@ body{
   margin-right:16px;
   transform:translateY(-.35em);
 }
+.live{
+  margin:34px 0 0;
+}
+.live-video{
+  display:block;
+  width:100%;
+  height:auto;                        /* the 1280x720 attrs hold the box while
+                                         it loads, so nothing jumps */
+  border:1px solid var(--ink-3);
+  border-radius:6px;
+  background:var(--ink-2);
+}
+.live-cap{
+  color:var(--steel);
+  font-size:14px;
+  margin:10px 0 0;
+}
 .section-sub{
   color:var(--steel);
   font-size:15.5px;
@@ -395,6 +446,20 @@ body{
 }
 
 /* ---------- Listen ---------- */
+.encore{
+  margin:30px 0 0;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:1.2rem;
+  color:var(--brass-lit);
+}
+.encore a{
+  color:var(--brass-lit);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.5);
+}
+.encore a:hover{ color:var(--cream); border-color:var(--cream); }
+
 .tracks{ list-style:none; margin:38px 0 0; padding:0; }
 
 .track{
@@ -454,6 +519,10 @@ body{
   margin:4px 0 0;
 }
 
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
 .track-time{
   grid-area:time;
   font-family:var(--mono);
@@ -469,27 +538,27 @@ body{
   -webkit-appearance:none;
   appearance:none;
   width:100%;
-  height:18px;          /* generous hit area; the visible track is 2px */
+  height:26px;          /* WCAG 2.2 target size; the visible line is 3px */
   background:transparent;
   cursor:pointer;
   margin:0;
   padding:0;
 }
 .track-bar::-webkit-slider-runnable-track{
-  height:2px;
+  height:3px;
   background:linear-gradient(to right,
-    var(--brass-lit) 0 var(--pct,0%), rgba(141,160,182,.22) var(--pct,0%) 100%);
+    var(--brass-lit) 0 var(--pct,0%), rgba(141,160,182,.60) var(--pct,0%) 100%);
 }
 .track-bar::-webkit-slider-thumb{
   -webkit-appearance:none;
   width:11px; height:11px;
-  margin-top:-4.5px;
+  margin-top:-4px;
   border-radius:50%;
   background:var(--brass-lit);
 }
 .track-bar::-moz-range-track{
-  height:2px;
-  background:rgba(141,160,182,.22);
+  height:3px;
+  background:rgba(141,160,182,.60);
 }
 .track-bar::-moz-range-progress{
   height:2px;
@@ -508,9 +577,30 @@ body{
 /* ---------- The Circuit (shows) ---------- */
 .shows{ list-style:none; margin:38px 0 0; padding:0; }
 
+.show-venue a{ color:inherit; text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.35);
+  /* Measured 115x20 - under the 24px minimum. Vertical padding on an INLINE
+     element grows the hit box without moving anything, the same fix already
+     used on the roster names. These are standalone links in a row, not links
+     inside a sentence, so the inline exemption does not cover them. */
+  padding-block:5px; }
+.show-venue a:hover{ color:var(--brass-lit); border-bottom-color:var(--brass-lit); }
+.show-note{
+  display:block;
+  margin-top:5px;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:.92rem;
+  color:var(--brass-lit);
+  letter-spacing:0;
+  text-transform:none;
+}
+.show-cover{ color:var(--steel); }
+.show-set-break{ display:block; height:4px; }
+.show-sep{ color:var(--steel); opacity:.5; margin:0 .5em; }
 .show{
   display:grid;
-  grid-template-columns:96px 1fr auto;
+  grid-template-columns:132px 1fr auto;
   gap:20px;
   align-items:baseline;
   padding:20px 0;
@@ -518,16 +608,123 @@ body{
 }
 .show:first-child{ border-top:1px solid rgba(141,160,182,.14); }
 
-.show-date{
+/* A gig poster, when there is one. Sits on its own row under the venue so
+   rows with art and rows without still line up down the page. Big enough to
+   read without clicking; the file is 900px so it survives the enlargement. */
+.show-poster{
+  grid-column:2 / -1;
+  align-self:start;
+  justify-self:start;
+  margin-top:20px;
+  display:block;
+  position:relative;
+  line-height:0;                      /* kills the descender gap under the img */
+  border:1px solid rgba(141,160,182,.22);
+  border-radius:2px;
+  cursor:zoom-in;
+}
+.show-poster img{ display:block; width:300px; height:auto; }
+.show-poster:hover{ border-color:var(--brass-lit); }
+.show-poster:focus-visible{
+  border-color:var(--brass-lit);
+  outline:2px solid var(--brass-lit);
+  outline-offset:3px;
+}
+
+/* The enlarge hint. Hidden until you point at it or tab to it, so the
+   artwork is never defaced at rest. Not drawn on touch at all - there the
+   poster is already near full width and there is nothing to enlarge to. */
+.show-poster::after{
+  content:"Enlarge";
+  opacity:0;
+  transition:opacity .18s ease;
+  position:absolute;
+  right:0; bottom:0;
+  padding:7px 11px;
+  min-height:24px;                    /* WCAG 2.5.8 - not a target, but sized like one */
+  box-sizing:border-box;
   font-family:var(--mono);
-  font-size:12.5px;
-  letter-spacing:.1em;
+  font-size:11px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  line-height:1.1;
+  color:var(--cream);
+  background:rgba(14,26,43,.86);
+  border-top:1px solid rgba(201,146,46,.45);
+  border-left:1px solid rgba(201,146,46,.45);
+}
+.show-poster:hover::after,
+.show-poster:focus-visible::after{ opacity:1; color:var(--brass-lit); }
+@media (hover: none){ .show-poster::after{ content:none; } }
+@media (prefers-reduced-motion: reduce){ .show-poster::after{ transition:none; } }
+
+/* ---------- Poster lightbox ---------- */
+/* A native <dialog>: Esc, focus handling and the inert background come from
+   the browser. Clicking the poster used to leave the site for a bare image
+   file, which read as a broken link. This keeps people on the page. */
+#lightbox{
+  border:0;
+  padding:0;
+  background:transparent;
+  max-width:min(92vw, 720px);
+  max-height:92vh;
+  overflow:visible;
+}
+#lightbox::backdrop{ background:rgba(6,12,21,.88); }
+#lightbox img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid rgba(201,146,46,.35);
+  border-radius:2px;
+}
+#lightbox-close{
+  position:absolute;
+  top:-14px; right:-14px;
+  width:44px; height:44px;            /* comfortably past the 24px minimum */
+  border-radius:50%;
+  border:1px solid rgba(201,146,46,.55);
+  background:var(--ink);
+  color:var(--cream);
+  font-family:var(--mono);
+  font-size:19px;
+  line-height:1;
+  cursor:pointer;
+}
+#lightbox-close:hover{ color:var(--brass-lit); border-color:var(--brass-lit); }
+#lightbox-close:focus-visible{ outline:2px solid var(--brass-lit); outline-offset:3px; }
+@media (max-width: 599px){
+  #lightbox{ max-width:94vw; }
+  #lightbox-close{ top:-10px; right:-10px; width:40px; height:40px; }
+}
+
+/* The date column. It used to be a single 12.5px mono line - smaller than the
+   body text and smaller than the venue beside it - which answered "where"
+   before "when" on a page whose venue is nearly always the same room. The
+   weekday leads because "Saturday" settles whether you are free faster than
+   "the 24th" does; the posters have worked this way since October. */
+.show-date{ display:block; }
+.show-day{
+  display:block;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--brass);
+  margin-bottom:2px;
+}
+.show-num{
+  display:block;
+  font-family:var(--display);
+  font-size:27px;
+  line-height:1.05;
+  color:var(--cream);
 }
 .show-venue{
   font-family:var(--display);
-  font-size:1.2rem;
+  /* stepped back from 1.2rem: still the anchor of the row, no longer the
+     loudest thing on it */
+  font-size:1.05rem;
   color:var(--cream);
 }
 .show-city{
@@ -539,11 +736,15 @@ body{
 }
 .show-right{
   font-family:var(--mono);
-  font-size:12px;
-  color:var(--steel);
+  /* 14.5 cream, not 12 steel: the time is the second thing anyone decides on,
+     and it was styled as a caption */
+  font-size:14.5px;
+  color:var(--cream);
   white-space:nowrap;
 }
-.show-right a{ color:var(--brass-lit); text-decoration:none; border-bottom:1px solid rgba(201,146,46,.5); }
+.show-right a{ color:var(--brass-lit); text-decoration:none;
+  border-bottom:1px solid rgba(201,146,46,.5);
+  padding-block:5px; }        /* measured 148x17, same reason as above */
 .show-right a:hover{ color:var(--cream); }
 
 .shows-status a{
@@ -564,6 +765,8 @@ body{
 @media (max-width: 599px){
   .show{ grid-template-columns:1fr; gap:6px; }
   .show-right{ margin-top:6px; }
+  .show-poster{ grid-column:1; margin-top:14px; }
+  .show-poster img{ width:100%; max-width:340px; }
 }
 
 /* ---------- The Riders ---------- */
@@ -575,8 +778,42 @@ body{
 .riders-copy{ max-width:58ch; margin-bottom:52px; }
 .riders-copy p{ margin:0 0 18px; }
 
+/* The trio and the stable. A small label and one line of framing - not two
+   different card treatments. The stable is here to be hired, not ranked. */
+.roster-group + .roster-group{ margin-top:56px; }
+/* These were paragraphs at 12px: the label organising the roster was the smallest
+   text inside it, quieter than its own 16px note and 11px below the names it
+   groups - and the gap widened when the names went to 23px. More
+   importantly they were paragraphs, so the document outline ran h2 "The
+   Riders" straight into eight flat h3 names. Anyone navigating by headings
+   got no sign that the first three are the band and the rest ride with it,
+   which is the single distinction a booker most needs. Now h3, with the
+   players as h4 beneath them, and set with a rule so the eye reads a divider.
+   It stays mono caps rather than growing to compete with a name - case,
+   tracking and colour carry the rank, not size. */
+.roster-label{
+  font-family:var(--mono);
+  font-size:15px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--brass);
+  font-weight:400;
+  margin:0 0 10px;
+  padding-top:22px;
+  border-top:1px solid rgba(201,146,46,.22);
+}
+.roster-group:first-child .roster-label{ padding-top:0; border-top:0; }
+.roster-note{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:1.02rem;
+  color:var(--steel);
+  max-width:52ch;
+  margin:0 0 26px;
+}
+
 /* Expand markers belong only to rows that actually expand.
-   Wes and Ross are plain rows until their bios arrive - no marker. */
+   Every player has a bio now; this stays scoped so a future plain row is safe. */
 details.member > .member-line{
   cursor:pointer;
   list-style:none;
@@ -592,7 +829,13 @@ details.member > .member-line::after{
   margin-left:14px;
 }
 details.member[open] > .member-line::after{ content:"\2212"; }
-details.member[open] > .member-line .member-name{ color:var(--brass-lit); }
+/* REMOVED: details.member[open] .member-name{ color:brass-lit }
+   It painted the h3 brass - the site's LINK colour - while .member-name a
+   below sets cream and wins inside an actual link. The result was exactly
+   backwards: the four names you can click rendered as plain text, and three
+   of the four you cannot rendered as links. Every entry also ships `open`,
+   so the state it was meant to signal never varied. Names are cream now; the
+   four that are links carry the brass underline and go brass on hover. */
 details.member > .member-line:focus-visible{
   outline:2px solid var(--brass-lit);
   outline-offset:4px;
@@ -612,7 +855,16 @@ details.member > .member-line:focus-visible{
   }
 }
 .member-detail img{
-  width:100%; height:auto; display:block;
+  /* The source frames are four different shapes - 900x600 landscape, 800x1200
+     portrait, 509x690, 500x500 - so in a 150px column every entry came out a
+     different height and the roster read as ragged rather than as a set. One
+     square box with cover cropping fixes it without recutting a single file.
+     object-position is set per player, inline, from the face coordinates the
+     poster generator already uses; a plain centre crop puts Brian's face half
+     out of frame. */
+  width:100%; aspect-ratio:1 / 1; height:auto; display:block;
+  object-fit:cover;
+  object-position:50% 30%;          /* fallback; overridden per image */
   filter:saturate(0);
   border:1px solid rgba(201,146,46,.28);
 }
@@ -625,17 +877,33 @@ details.member > .member-line:focus-visible{
 }
 .member-line{
   display:flex;
-  justify-content:space-between;
+  /* was space-between, which pushed the instruments to the far edge and left
+     a void across a 1280px screen - the two stopped reading as one line */
+  justify-content:flex-start;
   align-items:baseline;
-  gap:16px;
+  gap:22px;
   margin:0;
 }
-.member-name{ font-family:var(--display); font-size:1.15rem; color:var(--cream); }
+.member-line .member-inst{ margin-right:auto; }
+/* 1.45rem (23px), up from 1.15rem (18.4px). At the old size a player's name
+   was only 15% larger than the bio paragraph beneath it - not enough step for
+   a heading - and smaller than a TRACK TITLE at 19.5px, which put the tunes
+   above the people on a band's own site. 23px sits above the track titles and
+   below the gig date at 27px, which is the right order: the date is the one
+   thing a visitor acts on. */
+.member-name{ font-family:var(--display); font-size:1.45rem; color:var(--cream);
+  font-weight:400; margin:0; line-height:1.2; }
 .member-name a{
   color:var(--cream);
   text-decoration:none;
   border-bottom:1px solid rgba(201,146,46,.45);
   transition:color .2s ease, border-color .2s ease;
+  /* These names measured 21px tall, under the 24px minimum for a touch
+     target. Vertical padding on an INLINE element grows its hit box without
+     affecting line layout, so this buys 12px of tap area and moves nothing.
+     Measured: 21px -> 33px, roster rows and page height identical.
+     (display:inline-block also works but pushes Jonathan's row 15px taller.) */
+  padding-block:6px;
 }
 .member-name a:hover{ color:var(--brass-lit); border-color:var(--brass-lit); }
 .member-inst{
@@ -644,8 +912,7 @@ details.member > .member-line:focus-visible{
   text-align:right; flex:0 1 auto; min-width:0;
 }
 
-/* Links inside bio prose. These moved out of .member-also when the band
-   credits went inline, and lost their styling on the way. */
+/* Links inside bio prose. */
 .member-bio a{
   color:var(--brass-lit);
   text-decoration:none;
@@ -653,19 +920,6 @@ details.member > .member-line:focus-visible{
   transition:color .2s ease, border-color .2s ease;
 }
 .member-bio a:hover{ color:var(--cream); border-color:var(--cream); }
-
-.member-also{
-  margin:7px 0 0;
-  font-size:13.5px;
-  color:var(--steel);
-}
-.member-also a{
-  color:var(--brass-lit);
-  text-decoration:none;
-  border-bottom:1px solid rgba(201,146,46,.4);
-}
-.member-also a:hover{ color:var(--cream); border-color:var(--cream); }
-
 
 /* ---------- Booking ---------- */
 .section-book{ padding-bottom:96px; }
@@ -684,6 +938,13 @@ details.member > .member-line:focus-visible{
   transition:color .2s ease, border-color .2s ease;
 }
 .book-line:hover{ color:var(--cream); border-color:var(--cream); }
+
+.book-social{
+  font-size:clamp(1rem, 3.4vw, 1.35rem);
+  color:var(--steel);
+  border-bottom-color:rgba(141,160,182,.35);
+}
+.book-social:hover{ color:var(--brass-lit); border-bottom-color:var(--brass-lit); }
 
 .book-note{
   font-family:var(--mono); font-size:12px; letter-spacing:.1em;
@@ -707,7 +968,18 @@ details.member > .member-line:focus-visible{
   width:140px; height:auto; display:block;
   margin:0 0 26px; opacity:.94;
 }
-.foot-dim{ margin-top:8px !important; opacity:.6; font-family:var(--mono); font-size:11px; letter-spacing:.1em; }
+.foot-dim{ margin-top:8px !important; font-family:var(--mono); font-size:11px; letter-spacing:.1em; }
+
+@media print{
+  .grain, .hero-art, .rail::before, .node, .track-btn, .track-bar,
+  .track-time, .hero-actions{ display:none !important; }
+  body{ background:#fff; color:#000; }
+  .rail{ padding:0; max-width:none; }
+  a{ color:#000; }
+  .book-line::after{ content:" (" attr(href) ")"; font-size:.8em; }
+  .member-detail img{ max-width:180px; }
+  .section{ page-break-inside:avoid; border-top:1px solid #ccc; }
+}
 
 /* ---------- focus visibility (quality floor) ---------- */
 a:focus-visible, button:focus-visible{
@@ -715,25 +987,6 @@ a:focus-visible, button:focus-visible{
   outline-offset:3px;
 }
 
-
-/* ---- live video, appended to Listen. Markup only: no script, no new
-   section, no renumbering. Deleting this rule and the .showvids div
-   removes the feature completely. ---- */
-.showvids{ margin:46px 0 0; }
-.showvids-lab{
-  font-family:var(--mono); font-size:.7rem; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--brass); margin:0 0 22px;
-}
-.showvid{ margin:0 0 34px; }
-.showvid video{
-  width:100%; display:block; border-radius:3px; background:#000;
-  border:1px solid rgba(141,160,182,.2);
-}
-.showvid figcaption{
-  font-family:var(--mono); font-size:.72rem; letter-spacing:.09em;
-  color:var(--steel); margin-top:10px; line-height:1.7;
-}
-.showvid .d{ color:var(--brass); text-transform:uppercase; }
 </style>
 </head>
 
@@ -747,7 +1000,7 @@ a:focus-visible, button:focus-visible{
   <header class="hero">
     <div class="hero-art" aria-hidden="true"></div>
     <div class="hero-body">
-      <p class="eyebrow">Trio &amp; Quartet &middot; Chelsea, Michigan</p>
+      <p class="eyebrow">Chelsea, Michigan</p>
       <h1 class="wordmark">
         <span>Jazz</span>
         <span>Circuit</span>
@@ -768,7 +1021,51 @@ a:focus-visible, button:focus-visible{
   <section class="section" id="listen" aria-labelledby="listen-h">
     <span class="node" data-node aria-hidden="true"></span>
     <h2 class="section-head" id="listen-h"><span class="section-num">01</span> Listen</h2>
-    <p class="section-sub">Standards, recorded as a trio &mdash; Jed, Wes and Brian.</p>
+    <p class="section-sub">Three of us on the recordings. More of us on the videos.</p>
+
+    <!-- Self-hosted rather than embedded: an embed pulls a third-party player
+         and its tracking into every page view, for the sake of one file each.
+         preload="none" means this costs a visitor nothing at all until they
+         press play, so the page stays as fast as it was.
+
+         In colour, and the photographs on the page stay black and white. The
+         original clip here was desaturated on the reasoning that the room's
+         stage wash is so blue the players vanish into the curtain. They do
+         not - they vanish in a low-bitrate encode of a blue room, which is a
+         different problem and has a different fix (see sitevideo.py). That
+         clip is gone: its source was never kept, so it could not be re-cut in
+         colour, and it was the same room and the same quartet as the October
+         date below it. Three dated clips, one per show, is also a straighter
+         thing to caption than three dated clips and one undated one. -->
+    <figure class="live">
+      <video class="live-video" controls preload="none" playsinline
+             poster="assets/img/poster-video-2026-11-07-jds.webp" width="1280" height="720">
+        <source src="assets/video/jcr-2026-11-07-jds.mp4" type="video/mp4">
+        <p>Your browser can&rsquo;t play this clip.
+        <a href="assets/video/jcr-2026-11-07-jds.mp4">Download it instead</a>.</p>
+      </video>
+      <figcaption class="live-cap">November 7, 2026 &mdash; the piano trio at JD&rsquo;s Stage Bistro, Chelsea.</figcaption>
+    </figure>
+
+    <figure class="live">
+      <video class="live-video" controls preload="none" playsinline
+             poster="assets/img/poster-video-2026-11-06-jds.webp" width="1280" height="720">
+        <source src="assets/video/jcr-2026-11-06-jds.mp4" type="video/mp4">
+        <p>Your browser can&rsquo;t play this clip.
+        <a href="assets/video/jcr-2026-11-06-jds.mp4">Download it instead</a>.</p>
+      </video>
+      <figcaption class="live-cap">November 6, 2026 &mdash; the quartet at JD&rsquo;s Stage Bistro, Chelsea.</figcaption>
+    </figure>
+
+    <figure class="live">
+      <video class="live-video" controls preload="none" playsinline
+             poster="assets/img/poster-video-2026-10-03-jds.webp" width="1280" height="720">
+        <source src="assets/video/jcr-2026-10-03-jds.mp4" type="video/mp4">
+        <p>Your browser can&rsquo;t play this clip.
+        <a href="assets/video/jcr-2026-10-03-jds.mp4">Download it instead</a>.</p>
+      </video>
+      <figcaption class="live-cap">October 3, 2026 &mdash; the quartet at JD&rsquo;s Stage Bistro, Chelsea.</figcaption>
+    </figure>
 
     <ol class="tracks">
       <li class="track" data-src="assets/audio/emily.mp3">
@@ -780,7 +1077,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Johnny Mandel</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Emily">
-        <p class="track-time">0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/watch-what-happens.mp3">
@@ -792,7 +1089,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Michel Legrand</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Watch What Happens">
-        <p class="track-time">0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/nature-boy.mp3">
@@ -804,7 +1101,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">eden ahbez</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Nature Boy">
-        <p class="track-time">0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/killer-joe.mp3">
@@ -816,7 +1113,7 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Benny Golson</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Killer Joe">
-        <p class="track-time">0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
 
       <li class="track" data-src="assets/audio/billies-bounce.mp3">
@@ -828,25 +1125,12 @@ a:focus-visible, button:focus-visible{
           <p class="track-sub">Charlie Parker</p>
         </div>
         <input class="track-bar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek within Billie's Bounce">
-        <p class="track-time">0:00</p>
+        <p class="track-time"><span class="sr-only">Duration </span>&mdash;</p>
       </li>
     </ol>
-  
-    <div class="showvids">
-      <p class="showvids-lab">On the bandstand</p>
-  <figure class="showvid">
-    <video controls preload="metadata" playsinline src="assets/video/jcr-2026-11-07-jds.mp4"></video>
-    <figcaption><span class="d">November 7, 2026</span> &middot; JD&rsquo;s Stage Bistro<br>Piano trio &mdash; Jed Fritzemeier, Daniel Hicks, Jonathan Brown</figcaption>
-  </figure>
-  <figure class="showvid">
-    <video controls preload="metadata" playsinline src="assets/video/jcr-2026-11-06-jds.mp4"></video>
-    <figcaption><span class="d">November 6, 2026</span> &middot; JD&rsquo;s Stage Bistro<br>Quartet &mdash; Wes Fritzemeier, Jed Fritzemeier, Daniel Hicks, Ross Huff</figcaption>
-  </figure>
-  <figure class="showvid">
-    <video controls preload="metadata" playsinline src="assets/video/jcr-2026-10-03-jds.mp4"></video>
-    <figcaption><span class="d">October 3, 2026</span> &middot; JD&rsquo;s Stage Bistro<br>Quartet &mdash; Jed Fritzemeier, Brian Brill, Ross Huff, Jonathan Brown</figcaption>
-  </figure>
-    </div>
+
+    <p class="encore" id="encore" aria-live="polite" hidden>That&rsquo;s the whole set.
+    If you&rsquo;re still here, <a href="#booking">we should probably talk</a>.</p>
   </section>
 
   <!-- ========================= THE CIRCUIT (shows) ========================= -->
@@ -871,31 +1155,27 @@ a:focus-visible, button:focus-visible{
         when a room wants it, something to lean into when it doesn&rsquo;t.
         Tunes people already know, played by people who have spent a long time
         with them.</p>
-        <p>We bring our own PA, we start on time, and we've never played the
-        same set twice.</p>
+        <p>We can bring our own PA and we start on time. Everything else is
+        jazz.</p>
 
-        <p><strong>Trio or quartet.</strong> The recordings above are the trio.
-        Add Ross on trumpet for a front line when the room calls for it. Two of
-        us sing. We play as loud or as quiet as the night needs &mdash; dinner
-        service, a cocktail hour, or a full club set.</p>
+        <p><strong>We size the band to the night.</strong> Add trumpet or
+        vibraphone when the room calls for a front line. Two of us sing, three
+        when the night calls for it. We play as loud or as quiet as the night
+        needs &mdash; dinner service, a cocktail hour, or a full club set.</p>
 
         <p>Jazz Circuit Riders is new. The players aren&rsquo;t.</p>
       </div>
 
-      <div>
-        <!-- REPLACE: correct instruments -->
-        <!-- Member names link to their own page where one exists.
-             Other projects go on a .member-also line beneath:
-               <p class="member-also">also plays with <a href="URL" target="_blank" rel="noopener">Name</a></p>
-             Jed and Brian have no second project listed yet.
-        -->
+      <div class="roster-group">
+        <h3 class="roster-label">The Trio</h3>
+        <p class="roster-note">The constant &mdash; the three who make up the band.</p>
         <details class="member" open>
           <summary class="member-line">
-            <span class="member-name">Jed Fritzemeier</span>
+            <h4 class="member-name">Jed Fritzemeier</h4>
             <span class="member-inst">Double Bass, Bass Guitar, Vocals</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/jed.webp" alt="Jed Fritzemeier playing double bass" width="900" height="600" loading="lazy" decoding="async">
+            <img src="assets/img/jed.webp" style="object-position:37% 20%" alt="Jed Fritzemeier playing double bass" width="900" height="600" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>His middle school orchestra director, &ldquo;Doc&rdquo; Daycleth Walker,
               got him into jazz. Two years of lessons later he joined the Doc Walker
@@ -907,34 +1187,125 @@ a:focus-visible, button:focus-visible{
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <span class="member-name">Wes Fritzemeier</span>
+            <h4 class="member-name">Wes Fritzemeier</h4>
             <span class="member-inst">Tenor Guitar, Drums, Vocals</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/wes.webp" alt="Wes Fritzemeier with fiddle and mandolin" width="900" height="600" loading="lazy" decoding="async">
+            <img src="assets/img/wes.webp" style="object-position:48% 26%" alt="Wes Fritzemeier with fiddle and mandolin" width="900" height="600" loading="lazy" decoding="async">
             <div class="member-bio">
               <p>Suzuki violin at five, and thirty years playing across the Midwest since.
               Tenor guitar, mandolin, violin, bass and drums. He holds weekly residencies at
-              the Valiant and the Last Word, and plays with the <a href="https://www.bendanielsband.com/" target="_blank" rel="noopener" aria-label="Ben Daniels Band &ndash; opens in a new tab">Ben Daniels Band</a>, the Screaming Goats and the <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a>.</p>
+              the Valiant and the Last Word, and plays with the <a href="https://www.bendanielsband.com/" target="_blank" rel="noopener" aria-label="Ben Daniels Band &ndash; opens in a new tab">Ben Daniels Band</a>, the Screaming Goats, <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a> and Yellowhammer.</p>
             </div>
           </div>
         </details>
         <details class="member" open>
           <summary class="member-line">
-            <span class="member-name">Brian Brill</span>
+            <h4 class="member-name"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="Brian Brill &ndash; opens in a new tab">Brian Brill</a></h4>
             <span class="member-inst">Piano, Keys</span>
           </summary>
           <div class="member-detail">
-            <img src="assets/img/brian.webp" alt="Brian Brill playing grand piano" width="900" height="600" loading="lazy" decoding="async">
+            <img src="assets/img/brian.webp" style="object-position:69% 22%" alt="Brian Brill playing grand piano" width="900" height="600" loading="lazy" decoding="async">
             <div class="member-bio">
-              <p>Pianist, composer and producer. He has scored for PBS, CBS Sports and Turner Classic Movies, written for Disney and GM, and produced or arranged for artists including Billy Strings. Six records of his own, most recently a 2024 work for choir and orchestra.</p>
-              <p class="member-also"><a href="https://www.brianbrillmusic.com/" target="_blank" rel="noopener" aria-label="brianbrillmusic.com &ndash; opens in a new tab">brianbrillmusic.com</a></p>
+              <p>Pianist, composer and producer, out of jazz and classical with a
+              long-running soft spot for electronica. He toured with his own quartet,
+              Fast Tracks, has scored for PBS, CBS Sports and Turner Classic Movies,
+              and has produced or arranged for artists including Billy Strings. Six
+              records of his own, most recently a 2024 work for choir and orchestra.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="roster-group">
+        <h3 class="roster-label">The Stable</h3>
+        <p class="roster-note">Players who ride with us. Every one of them is worth
+        hiring for your own night &mdash; their other projects are linked below.</p>
+        <details class="member" open>
+          <summary class="member-line">
+            <h4 class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></h4>
+            <span class="member-inst">Trumpet, Flugelhorn</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/ross.webp" style="object-position:41% 27%" alt="Ross Huff holding a trumpet" width="800" height="1200" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Trumpeter, flugelhornist, and independent artist.
+              He currently performs with the ensembles Cici Blind and the Spectacles,
+              the <a href="https://www.facebook.com/TheMacpodz/" target="_blank" rel="noopener" aria-label="Macpodz &ndash; opens in a new tab">Macpodz</a>, Rhyta Musik, <a href="http://www.jivecolossus.com/" target="_blank" rel="noopener" aria-label="Jive Colossus &ndash; opens in a new tab">Jive Colossus</a>, the <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a>,
+              Yellowhammer, and the <a href="https://www.facebook.com/rollietussingmusic/" target="_blank" rel="noopener" aria-label="Rollie Tussing Trio &ndash; opens in a new tab">Rollie Tussing Trio</a>. In addition to instructing
+              trumpet students ranging in age from 9 to 65, by necessity he&rsquo;s become
+              an arranger, composer, transcriptionist, producer, director, recording
+              artist, tour manager, copy writer, and bandleader. In cases of emergency
+              he can be a sound engineer and run the chuck wagon. Ross is also the
+              musical director of the beloved <a href="https://theragbirds.com/holidayshow/" target="_blank" rel="noopener" aria-label="Ebird and Friends Holiday Show &ndash; opens in a new tab">Ebird and Friends Holiday Show</a>, which plays the Ark each December.</p>
+            </div>
+          </div>
+        </details>
+        <details class="member" open>
+          <summary class="member-line">
+            <h4 class="member-name"><a href="https://www.jonbrowndrums.com/" target="_blank" rel="noopener" aria-label="Jonathan Brown &ndash; opens in a new tab">Jonathan Brown</a></h4>
+            <span class="member-inst">Drums, Vibraphone, Percussion</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/jonathan.webp" style="object-position:29% 18%" alt="Jonathan Brown playing drums" width="509" height="690" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Drummer, vibraphonist and chamber percussionist based in Ann Arbor.
+              He plays drum set with Chelsea&rsquo;s own <a href="https://jessmerritt.bandcamp.com/" target="_blank" rel="noopener" aria-label="Jess Merritt &ndash; opens in a new tab">Jess Merritt</a>, drums and mallets
+              for Cici Blind and the Spectacles, and vibraphone with the retro lounge
+              exotica outfit Yellowhammer. He&rsquo;s a member of the <a href="https://www.portlandpercussiongroup.com/" target="_blank" rel="noopener" aria-label="Portland Percussion Group &ndash; opens in a new tab">Portland Percussion Group</a>, whose album <a href="https://newfocusrecordings.bandcamp.com/album/patterns-form" target="_blank" rel="noopener" aria-label="Patterns and Form &ndash; opens in a new tab">Patterns and Form</a> is out on New Focus Records, and he performs
+              regularly with the Jackson and Toledo symphonies. He teaches privately
+              and leads the <a href="https://www.steinerschool.org/" target="_blank" rel="noopener" aria-label="Rudolf Steiner School of Ann Arbor &ndash; opens in a new tab">Rudolf Steiner School of Ann Arbor</a> Steel Drum Ensemble.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="member" open>
+          <summary class="member-line">
+            <h4 class="member-name"><a href="https://danielhicksmusic.com/" target="_blank" rel="noopener" aria-label="Daniel Hicks &ndash; opens in a new tab">Daniel Hicks</a></h4>
+            <span class="member-inst">Piano, Keys</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/daniel.webp" style="object-position:44% 30%" alt="Daniel Hicks at a grand piano" width="800" height="1200" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Versatile pianist, composer and producer out of Indianapolis,
+              in Jackson since 2023. An in-demand sideman, he has worked with
+              Rob Dixon, Tony Cheeseborough of the Ohio Players, Goldie Ingram
+              and Wendy Reed, and played Indy Jazz Fest in 2023 with Ingram and
+              the festival&rsquo;s Legacy Band. He is a third of the Northside
+              Exchange, which co-headlined the first Carmel Jazz Fest and opened
+              for the Branford Marsalis Quartet at the Palladium in 2024. He
+              trained at Franklin College with Joshua Espinoza and Clare
+              Longendyke. Jazz, classical, pop, funk, R&amp;B, gospel and hymns
+              are all in his repertoire.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- Plain rows, not <details>: no bio yet, so nothing to expand and
+             no marker inviting a click that does nothing. They become
+             <details> the moment a bio and a photo arrive. -->
+        <details class="member" open>
+          <summary class="member-line">
+            <h4 class="member-name">Joe Fee</h4>
+            <span class="member-inst">Upright Bass, Bass Guitar, Tuba</span>
+          </summary>
+          <div class="member-detail">
+            <img src="assets/img/joe.webp" style="object-position:39% 30%" alt="Joe Fee playing upright bass" width="500" height="500" loading="lazy" decoding="async">
+            <div class="member-bio">
+              <p>Joe Fee has been an active member of the Southeast Michigan
+              music community since the early 2010&rsquo;s, appearing in a wide
+              variety of ensembles and contexts playing upright bass, bass
+              guitar, and tuba. He is a graduate of the <a href="https://smtd.umich.edu/" target="_blank" rel="noopener" aria-label="University of Michigan School of Music, Theatre &amp; Dance &ndash; opens in a new tab">University of Michigan&rsquo;s
+              School of Music, Theater, and Dance</a>, but please don&rsquo;t ask him
+              to act or pirouette.</p>
             </div>
           </div>
         </details>
         <div class="member">
-          <p class="member-line"><span class="member-name"><a href="https://rosshuff.com/home" target="_blank" rel="noopener" aria-label="Ross Huff &ndash; opens in a new tab">Ross Huff</a></span><span class="member-inst">Trumpet &middot; quartet</span></p>
-          <p class="member-also">also plays with <a href="https://www.facebook.com/pherotones" target="_blank" rel="noopener" aria-label="Pherotones &ndash; opens in a new tab">Pherotones</a></p>
+          <div class="member-line">
+            <h4 class="member-name">Lori Bittle Minnick</h4>
+            <span class="member-inst">Vocals</span>
+          </div>
         </div>
       </div>
     </div>
@@ -948,9 +1319,10 @@ a:focus-visible, button:focus-visible{
 
     <div class="book-lines">
       <a class="book-line" href="mailto:booking@jazzcircuitriders.com">booking@jazzcircuitriders.com</a>
+      <a class="book-line book-social" href="https://www.facebook.com/jazzcircuitriders" target="_blank" rel="me noopener noreferrer" aria-label="Jazz Circuit Riders on Facebook &ndash; opens in a new tab">facebook.com/jazzcircuitriders</a>
     </div>
 
-    <p class="book-note">Clubs, weddings, private events, festivals. We travel.</p>
+    <p class="book-note">Clubs, restaurants, receptions, private events and festivals. We travel.</p>
   </section>
 
   </main>
@@ -966,6 +1338,14 @@ a:focus-visible, button:focus-visible{
 
 </div>
 
+<!-- Poster lightbox. Empty until a poster is clicked; the browser handles
+     Esc, focus and making the page behind it inert. -->
+<dialog id="lightbox" aria-label="Gig poster">
+  <button id="lightbox-close" type="button" aria-label="Close the poster">&times;</button>
+  <!-- the image element is built by the script when a poster is opened, so
+       this markup never holds a path to a poster that has been retired -->
+</dialog>
+
 <script>
 /* ============================================================
    JAZZ CIRCUIT RIDERS — main.js
@@ -975,6 +1355,15 @@ a:focus-visible, button:focus-visible{
 
 (function () {
   'use strict';
+
+  // No %c styling here - consoles that don't support it print the raw CSS,
+  // which looks like a bug rather than a signature.
+  console.log(
+    'Jazz Circuit Riders\n' +
+    'Standards for rooms that listen. Chelsea, Michigan.\n' +
+    'No framework, no tracker, no build step.\n' +
+    'Listen to all five and the set has an encore.'
+  );
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1009,23 +1398,14 @@ a:focus-visible, button:focus-visible{
      three appear. Nothing to edit in between.
      ============================================================ */
   var tracks = Array.prototype.slice.call(document.querySelectorAll('.track'));
-  var listenSection = document.getElementById('listen');
   var current = null;
-  var pending = tracks.length;
-  var found = 0;
+  var finished = [];   // tracks played all the way through
 
   function fmt(seconds) {
     if (!isFinite(seconds) || seconds < 0) seconds = 0;
     var m = Math.floor(seconds / 60);
     var s = Math.floor(seconds % 60);
     return m + ':' + (s < 10 ? '0' : '') + s;
-  }
-
-  function settle() {
-    pending--;
-    if (pending > 0) return;
-    // Nothing loaded at all - hide the section rather than show an empty one.
-    if (found === 0 && listenSection) listenSection.style.display = 'none';
   }
 
   tracks.forEach(function (track) {
@@ -1036,71 +1416,84 @@ a:focus-visible, button:focus-visible{
     var titleEl = track.querySelector('.track-title');
     var label = titleEl ? titleEl.textContent.trim() : 'track';
     var seeking = false;
+    var audio = null;
 
-    // preload='metadata' fetches only the header, not the whole song,
-    // so this costs almost nothing and tells us the file is really there.
-    var audio = new Audio(src);
-    audio.preload = 'metadata';
+    // Nothing is fetched until a play button is pressed. Creating Audio
+    // objects on load pulled 22MB of MP3 before anyone asked to hear a note,
+    // which starved the hero image and put Largest Contentful Paint at 52s.
+    function build() {
+      if (audio) return audio;
+      audio = new Audio(src);
+      audio.preload = 'auto';
 
-    audio.addEventListener('loadedmetadata', function () {
-      found++;
-      time.textContent = fmt(audio.duration);
-      settle();
-    });
+      audio.addEventListener('loadedmetadata', function () {
+        time.textContent = fmt(audio.duration);
+      });
 
-    audio.addEventListener('error', function () {
-      track.parentNode && track.parentNode.removeChild(track);
-      settle();
-    });
+      audio.addEventListener('timeupdate', function () {
+        if (!audio.duration || seeking) return;
+        var pct = audio.currentTime / audio.duration * 100;
+        bar.value = pct;
+        bar.style.setProperty('--pct', pct + '%');
+        time.textContent = fmt(audio.duration - audio.currentTime);
+      });
 
-    audio.addEventListener('timeupdate', function () {
-      if (!audio.duration || seeking) return;
-      var pct = audio.currentTime / audio.duration * 100;
-      bar.value = pct;
-      bar.style.setProperty('--pct', pct + '%');
-      time.textContent = fmt(audio.duration - audio.currentTime);
-    });
+      audio.addEventListener('ended', function () {
+        // Heard the whole thing? Note it. Five of five earns the encore.
+        if (finished.indexOf(src) === -1) finished.push(src);
+        if (finished.length === tracks.length) {
+          var enc = document.getElementById('encore');
+          if (enc) enc.hidden = false;
+        }
+        track.classList.remove('playing');
+        bar.value = 0;
+        bar.style.setProperty('--pct', '0%');
+        btn.setAttribute('aria-label', 'Play ' + label);
+        audio.currentTime = 0;
+        current = null;
+      });
 
-    audio.addEventListener('ended', function () {
-      track.classList.remove('playing');
-      bar.value = 0;
-      bar.style.setProperty('--pct', '0%');
-      btn.setAttribute('aria-label', 'Play ' + label);
-      audio.currentTime = 0;
-      time.textContent = fmt(audio.duration);
-      current = null;
-    });
+      audio.addEventListener('error', function () {
+        track.classList.remove('playing');
+        time.textContent = '\u2014';
+        btn.disabled = true;
+        btn.setAttribute('aria-label', label + ' is unavailable');
+      });
+
+      return audio;
+    }
 
     btn.addEventListener('click', function () {
-      if (current && current !== audio) {
+      var a = build();
+
+      if (current && current !== a) {
         current.pause();
         tracks.forEach(function (t) { t.classList.remove('playing'); });
       }
 
-      if (audio.paused) {
-        audio.play().then(function () {
+      if (a.paused) {
+        a.play().then(function () {
           track.classList.add('playing');
           btn.setAttribute('aria-label', 'Pause ' + label);
-          current = audio;
+          current = a;
         }).catch(function () {
           track.classList.remove('playing');
         });
       } else {
-        audio.pause();
+        a.pause();
         track.classList.remove('playing');
         btn.setAttribute('aria-label', 'Play ' + label);
         current = null;
       }
     });
 
-    // 'input' fires for mouse drag, touch AND arrow keys - one handler covers all.
     bar.addEventListener('input', function () {
       seeking = true;
       bar.style.setProperty('--pct', bar.value + '%');
     });
     bar.addEventListener('change', function () {
       seeking = false;
-      if (audio.duration) audio.currentTime = (bar.value / 100) * audio.duration;
+      if (audio && audio.duration) audio.currentTime = (bar.value / 100) * audio.duration;
     });
   });
 
@@ -1110,6 +1503,7 @@ a:focus-visible, button:focus-visible{
   var FALLBACK_SHOWS = [];
 
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   var list = document.getElementById('shows-list');
   if (!list) return;
 
@@ -1132,7 +1526,13 @@ a:focus-visible, button:focus-visible{
 
     var upcoming = shows
       .filter(function (s) { return parseLocal(s.date) >= today; })
-      .sort(function (a, b) { return parseLocal(a.date) - parseLocal(b.date); });
+      .sort(function (a, b) {
+      var d = parseLocal(a.date) - parseLocal(b.date);
+      if (d !== 0) return d;
+      // two sets on one night: earlier one first
+      var at = [].concat(a.time || '')[0], bt = [].concat(b.time || '')[0];
+      return String(at).localeCompare(String(bt), undefined, { numeric: true });
+    });
 
     if (!upcoming.length) {
       // An empty calendar is not an embarrassment - to a booker it reads as
@@ -1145,21 +1545,97 @@ a:focus-visible, button:focus-visible{
 
     list.innerHTML = upcoming.map(function (s) {
       var d = parseLocal(s.date);
-      var date = MONTHS[d.getMonth()] + ' ' + d.getDate();
+      var date = '<span class="show-day">' + DAYS[d.getDay()] + '</span>'
+                 + '<span class="show-num">' + MONTHS[d.getMonth()] + ' '
+                 + d.getDate() + '</span>';
 
-      var right = s.ticketUrl
-        ? '<a href="' + esc(s.ticketUrl) + '" rel="noopener">Tickets</a>'
-        : esc(s.time || '');
+      // Time always shows. An optional link sits beside it — a venue page,
+      // a Facebook event, tickets, whatever the night calls for.
+      var bits = [];
+      if (s.time) {
+        // a string, or an array when there's more than one set
+        var times = Object.prototype.toString.call(s.time) === '[object Array]'
+          ? s.time : [s.time];
+        bits.push(times.map(esc).join('<span class="show-set-break"></span>'));
+      }
+      if (s.cover) bits.push('<span class="show-cover">' + esc(s.cover) + '</span>');
+      if (s.link) {
+        bits.push('<a href="' + esc(s.link) + '" target="_blank" ' +
+                  'rel="noopener noreferrer">' + esc(s.linkText || 'Details') + '</a>');
+      }
+      var right = bits.join('<span class="show-sep">&middot;</span>');
+
+      // Optional gig poster. Lazy — it is well below the fold, and the
+      // width/height attributes reserve the box so nothing jumps as it loads.
+      var poster = '';
+      if (s.poster) {
+        var palt = s.posterAlt ||
+          ('Poster for Jazz Circuit Riders at ' + s.venue + ', ' + date);
+        poster =
+          // The href stays real. JS turns the click into a lightbox; without
+          // JS it still opens the poster rather than doing nothing at all.
+          '<a class="show-poster" href="' + esc(s.poster) + '" ' +
+            'aria-label="' + esc(palt) + ' &ndash; enlarge">' +
+            // alt="" on purpose: the link above already carries the description,
+            // and a screen reader should not hear the same sentence twice.
+            '<img src="' + esc(s.poster) + '" alt="" ' +
+                 'width="900" height="900" loading="lazy" decoding="async">' +
+          '</a>';
+      }
 
       return '<li class="show">' +
         '<span class="show-date">' + date + '</span>' +
-        '<span class="show-venue">' + esc(s.venue) +
-          '<span class="show-city">' + esc(s.city) + '</span>' +
+        '<span class="show-venue">' +
+          (s.venueUrl
+            ? '<a href="' + esc(s.venueUrl) + '" target="_blank" rel="noopener noreferrer">'
+              + esc(s.venue) + '</a>'
+            : esc(s.venue)) +
+          '<span class="show-city">' + esc(s.city) +
+          (s.note ? '<span class="show-note">' + esc(s.note) + '</span>' : '') +
+        '</span>' +
         '</span>' +
         '<span class="show-right">' + right + '</span>' +
+        poster +
       '</li>';
     }).join('');
   }
+
+  /* ---- poster lightbox -------------------------------------------------
+     Delegated off the list, so it works for rows that do not exist yet when
+     this runs. If <dialog> is missing (old Safari), we leave the anchor
+     alone and the poster opens normally - degraded, never dead. */
+  (function () {
+    var dlg = document.getElementById('lightbox');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+
+    var close = document.getElementById('lightbox-close');
+    var img   = document.createElement('img');
+    img.width = 900; img.height = 900;
+    img.decoding = 'async';
+    dlg.appendChild(img);
+
+    list.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a.show-poster') : null;
+      if (!a) return;
+      // let cmd/ctrl/shift-click and middle-click do the normal thing
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      img.src = a.getAttribute('href');
+      img.alt = (a.getAttribute('aria-label') || 'Gig poster')
+                  .replace(/\s*[-–]\s*enlarge$/i, '');
+      dlg.showModal();
+    });
+
+    close.addEventListener('click', function () { dlg.close(); });
+
+    // clicking anywhere off the poster closes it, the way people expect
+    dlg.addEventListener('click', function (e) {
+      if (e.target !== img && e.target !== close) dlg.close();
+    });
+
+    // drop the src on close so a stale poster never flashes on the next open
+    dlg.addEventListener('close', function () { img.removeAttribute('src'); });
+  }());
 
   // A missing shows.json is obvious and harmless — you'll notice the dates
   // are wrong. A MALFORMED shows.json is the dangerous one: the site quietly
