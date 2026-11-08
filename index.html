@@ -716,68 +716,24 @@ a:focus-visible, button:focus-visible{
 }
 
 
-/* ---- PLAYED: the archive. Same grid as .show so a past night and an
-   upcoming one read as the same kind of object, with the set list folded
-   away behind a <details> because 26 tunes should not shout. ---- */
-.played{ list-style:none; margin:38px 0 0; padding:0; }
-.played > li{ border-bottom:1px solid rgba(141,160,182,.14); }
-.played-head{
-  display:grid; grid-template-columns:96px 1fr auto; gap:20px;
-  align-items:baseline; padding:20px 0; cursor:pointer; list-style:none;
+/* ---- live video, appended to Listen. Markup only: no script, no new
+   section, no renumbering. Deleting this rule and the .showvids div
+   removes the feature completely. ---- */
+.showvids{ margin:46px 0 0; }
+.showvids-lab{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--brass); margin:0 0 22px;
 }
-.played-head::-webkit-details-marker{ display:none; }
-.played-head:hover .played-venue{ color:var(--brass-lit); }
-.played-date{
-  font-family:var(--mono); font-size:.78rem; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--brass); white-space:nowrap;
+.showvid{ margin:0 0 34px; }
+.showvid video{
+  width:100%; display:block; border-radius:3px; background:#000;
+  border:1px solid rgba(141,160,182,.2);
 }
-.played-venue{ display:block; color:var(--cream); transition:color .15s; }
-.played-sub{
-  display:block;
-  font-family:var(--mono); font-size:.72rem; letter-spacing:.08em;
-  color:var(--steel); margin-top:5px; line-height:1.6;
+.showvid figcaption{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.09em;
+  color:var(--steel); margin-top:10px; line-height:1.7;
 }
-.played-count{
-  font-family:var(--mono); font-size:.72rem; letter-spacing:.1em;
-  color:var(--steel); white-space:nowrap;
-}
-.played-body{ padding:4px 0 28px; }
-.played-none{
-  font-family:var(--mono); font-size:.74rem; letter-spacing:.06em;
-  color:var(--steel); opacity:.8; margin:4px 0 0;
-}
-.played-body video{
-  width:100%; max-width:340px; border-radius:3px; display:block;
-  margin:0 0 26px; border:1px solid rgba(141,160,182,.2);
-}
-.setname{
-  font-family:var(--mono); font-size:.7rem; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--brass); margin:18px 0 10px;
-}
-.tunes{ list-style:none; margin:0; padding:0; }
-.tunes li{
-  display:grid; grid-template-columns:28px 1fr auto; gap:14px;
-  align-items:baseline; padding:7px 0;
-  border-top:1px solid rgba(141,160,182,.09);
-}
-.tunes .tn{ font-family:var(--mono); font-size:.72rem; color:var(--steel); }
-.tunes .tt{ color:var(--cream); }
-.tunes .tc{ color:var(--steel); font-size:.86rem; }
-.tunes .tnote{
-  display:block; font-family:var(--mono); font-size:.68rem;
-  color:var(--steel); opacity:.75; margin-top:3px; letter-spacing:.04em;
-}
-.tunes a.play{
-  font-size:.62rem; color:var(--brass-lit); text-decoration:none;
-  border:1px solid rgba(201,146,46,.4); border-radius:50%;
-  width:24px; height:24px; line-height:22px; text-align:center;
-  display:inline-block; transition:border-color .15s,color .15s;
-}
-.tunes a.play:hover{ border-color:var(--brass-lit); color:var(--cream); }
-@media (max-width:640px){
-  .played-head{ grid-template-columns:1fr; gap:4px; }
-  .played-count{ margin-top:4px; }
-}
+.showvid .d{ color:var(--brass); text-transform:uppercase; }
 </style>
 </head>
 
@@ -875,6 +831,22 @@ a:focus-visible, button:focus-visible{
         <p class="track-time">0:00</p>
       </li>
     </ol>
+  
+    <div class="showvids">
+      <p class="showvids-lab">Live at JD&rsquo;s</p>
+  <figure class="showvid">
+    <video controls preload="metadata" playsinline src="assets/video/jcr-2026-11-07-jds.mp4"></video>
+    <figcaption><span class="d">November 7, 2026</span> &middot; JD&rsquo;s Stage Bistro<br>Piano trio &mdash; Jed Fritzemeier, Daniel Hicks, Jonathan Brown</figcaption>
+  </figure>
+  <figure class="showvid">
+    <video controls preload="metadata" playsinline src="assets/video/jcr-2026-11-06-jds.mp4"></video>
+    <figcaption><span class="d">November 6, 2026</span> &middot; JD&rsquo;s Stage Bistro<br>Quartet &mdash; Wes Fritzemeier, Jed Fritzemeier, Daniel Hicks, Ross Huff</figcaption>
+  </figure>
+  <figure class="showvid">
+    <video controls preload="metadata" playsinline src="assets/video/jcr-2026-10-03-jds.mp4"></video>
+    <figcaption><span class="d">October 3, 2026</span> &middot; JD&rsquo;s Stage Bistro<br>Quartet &mdash; Jed Fritzemeier, Brian Brill, Ross Huff, Jonathan Brown</figcaption>
+  </figure>
+    </div>
   </section>
 
   <!-- ========================= THE CIRCUIT (shows) ========================= -->
@@ -888,22 +860,10 @@ a:focus-visible, button:focus-visible{
     </ol>
   </section>
 
-
-  <!-- ========================= PLAYED ========================= -->
-  <section class="section" id="played" aria-labelledby="played-h">
-    <span class="node" data-node aria-hidden="true"></span>
-    <h2 class="section-head" id="played-h"><span class="section-num">03</span> Played</h2>
-    <p class="section-sub">Where we&rsquo;ve been, and what we called.</p>
-
-    <ol class="played" id="played-list">
-      <li class="shows-status">Loading&hellip;</li>
-    </ol>
-  </section>
-
   <!-- ========================= THE RIDERS ========================= -->
   <section class="section" id="riders" aria-labelledby="riders-h">
     <span class="node" data-node aria-hidden="true"></span>
-    <h2 class="section-head" id="riders-h"><span class="section-num">04</span> The Riders</h2>
+    <h2 class="section-head" id="riders-h"><span class="section-num">03</span> The Riders</h2>
 
     <div class="riders-grid">
       <div class="riders-copy">
@@ -983,7 +943,7 @@ a:focus-visible, button:focus-visible{
   <!-- ========================= BOOKING ========================= -->
   <section class="section section-book" id="booking" aria-labelledby="booking-h">
     <span class="node" data-node aria-hidden="true"></span>
-    <h2 class="section-head" id="booking-h"><span class="section-num">05</span> Booking</h2>
+    <h2 class="section-head" id="booking-h"><span class="section-num">04</span> Booking</h2>
     <p class="section-sub">Tell us the room, the date, and how long you need us.</p>
 
     <div class="book-lines">
@@ -1228,71 +1188,6 @@ a:focus-visible, button:focus-visible{
 
 })();
 
-
-  /* ---------------------------------------------------------------
-     4. PLAYED — the archive, from shows-archive.json.
-     Unlike the Circuit list this never hides anything: a past date is
-     the point. Fails silently to nothing rather than to a broken list,
-     because an empty archive is merely quiet and a broken one is worse.
-  ----------------------------------------------------------------- */
-  (function () {
-    var el = document.getElementById('played-list');
-    if (!el) return;
-    var MONTH = ['January','February','March','April','May','June','July',
-                 'August','September','October','November','December'];
-    function esc(s){ return String(s == null ? '' : s)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;'); }
-    function longDate(iso){
-      var p = iso.split('-');
-      return MONTH[+p[1]-1] + ' ' + (+p[2]) + ', ' + p[0];
-    }
-    function tuneRow(t){
-      var meta = esc(t.composer) + (t.year ? ', ' + esc(t.year) : '');
-      return '<li><span class="tn">' + t.n + '</span>' +
-        '<span><span class="tt">' + esc(t.title) + '</span> ' +
-        '<span class="tc">' + meta + '</span>' +
-        (t.note ? '<span class="tnote">' + esc(t.note) + '</span>' : '') +
-        '</span>' +
-        (t.listen ? '<a class="play" href="' + esc(t.listen) +
-          '" target="_blank" rel="noopener" aria-label="Listen to ' +
-          esc(t.title) + ' on YouTube Music">&#9654;</a>' : '<span></span>') +
-        '</li>';
-    }
-    function show(s){
-      var calls = s.sets.reduce(function (n, st) { return n + st.tunes.length; }, 0);
-      var who = s.lineup.join(' \u00b7 ');
-      var sub = (s.billing ? esc(s.billing) + ' \u2014 ' : '') + esc(who) +
-                (s.occasion ? '<br>' + esc(s.occasion) : '');
-      var body = '';
-      if (s.video) {
-        body += '<video controls preload="none" playsinline src="' +
-                esc(s.video.src) + '"></video>';
-      }
-      if (!s.sets.length) {
-        body += '<p class="played-none">' +
-                esc(s.no_setlist || 'Set list not recorded.') + '</p>';
-      }
-      s.sets.forEach(function (st) {
-        body += '<p class="setname">' + esc(st.name) + '</p><ul class="tunes">' +
-                st.tunes.map(tuneRow).join('') + '</ul>';
-      });
-      return '<li><details><summary class="played-head">' +
-        '<span class="played-date">' + longDate(s.date) + '</span>' +
-        '<span><span class="played-venue">' + esc(s.venue) + '</span>' +
-          '<span class="played-sub">' + sub + '</span></span>' +
-        '<span class="played-count">' +
-          (calls ? calls + ' calls' : 'no set list') + '</span>' +
-        '</summary><div class="played-body">' + body + '</div></details></li>';
-    }
-    fetch('shows-archive.json', { cache: 'no-cache' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) {
-        if (!d || !d.shows || !d.shows.length) { el.innerHTML = ''; return; }
-        el.innerHTML = d.shows.map(show).join('');
-      })
-      .catch(function () { el.innerHTML = ''; });
-  })();
 </script>
 </body>
 </html>
